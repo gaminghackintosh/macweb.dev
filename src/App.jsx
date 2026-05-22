@@ -1,4 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
+import {
+  MENU_ICONS,
+  MENU_ICON_FALLBACK,
+  DESKTOP_ICONS,
+  DESKTOP_ICON_FALLBACK,
+} from "./assets/paths";
+import { AssetIcon } from "./components/AssetIcon";
+import Dock from "./components/Dock";
+import MobileNotSupported from "./components/MNS/MobileNotSupported";
+import { APPS } from "./constants/apps";
 
 const WALLPAPER = `
   radial-gradient(ellipse at 25% 35%, rgba(120, 40, 220, 0.75) 0%, transparent 55%),
@@ -8,22 +18,13 @@ const WALLPAPER = `
   linear-gradient(145deg, #0d0718 0%, #1a0833 35%, #0d1a3a 65%, #0d1f18 100%)
 `;
 
-const APPS = [
-  { id: "finder", name: "Finder", icon: "🗂", color: "#4B9EF0" },
-  { id: "safari", name: "Safari", icon: "🧭", color: "#0A84FF" },
-  { id: "notes", name: "Notes", icon: "📒", color: "#FFD60A" },
-  { id: "terminal", name: "Terminal", icon: "🖥", color: "#1C1C1E" },
-  { id: "music", name: "Music", icon: "🎵", color: "#FF375F" },
-  { id: "settings", name: "System Settings", icon: "⚙️", color: "#636366" },
-];
-
 const INITIAL_POSITIONS = {
-  finder: { x: 80, y: 56, w: 740, h: 500 },
-  notes: { x: 200, y: 90, w: 620, h: 440 },
-  terminal: { x: 140, y: 70, w: 660, h: 420 },
-  settings: { x: 260, y: 100, w: 520, h: 400 },
-  music: { x: 180, y: 80, w: 500, h: 420 },
-  safari: { x: 100, y: 60, w: 780, h: 520 },
+  finder:   { x: 80,  y: 56,  w: 740, h: 500 },  // эталон
+  safari:   { x: 100, y: 60,  w: 780, h: 520 },  // эталон
+  notes:    { x: 200, y: 90,  w: 620, h: 440 },  // без изменений
+  terminal: { x: 140, y: 70,  w: 780, h: 520 },  // ← было 660×420, теперь = Safari
+  settings: { x: 80,  y: 56,  w: 740, h: 500 },  // ← было 260/100, теперь = Finder
+  music:    { x: 180, y: 80,  w: 740, h: 500 },  // ← было 500×420, теперь ≈ Finder
 };
 
 let zCounter = 100;
@@ -95,132 +96,6 @@ function MenuBar({ activeApp }) {
   );
 }
 
-function Dock({ onOpen, openApps }) {
-  const [hoverIdx, setHoverIdx] = useState(null);
-
-  const getScale = (i) => {
-    if (hoverIdx === null) return 1;
-    const d = Math.abs(i - hoverIdx);
-    if (d === 0) return 1.65;
-    if (d === 1) return 1.3;
-    if (d === 2) return 1.1;
-    return 1;
-  };
-
-  const getTranslate = (i) => {
-    if (hoverIdx === null) return 0;
-    const d = Math.abs(i - hoverIdx);
-    if (d === 0) return -10;
-    if (d === 1) return -6;
-    if (d === 2) return -2;
-    return 0;
-  };
-
-  return (
-    <div
-      style={{
-        position: "fixed",
-        bottom: 8,
-        left: "50%",
-        transform: "translateX(-50%)",
-        display: "flex",
-        alignItems: "flex-end",
-        gap: 8,
-        background: "rgba(255,255,255,0.14)",
-        backdropFilter: "blur(40px) saturate(2)",
-        padding: "8px 14px 12px",
-        borderRadius: 22,
-        border: "1px solid rgba(255,255,255,0.24)",
-        boxShadow: "0 10px 50px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.28)",
-        zIndex: 9000,
-      }}
-    >
-      {APPS.map((app, i) => {
-        const scale = getScale(i);
-        const ty = getTranslate(i);
-        const isOpen = openApps.includes(app.id);
-
-        return (
-          <div
-            key={app.id}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              position: "relative",
-              transform: `scale(${scale}) translateY(${ty}px)`,
-              transformOrigin: "bottom center",
-              transition: "transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1)",
-            }}
-            onMouseEnter={() => setHoverIdx(i)}
-            onMouseLeave={() => setHoverIdx(null)}
-            onClick={() => onOpen(app.id)}
-          >
-            {hoverIdx === i && (
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: "calc(100% + 10px)",
-                  left: "50%",
-                  transform: "translateX(-50%)",
-                  background: "rgba(24,24,28,0.92)",
-                  backdropFilter: "blur(12px)",
-                  color: "white",
-                  padding: "5px 10px",
-                  borderRadius: 7,
-                  fontSize: 12,
-                  fontWeight: 500,
-                  whiteSpace: "nowrap",
-                  border: "1px solid rgba(255,255,255,0.12)",
-                  boxShadow: "0 4px 16px rgba(0,0,0,0.4)",
-                  fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
-                  pointerEvents: "none",
-                }}
-              >
-                {app.name}
-              </div>
-            )}
-
-            <div
-              style={{
-                width: 54,
-                height: 54,
-                borderRadius: 14,
-                background:
-                  app.id === "terminal"
-                    ? "linear-gradient(145deg, #2c2c2e, #1c1c1e)"
-                    : `linear-gradient(145deg, ${app.color}dd, ${app.color}99)`,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: 28,
-                cursor: "pointer",
-                boxShadow: "0 4px 16px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.15)",
-                border: "1px solid rgba(255,255,255,0.12)",
-              }}
-            >
-              {app.icon}
-            </div>
-
-            <div style={{ height: 6, display: "flex", alignItems: "center", justifyContent: "center" }}>
-              {isOpen && (
-                <div
-                  style={{
-                    width: 4,
-                    height: 4,
-                    borderRadius: "50%",
-                    background: "rgba(255,255,255,0.75)",
-                  }}
-                />
-              )}
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  );
-}
-
 function AppWindow({ win, onClose, onMinimize, onFocus, isActive, children }) {
   const [pos, setPos] = useState({ x: win.x, y: win.y });
   const dragging = useRef(false);
@@ -268,7 +143,6 @@ function AppWindow({ win, onClose, onMinimize, onFocus, isActive, children }) {
         backdropFilter: "blur(40px) saturate(1.8)",
         borderRadius: 12,
         overflow: "hidden",
-        border: `1px solid rgba(255,255,255,${isActive ? 0.18 : 0.08})`,
         boxShadow: isActive
           ? "0 32px 100px rgba(0,0,0,0.75), 0 0 0 1px rgba(255,255,255,0.1)"
           : "0 14px 40px rgba(0,0,0,0.45)",
@@ -345,16 +219,19 @@ function FinderContent() {
     {
       label: "FAVOURITES",
       items: [
-        { name: "Home", icon: "🏠" },
-        { name: "Desktop", icon: "🖥" },
-        { name: "Documents", icon: "📁" },
-        { name: "Downloads", icon: "⬇️" },
-        { name: "Projects", icon: "💻" },
+        { name: "Home", iconPath: MENU_ICONS.home, icon: MENU_ICON_FALLBACK.home },
+        { name: "Desktop", iconPath: MENU_ICONS.desktop, icon: MENU_ICON_FALLBACK.desktop },
+        { name: "Documents", iconPath: MENU_ICONS.documents, icon: MENU_ICON_FALLBACK.documents },
+        { name: "Downloads", iconPath: MENU_ICONS.downloads, icon: MENU_ICON_FALLBACK.downloads },
+        { name: "Projects", iconPath: MENU_ICONS.projects, icon: MENU_ICON_FALLBACK.projects },
       ],
     },
     {
       label: "LOCATIONS",
-      items: [{ name: "Macintosh HD", icon: "💾" }, { name: "Network", icon: "🌐" }],
+      items: [
+        { name: "Macintosh HD", iconPath: MENU_ICONS.macintoshHd, icon: MENU_ICON_FALLBACK.macintoshHd },
+        { name: "Network", iconPath: MENU_ICONS.network, icon: MENU_ICON_FALLBACK.network },
+      ],
     },
   ];
 
@@ -449,7 +326,7 @@ function FinderContent() {
                   if (currentFolder !== item.name) e.currentTarget.style.background = "transparent";
                 }}
               >
-                <span>{item.icon}</span>
+                <AssetIcon path={item.iconPath} fallback={item.icon} size={16} alt={item.name} />
                 <span>{item.name}</span>
               </div>
             ))}
@@ -621,20 +498,34 @@ function TerminalContent() {
       ],
       neofetch: [
         "",
-        "               \x1b[36m.'''\x1b[0m",
-        "          \x1b[36m.--''     ''--.\x1b[0m      \x1b[32mgaminghackintosh\x1b[0m@\x1b[32mhackintosh.web\x1b[0m",
-        "        \x1b[36m/'            '\\x1b[0m     ─────────────────────────────",
-        "       \x1b[36m|\x1b[0m  \x1b[35mhackintosh\x1b[0m  \x1b[36m|\x1b[0m     OS: \x1b[37mhackintosh.web 1.0.0\x1b[0m",
-        "        \x1b[36m\\    \x1b[35m.web\x1b[0m     \x1b[36m/\x1b[0m      Host: \x1b[37mMacBook (Simulated)\x1b[0m",
-        "         \x1b[36m`-.______.-'\x1b[0m       Shell: \x1b[37mhacksh 1.0.0\x1b[0m",
-        "                            Runtime: \x1b[37mReact 18 / V8\x1b[0m",
-        "                            Resolution: \x1b[37m" + window.innerWidth + "x" + window.innerHeight + "\x1b[0m",
-        "                            Theme: \x1b[35mhackintosh Dark\x1b[0m",
-        "                            Memory: \x1b[37m" + Math.round((performance?.memory?.usedJSHeapSize || 67108864) / 1048576) + " MB\x1b[0m",
+        " \x1b[38;5;39m                                     ,\x1b[0m                          \x1b[32mGamingHackintosh\x1b[0m@\x1b[36mhackintosh.web\x1b[0m",
+        " \x1b[38;5;39m                                    ;o\\\\\x1b[0m                         ─────────────────────────────",
+        " \x1b[38;5;45m                                    ;Ob`.\x1b[0m                       OS:          \x1b[37mhackintosh.web 1.0.0\x1b[0m",
+        " \x1b[38;5;45m                                   ;OOOOb`.\x1b[0m                     Kernel:      \x1b[37mhackintosh-core\x1b[0m",
+        " \x1b[38;5;51m                                  ;OOOOOY\" )\x1b[0m                    Host:        \x1b[37mMacBook Pro (Simulated)\x1b[0m",
+        " \x1b[38;5;51m                                 ;OOOO' ,%%)\x1b[0m                    Shell:       \x1b[37mhacksh 1.0.0\x1b[0m",
+        " \x1b[38;5;87m                             \\\\  /OOO ,%%%%,%\\\\\x1b[0m                 Runtime:     \x1b[37mReact 18 / V8\x1b[0m",
+        " \x1b[38;5;87m                              |:  ,%%%%%%;%%/\x1b[0m                  Resolution:  \x1b[37m" + window.innerWidth + "x" + window.innerHeight + "\x1b[0m",
+        " \x1b[38;5;123m                              ||,%%%%%%%%%%/\x1b[0m                   Theme:       \x1b[35mhackintosh Dark\x1b[0m",
+        " \x1b[38;5;123m                              ;|%%%%%%%%%'/`-\"\"`.\x1b[0m             Engine:      \x1b[37mChromium Terminal\x1b[0m",
+        " \x1b[38;5;159m                             /: %%%%%%%%'/ c$$$$.`.\x1b[0m            Memory:      \x1b[37m" + Math.round((performance?.memory?.usedJSHeapSize || 67108864) / 1048576) + " MB\x1b[0m",
+        " \x1b[38;5;159m                `.______     \\\\ \\\\%%%%%%%'/.$$YF\"Y$: )\x1b[0m          Uptime:     \x1b[37m" + Math.floor(performance.now() / 1000) + "s\x1b[0m",
+        " \x1b[38;5;195m              _________ \"`..\\\\`o \\\\`%%' ,',$F,.   $F )\x1b[0m         Packages:    \x1b[37m1337 (npm)\x1b[0m",
+        " \x1b[38;5;195m     ___,--\"\"'dOOO;,:%%`-._ o_,O_   ,'\"',d88)  '  )\x1b[0m",
+        " \x1b[38;5;45m  -\"'. YOOOOOOO';%%%%%%%%%;`-O   )_     ,X888F   _/\x1b[0m",
+        " \x1b[38;5;45m      \\\\ YOOOO',%%%%%%%%%%Y    \\\\__;`),-.  `\"\"F  ,'\x1b[0m",
+        " \x1b[38;5;51m       \\\\ `\" ,%%%%%%%%%%,' _,-   \\\\-' \\\\_ `------'\x1b[0m",
+        " \x1b[38;5;51m        \\\\_ %%%%',%%%%%_,-' ,;    ( _,-\\\\\x1b[0m",
+        " \x1b[38;5;87m          `-.__`%%',-' .c$$'     |\\\\-_,-\\\\\x1b[0m",
+        " \x1b[38;5;87m               `\"\"; ,$$$',md8oY  : `\\\\_,')\x1b[0m",
+        " \x1b[38;5;123m                 ( ,$$$F `88888  ;   `--'\x1b[0m",
+        " \x1b[38;5;123m                  \\\\`$$(    `\"\"' /\x1b[0m",
+        " \x1b[38;5;159m                   \\\\`\"$$c'   _,'\x1b[0m",
+        " \x1b[38;5;159m                    `.____,-'\x1b[0m",
         "",
-        "  \x1b[41m   \x1b[0m\x1b[43m   \x1b[0m\x1b[42m   \x1b[0m\x1b[46m   \x1b[0m\x1b[44m   \x1b[0m\x1b[45m   \x1b[0m",
+        " \x1b[40m   \x1b[0m\x1b[41m   \x1b[0m\x1b[42m   \x1b[0m\x1b[43m   \x1b[0m\x1b[44m   \x1b[0m\x1b[45m   \x1b[0m\x1b[46m   \x1b[0m\x1b[47m   \x1b[0m",
         "",
-      ],
+      ]
     };
 
     if (cmd === "clear") return "CLEAR";
@@ -681,29 +572,47 @@ function TerminalContent() {
     setInput("");
   };
 
-  const renderLine = (text) => {
-    const ansiMap = {
-      "\x1b[0m": "</span>",
-      "\x1b[31m": '<span style="color:#ff453a">',
-      "\x1b[32m": '<span style="color:#32d74b">',
-      "\x1b[33m": '<span style="color:#ffd60a">',
-      "\x1b[34m": '<span style="color:#0a84ff">',
-      "\x1b[35m": '<span style="color:#bf5af2">',
-      "\x1b[36m": '<span style="color:#5ac8fa">',
-      "\x1b[37m": '<span style="color:#e5e5ea">',
-      "\x1b[41m": '<span style="background:#ff453a;color:#ff453a">',
-      "\x1b[43m": '<span style="background:#ffd60a;color:#ffd60a">',
-      "\x1b[42m": '<span style="background:#32d74b;color:#32d74b">',
-      "\x1b[46m": '<span style="background:#5ac8fa;color:#5ac8fa">',
-      "\x1b[44m": '<span style="background:#0a84ff;color:#0a84ff">',
-      "\x1b[45m": '<span style="background:#bf5af2;color:#bf5af2">',
-    };
-    let result = text;
-    Object.entries(ansiMap).forEach(([code, tag]) => {
-      result = result.split(code).join(tag);
-    });
-    return <span dangerouslySetInnerHTML={{ __html: result }} />;
+const renderLine = (text) => {
+  const ansiMap = {
+    "\x1b[0m": "</span>",
+
+    "\x1b[30m": '<span style="color:#000">',
+    "\x1b[31m": '<span style="color:#ff5f56">',
+    "\x1b[32m": '<span style="color:#27c93f">',
+    "\x1b[33m": '<span style="color:#ffbd2e">',
+    "\x1b[34m": '<span style="color:#0a84ff">',
+    "\x1b[35m": '<span style="color:#bf5af2">',
+    "\x1b[36m": '<span style="color:#5ac8fa">',
+    "\x1b[37m": '<span style="color:#f2f2f7">',
+
+    "\x1b[1m": '<span style="font-weight:bold">',
+
+    "\x1b[40m": '<span style="background:#1c1c1e;color:#1c1c1e">',
+    "\x1b[41m": '<span style="background:#ff5f56;color:#ff5f56">',
+    "\x1b[42m": '<span style="background:#27c93f;color:#27c93f">',
+    "\x1b[43m": '<span style="background:#ffbd2e;color:#ffbd2e">',
+    "\x1b[44m": '<span style="background:#0a84ff;color:#0a84ff">',
+    "\x1b[45m": '<span style="background:#bf5af2;color:#bf5af2">',
+    "\x1b[46m": '<span style="background:#5ac8fa;color:#5ac8fa">',
+    "\x1b[47m": '<span style="background:#f2f2f7;color:#f2f2f7">',
   };
+
+  let result = text;
+
+  Object.entries(ansiMap).forEach(([code, tag]) => {
+    result = result.split(code).join(tag);
+  });
+
+  return (
+    <span
+      dangerouslySetInnerHTML={{ __html: result }}
+      style={{
+        whiteSpace: "pre",
+        fontVariantLigatures: "none",
+      }}
+    />
+  );
+};
 
   return (
     <div
@@ -913,7 +822,7 @@ function PlaceholderContent({ appId }) {
         fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
       }}
     >
-      <span style={{ fontSize: 68 }}>{app?.icon}</span>
+      <AssetIcon path={app?.iconPath} fallback={app?.icon} size={68} alt={app?.name} />
       <span style={{ fontSize: 20, fontWeight: 300 }}>{app?.name}</span>
       <span
         style={{
@@ -922,7 +831,6 @@ function PlaceholderContent({ appId }) {
           background: "rgba(255,255,255,0.06)",
           padding: "4px 12px",
           borderRadius: 20,
-          border: "1px solid rgba(255,255,255,0.1)",
         }}
       >
         Coming soon
@@ -935,6 +843,19 @@ export default function App() {
   const [windows, setWindows] = useState([]);
   const [openApps, setOpenApps] = useState([]);
   const [activeWin, setActiveWin] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      const width = window.innerWidth;
+      // Просто проверяем ширину экрана - более надежно для мобильных
+      setIsMobile(width <= 1024);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const openApp = (appId) => {
     const existing = windows.find((w) => w.id === appId);
@@ -979,6 +900,10 @@ export default function App() {
 
   const activeApp = activeWin ? APPS.find((a) => a.id === activeWin)?.name : "Finder";
 
+  if (isMobile) {
+    return <MobileNotSupported />;
+  }
+
   return (
     <div style={{ width: "100vw", height: "100vh", overflow: "hidden", position: "relative", background: WALLPAPER }}>
       <div
@@ -1002,7 +927,13 @@ export default function App() {
           zIndex: 2,
         }}
       >
-        {[{ name: "hackintosh.web", icon: "💿" }].map((item) => (
+        {[
+          {
+            name: "hackintosh.web",
+            iconPath: DESKTOP_ICONS.hackintoshWeb,
+            icon: DESKTOP_ICON_FALLBACK.hackintoshWeb,
+          },
+        ].map((item) => (
           <div
             key={item.name}
             style={{
@@ -1011,15 +942,10 @@ export default function App() {
               alignItems: "center",
               gap: 4,
               cursor: "pointer",
-              padding: 8,
-              borderRadius: 8,
-              transition: "background 0.15s",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(255,255,255,0.1)")}
-            onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
             onDoubleClick={() => openApp("finder")}
           >
-            <span style={{ fontSize: 44 }}>{item.icon}</span>
+            <AssetIcon path={item.iconPath} fallback={item.icon} size={44} alt={item.name} style={{ borderRadius: 12 }} />
             <span
               style={{
                 color: "white",

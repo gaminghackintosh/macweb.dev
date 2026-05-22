@@ -14,12 +14,12 @@ const WALLPAPER = `
 `;
 
 const APPS = [
-  { id: "finder",   name: "Finder",          icon: "🗂",  color: "#4B9EF0" },
-  { id: "safari",   name: "Safari",          icon: "🧭",  color: "#0A84FF" },
-  { id: "notes",    name: "Notes",           icon: "📒",  color: "#FFD60A" },
-  { id: "terminal", name: "Terminal",        icon: "🖥",  color: "#1C1C1E" },
-  { id: "music",    name: "Music",           icon: "🎵",  color: "#FF375F" },
-  { id: "settings", name: "System Settings", icon: "⚙️", color: "#636366" },
+  { id: "finder",   name: "Finder",          icon: "./src/assets/icons/finder/finder.svg",  color: "#4B9EF0" },
+  { id: "safari",   name: "Safari",          icon: "./src/assets/icons/apps/safari.webp",  color: "#0A84FF" },
+  { id: "notes",    name: "Notes",           icon: "./src/assets/icons/apps/notes.webp",  color: "#FFD60A" },
+  { id: "terminal", name: "Terminal",        icon: "./src/assets/icons/apps/terminal.webp",  color: "#1C1C1E" },
+  { id: "music",    name: "Music",           icon: "./src/assets/icons/apps/music.webp",  color: "#FF375F" },
+  { id: "settings", name: "System Settings", icon: "./src/assets/icons/apps/settings.webp", color: "#636366" },
 ];
 
 const INITIAL_POSITIONS = {
@@ -312,14 +312,18 @@ function FinderContent() {
     {
       label: "FAVOURITES",
       items: [
-        { name: "Home", icon: "🏠" }, { name: "Desktop", icon: "🖥" },
-        { name: "Documents", icon: "📁" }, { name: "Downloads", icon: "⬇️" },
-        { name: "Projects", icon: "💻" },
+        { name: "Home", icon: "./src/assets/icons/menu/finder/finder.svg" }, 
+        { name: "Desktop", icon: "./src/assets/icons/menu/desktop.png" },
+        { name: "Documents", icon: "./src/assets/icons/menu/documents.png" }, 
+        { name: "Downloads", icon: "./src/assets/icons/menu/downloads.png" },
+        { name: "Projects", icon: "./src/assets/icons/menu/projects.png" },
       ],
     },
     {
       label: "LOCATIONS",
-      items: [{ name: "Macintosh HD", icon: "💾" }, { name: "Network", icon: "🌐" }],
+      items: [{ name: "Macintosh HD", icon: "./src/assets/icons/menu/macintosh-hd.png" }, 
+        { name: "Network", icon: "./src/assets/icons/menu/network.png" },
+      ],
     },
   ];
 
@@ -540,20 +544,34 @@ function TerminalContent() {
       ],
       neofetch: [
         "",
-        "               \x1b[36m.\'\'\'.\x1b[0m",
-        "          \x1b[36m.--\'\'     \'\'--.\x1b[0m      \x1b[32mgaminghackintosh\x1b[0m@\x1b[32mhackintosh.web\x1b[0m",
-        "        \x1b[36m/\'            \'\\\x1b[0m     ─────────────────────────────",
-        "       \x1b[36m|\x1b[0m  \x1b[35mhackintosh\x1b[0m  \x1b[36m|\x1b[0m     OS: \x1b[37mhackintosh.web 1.0.0\x1b[0m",
-        "        \x1b[36m\\\x1b[0m    \x1b[35m.web\x1b[0m     \x1b[36m/\x1b[0m      Host: \x1b[37mMacBook (Simulated)\x1b[0m",
-        "         \x1b[36m`-.______.-\'\x1b[0m       Shell: \x1b[37mhacksh 1.0.0\x1b[0m",
-        "                            Runtime: \x1b[37mReact 18 / V8\x1b[0m",
-        "                            Resolution: \x1b[37m" + window.innerWidth + "x" + window.innerHeight + "\x1b[0m",
-        "                            Theme: \x1b[35mhackintosh Dark\x1b[0m",
-        "                            Memory: \x1b[37m" + Math.round((performance?.memory?.usedJSHeapSize || 67108864) / 1048576) + " MB\x1b[0m",
+        " \x1b[38;5;39m                                     ,\x1b[0m                          \x1b[32mGamingHackintosh\x1b[0m@\x1b[36mhackintosh.web\x1b[0m",
+        " \x1b[38;5;39m                                    ;o\\\\\x1b[0m                         ─────────────────────────────",
+        " \x1b[38;5;45m                                    ;Ob`.\x1b[0m                       OS:          \x1b[37mhackintosh.web 1.0.0\x1b[0m",
+        " \x1b[38;5;45m                                   ;OOOOb`.\x1b[0m                     Kernel:      \x1b[37mhackintosh-core\x1b[0m",
+        " \x1b[38;5;51m                                  ;OOOOOY\" )\x1b[0m                    Host:        \x1b[37mMacBook Pro (Simulated)\x1b[0m",
+        " \x1b[38;5;51m                                 ;OOOO' ,%%)\x1b[0m                    Shell:       \x1b[37mhacksh 1.0.0\x1b[0m",
+        " \x1b[38;5;87m                             \\\\  /OOO ,%%%%,%\\\\\x1b[0m                 Runtime:     \x1b[37mReact 18 / V8\x1b[0m",
+        " \x1b[38;5;87m                              |:  ,%%%%%%;%%/\x1b[0m                  Resolution:  \x1b[37m" + window.innerWidth + "x" + window.innerHeight + "\x1b[0m",
+        " \x1b[38;5;123m                              ||,%%%%%%%%%%/\x1b[0m                   Theme:       \x1b[35mhackintosh Dark\x1b[0m",
+        " \x1b[38;5;123m                              ;|%%%%%%%%%'/`-\"\"`.\x1b[0m             Engine:      \x1b[37mChromium Terminal\x1b[0m",
+        " \x1b[38;5;159m                             /: %%%%%%%%'/ c$$$$.`.\x1b[0m            Memory:      \x1b[37m" + Math.round((performance?.memory?.usedJSHeapSize || 67108864) / 1048576) + " MB\x1b[0m",
+        " \x1b[38;5;159m                `.______     \\\\ \\\\%%%%%%%'/.$$YF\"Y$: )\x1b[0m          Uptime:     \x1b[37m" + Math.floor(performance.now() / 1000) + "s\x1b[0m",
+        " \x1b[38;5;195m              _________ \"`..\\\\`o \\\\`%%' ,',$F,.   $F )\x1b[0m         Packages:    \x1b[37m1337 (npm)\x1b[0m",
+        " \x1b[38;5;195m     ___,--\"\"'dOOO;,:%%`-._ o_,O_   ,'\"',d88)  '  )\x1b[0m",
+        " \x1b[38;5;45m  -\"'. YOOOOOOO';%%%%%%%%%;`-O   )_     ,X888F   _/\x1b[0m",
+        " \x1b[38;5;45m      \\\\ YOOOO',%%%%%%%%%%Y    \\\\__;`),-.  `\"\"F  ,'\x1b[0m",
+        " \x1b[38;5;51m       \\\\ `\" ,%%%%%%%%%%,' _,-   \\\\-' \\\\_ `------'\x1b[0m",
+        " \x1b[38;5;51m        \\\\_ %%%%',%%%%%_,-' ,;    ( _,-\\\\\x1b[0m",
+        " \x1b[38;5;87m          `-.__`%%',-' .c$$'     |\\\\-_,-\\\\\x1b[0m",
+        " \x1b[38;5;87m               `\"\"; ,$$$',md8oY  : `\\\\_,')\x1b[0m",
+        " \x1b[38;5;123m                 ( ,$$$F `88888  ;   `--'\x1b[0m",
+        " \x1b[38;5;123m                  \\\\`$$(    `\"\"' /\x1b[0m",
+        " \x1b[38;5;159m                   \\\\`\"$$c'   _,'\x1b[0m",
+        " \x1b[38;5;159m                    `.____,-'\x1b[0m",
         "",
-        "  \x1b[41m   \x1b[0m\x1b[43m   \x1b[0m\x1b[42m   \x1b[0m\x1b[46m   \x1b[0m\x1b[44m   \x1b[0m\x1b[45m   \x1b[0m",
+        " \x1b[40m   \x1b[0m\x1b[41m   \x1b[0m\x1b[42m   \x1b[0m\x1b[43m   \x1b[0m\x1b[44m   \x1b[0m\x1b[45m   \x1b[0m\x1b[46m   \x1b[0m\x1b[47m   \x1b[0m",
         "",
-      ],
+      ]
     };
 
     if (cmd === "clear") return "CLEAR";

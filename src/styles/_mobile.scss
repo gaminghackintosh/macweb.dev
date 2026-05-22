@@ -1,32 +1,4 @@
-html,
-body,
-#root {
-  margin: 0;
-  min-height: 100%;
-  width: 100%;
-}
-
-body {
-  color: #fff;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-button,
-input,
-textarea,
-select {
-  font: inherit;
-}
-
-/* Icon Assets */
-.icon-asset {
-  width: 58px;
-  height: 58px;
-}
+@import "./variables";
 
 /* Mobile Not Supported Page */
 .mobile-not-supported {
@@ -36,8 +8,8 @@ select {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #0d0718 0%, #1a0833 35%, #0d1a3a 65%, #0d1f18 100%);
-  z-index: 10000;
+  background: $gradient-main;
+  z-index: $z-mobile;
   overflow: hidden;
 }
 
@@ -49,7 +21,7 @@ select {
   text-align: center;
   max-width: 500px;
   width: 100%;
-  animation: fadeInScale 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: fadeInScale $transition-slow $easing-ease-out;
 }
 
 @keyframes fadeInScale {
@@ -66,7 +38,7 @@ select {
 .mobile-icon {
   font-size: 64px;
   margin-bottom: 32px;
-  animation: float 3s ease-in-out infinite;
+  animation: float 3s $easing-ease-in-out infinite;
 }
 
 @keyframes float {
@@ -82,7 +54,7 @@ select {
   font-size: 32px;
   font-weight: 700;
   margin: 0 0 16px 0;
-  color: #fff;
+  color: $color-white;
   letter-spacing: -0.5px;
 }
 
@@ -90,14 +62,14 @@ select {
   font-size: 20px;
   font-weight: 600;
   margin: 0 0 12px 0;
-  color: rgba(255, 255, 255, 0.8);
+  color: $color-text-secondary;
   letter-spacing: -0.3px;
 }
 
 .mobile-description {
   font-size: 15px;
   margin: 0 0 40px 0;
-  color: rgba(255, 255, 255, 0.6);
+  color: $color-text-tertiary;
   line-height: 1.6;
   letter-spacing: -0.2px;
 }
@@ -118,18 +90,18 @@ select {
   padding: 12px 16px;
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(12px);
-  border-radius: 12px;
+  border-radius: $radius-md;
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: rgba(255, 255, 255, 0.9);
   font-size: 14px;
   font-weight: 500;
-  transition: all 0.3s ease;
-}
+  transition: all $transition-smooth $easing-ease-in-out;
 
-.feature-item:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
+  &:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+  }
 }
 
 .feature-icon {
@@ -137,12 +109,21 @@ select {
 }
 
 .mobile-footer {
-  color: rgba(255, 255, 255, 0.4);
+  color: $color-text-muted;
   font-size: 12px;
   margin-top: 24px;
+
+  p {
+    margin: 0;
+    letter-spacing: -0.1px;
+  }
 }
 
-.mobile-footer p {
-  margin: 0;
-  letter-spacing: -0.1px;
+@media (max-width: 1024px) {
+  .mobile-not-supported {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
 }
