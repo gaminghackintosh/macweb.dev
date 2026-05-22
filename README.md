@@ -59,26 +59,6 @@
 
 ---
 
-## 🚀 Getting Started
-
-```bash
-# Clone
-git clone https://github.com/gaminghackintosh/hackintosh.web.git
-cd hackintosh.web
-
-# Install
-npm install
-
-# Dev server
-npm run dev
-
-# Build for production
-npm run build
-```
-
-Open [http://localhost:5173](http://localhost:5173) — you're in.
-
----
 
 ## 📁 Project Structure
 
