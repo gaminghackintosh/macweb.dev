@@ -5,82 +5,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-  <!-- ═══════════════════════════════════════════
-       PRIMARY META
-  ════════════════════════════════════════════ -->
   <title>hackintosh.web — macOS в браузере</title>
-  <meta name="title"       content="hackintosh.web — macOS в браузере" />
-  <meta name="description" content="Веб-версия macOS: окна, Dock, Terminal, Finder, Notes и многое другое. Полностью в браузере на React." />
-  <meta name="author"      content="gaminghackintosh" />
-  <meta name="keywords"    content="macos web, macos browser, react desktop, hackintosh, web os, macos clone, react macos, gaminghackintosh" />
-  <meta name="robots"      content="index, follow" />
+
   <meta name="theme-color" content="#0d0718" />
   <meta name="color-scheme" content="dark" />
 
-  <!-- ═══════════════════════════════════════════
-       FAVICON — все форматы
-  ════════════════════════════════════════════ -->
-  <!-- SVG (современные браузеры — масштабируется идеально) -->
-  <link rel="icon" type="image/svg+xml" href="./src/assets/icons/favicons/favicon.svg" />
+  <!-- =========================
+       FAVICON SYSTEM (FIXED)
+  ========================== -->
 
-  <!-- ICO (фоллбэк для IE / старых браузеров) -->
-  <link rel="shortcut icon" type="image/x-icon" href="./src/assets/icons/favicons/favicon.ico" />
+  <link rel="icon" href="/hackintosh.web/favicons/favicon.ico" />
 
-  <!-- PNG в разных размерах -->
-  <link rel="icon" type="image/png" sizes="16x16"   href="./src/assets/icons/favicons/favicon-16x16.png" />
-  <link rel="icon" type="image/png" sizes="32x32"   href="./src/assets/icons/favicons/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="48x48"   href="./src/assets/icons/favicons/favicon-48x48.png" />
-  <link rel="icon" type="image/png" sizes="96x96"   href="./src/assets/icons/favicons/favicon-96x96.png" />
-  <link rel="icon" type="image/png" sizes="192x192" href="./src/assets/icons/favicons/favicon-192x192.png" />
-  <link rel="icon" type="image/png" sizes="512x512" href="./src/assets/icons/favicons/favicon-512x512.png" />
+  <link rel="icon" type="image/svg+xml" href="/hackintosh.web/favicons/favicon.svg" />
 
+  <link rel="icon" type="image/png" sizes="16x16" href="/hackintosh.web/favicons/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/hackintosh.web/favicons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/hackintosh.web/favicons/favicon-48x48.png" />
+  <link rel="icon" type="image/png" sizes="96x96" href="/hackintosh.web/favicons/favicon-96x96.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/hackintosh.web/favicons/favicon-192x192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/hackintosh.web/favicons/favicon-512x512.png" />
 
-  <!-- ═══════════════════════════════════════════
-       PWA — Progressive Web App
-  ════════════════════════════════════════════ -->
-  <link rel="manifest" href="/manifest.json" />
-  <meta name="mobile-web-app-capable"          content="yes" />
-  <meta name="apple-mobile-web-app-capable"    content="yes" />
-  <meta name="apple-mobile-web-app-title"      content="hackintosh.web" />
+  <!-- PWA -->
+  <link rel="manifest" href="/hackintosh.web/manifest.json" />
+
+  <!-- Apple -->
+  <link rel="apple-touch-icon" href="/hackintosh.web/favicons/apple-touch-icon.png" />
+
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="hackintosh.web" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="application-name"               content="hackintosh.web" />
 
-  <!-- ═══════════════════════════════════════════
-       OPEN GRAPH (Facebook / Discord / VK / Telegram)
-  ════════════════════════════════════════════ -->
-  <meta property="og:type"        content="website" />
-  <meta property="og:url"         content="https://hackintosh.web/" />
-  <meta property="og:title"       content="hackintosh.web — macOS в браузере" />
-  <meta property="og:description" content="Веб-версия macOS: окна, Dock, Terminal, Finder, Notes и многое другое. Полностью в браузере на React." />
-  <meta property="og:image"       content="https://hackintosh.web/og-image.png" />
-  <meta property="og:image:width"  content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt"    content="hackintosh.web desktop preview" />
-  <meta property="og:site_name"   content="hackintosh.web" />
-  <meta property="og:locale"      content="ru_RU" />
+  <!-- OPEN GRAPH -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://gaminghackintosh.github.io/hackintosh.web/" />
+  <meta property="og:title" content="hackintosh.web — macOS в браузере" />
+  <meta property="og:description" content="Веб-версия macOS в браузере на React." />
+  <meta property="og:image" content="https://gaminghackintosh.github.io/hackintosh.web/og-image.png" />
 
-  <!-- ═══════════════════════════════════════════
-       TWITTER / X CARD
-  ════════════════════════════════════════════ -->
-  <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:site"        content="@gaminghackintosh" />
-  <meta name="twitter:creator"     content="@gaminghackintosh" />
-  <meta name="twitter:url"         content="https://hackintosh.web/" />
-  <meta name="twitter:title"       content="hackintosh.web — macOS в браузере" />
-  <meta name="twitter:description" content="Веб-версия macOS: окна, Dock, Terminal, Finder, Notes и многое другое. Полностью в браузере на React." />
-  <meta name="twitter:image"       content="https://hackintosh.web/og-image.png" />
-  <meta name="twitter:image:alt"   content="hackintosh.web desktop preview" />
+  <!-- TWITTER -->
+  <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- ═══════════════════════════════════════════
-       PRECONNECT / DNS PREFETCH
-  ════════════════════════════════════════════ -->
+  <!-- PRECONNECT -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
 
-  <!-- ═══════════════════════════════════════════
-       GLOBAL RESET
-  ════════════════════════════════════════════ -->
+  <!-- GLOBAL RESET -->
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -91,23 +60,25 @@
       background: #0d0718;
     }
 
-    /* Убираем синее выделение на мобильных */
     * { -webkit-tap-highlight-color: transparent; }
 
-    /* Кастомный скроллбар в духе macOS */
-    ::-webkit-scrollbar             { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track       { background: transparent; }
-    ::-webkit-scrollbar-thumb       { background: rgba(255,255,255,0.2); border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.32); }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.2);
+      border-radius: 3px;
+    }
 
-    /* Запрещаем выделение текста по всему desktop-UI */
-    .no-select { user-select: none; -webkit-user-select: none; }
+    #root {
+      opacity: 0;
+      animation: fadeIn 0.4s ease 0.1s forwards;
+    }
 
-    /* Плавная загрузка */
-    #root { opacity: 0; animation: fadeIn 0.4s ease 0.1s forwards; }
-    @keyframes fadeIn { to { opacity: 1; } }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
   </style>
 </head>
+
 <body>
   <div id="root"></div>
 
