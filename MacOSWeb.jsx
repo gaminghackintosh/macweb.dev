@@ -321,7 +321,7 @@ function FinderContent() {
     },
     {
       label: "LOCATIONS",
-      items: [{ name: "Macintosh HD", icon: "./src/assets/icons/menu/macintosh-hd.png" }, 
+      items: [{ name: "Macintosh HD", icon: "./src/assets/icons/apps/macintosh_HD.ico" }, 
         { name: "Network", icon: "./src/assets/icons/menu/network.png" },
       ],
     },

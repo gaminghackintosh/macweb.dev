@@ -35,7 +35,7 @@ export const MENU_ICONS = {
   documents: `${ASSET_DIRS.menu}/documents.png`,
   downloads: `${ASSET_DIRS.menu}/downloads.png`,
   projects: `${ASSET_DIRS.menu}/projects.png`,
-  macintoshHd: `${ASSET_DIRS.menu}/macintosh-hd.png`,
+  macintoshHd: `${ASSET_DIRS.apps}/macintosh_HD.ico`,
   network: `${ASSET_DIRS.menu}/network.png`,
 };
 
@@ -51,7 +51,7 @@ export const MENU_ICON_FALLBACK = {
 
 /**===== Иконки на рабочем столе =====**/
 export const DESKTOP_ICONS = {
-  hackintoshWeb: `${ASSET_DIRS.desktop}/hackintosh-web.png`,
+  hackintoshWeb: `${ASSET_DIRS.apps}/macintosh_HD.ico`,
 };
 
 export const DESKTOP_ICON_FALLBACK = {
