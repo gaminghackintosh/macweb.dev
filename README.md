@@ -25,7 +25,7 @@
 
 **hackintosh.web** is an open-source macOS desktop environment that runs entirely in the browser. Built with React 18, it recreates the look, feel, and behavior of macOS — draggable windows, a magnifying Dock, a live Menu Bar, and real working apps — without touching a single line of Swift.
 
-![hackintosh.web preview](./docs/preview.png)
+![hackintosh.web preview](assets/img/desktop.png)
 
 ---
 
