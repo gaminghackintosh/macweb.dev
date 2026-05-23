@@ -1,0 +1,119 @@
+.menuBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 28px;
+
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(40px) saturate(1.8);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 6px;
+  z-index: 9999;
+
+  color: white;
+  user-select: none;
+
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.menuBar__left {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.menuBar__itemWrapper {
+  position: relative;
+}
+
+.menuBar__item {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 2px 9px;
+  border-radius: 5px;
+
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.88);
+
+  transition: background 0.12s ease;
+}
+
+.menuBar__item.isApple {
+  font-size: 18px;
+  color: white;
+}
+
+.menuBar__item.isBold {
+  font-weight: 600;
+}
+
+.menuBar__item.isClickable {
+  cursor: pointer;
+}
+
+.menuBar__item.isClickable:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.menuBar__item.isActive {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.menuBar__dropdown {
+  position: absolute;
+  top: 28px;
+  left: 0;
+
+  min-width: 160px;
+
+  background: rgba(12, 12, 14, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+
+  padding: 6px 0;
+  z-index: 10000;
+}
+
+.menuBar__dropdownItem {
+  padding: 9px 14px;
+
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.9);
+
+  white-space: nowrap;
+  cursor: pointer;
+
+  transition: background 0.12s ease;
+}
+
+.menuBar__dropdownItem:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.menuBar__right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  font-size: 13px;
+}
+
+.menuBar__date {
+  opacity: 0.75;
+  font-size: 12px;
+}
+
+.menuBar__time {
+  font-weight: 500;
+}

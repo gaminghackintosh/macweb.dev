@@ -101,7 +101,7 @@ function MenuBar({ activeApp }) {
             onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(255,255,255,0.15)")}
             onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
           >
-            {item === " " ? "🍎" : item}
+            {item === " " ? "" : item}
           </span>
         ))}
       </div>

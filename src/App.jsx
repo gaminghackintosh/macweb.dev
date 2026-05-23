@@ -32,33 +32,26 @@ const INITIAL_POSITIONS = {
   music:    { x: 180, y: 80,  w: 740, h: 500 },  // ← было 500×420, теперь ≈ Finder
 };
 
+/* ===== APPLE SVG ===== */
+const AppleIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    width="16"
+    height="16"
+    style={{ display: "block" }}
+    fill="currentColor"
+  >
+    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47c-1.34.03-1.77-.79-3.29-.79c-1.53 0-2 .77-3.27.82c-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51c1.28-.02 2.5.87 3.29.87c.78 0 2.26-1.07 3.81-.91c.65.03 2.47.26 3.64 1.98c-.09.06-2.17 1.28-2.15 3.81c.03 3.02 2.65 4.03 2.68 4.04c-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5c.13 1.17-.34 2.35-1.04 3.19c-.69.85-1.83 1.51-2.95 1.42c-.15-1.15.41-2.35 1.05-3.11"/>
+  </svg>
+);
+
 let zCounter = 100;
 
+/* ===== MENU BAR ===== */
 function MenuBar({ activeApp }) {
   const [time, setTime] = useState(new Date());
   const [activeMenu, setActiveMenu] = useState(null);
   const barRef = useRef(null);
-
-  useEffect(() => {
-    const t = setInterval(() => setTime(new Date()), 1000);
-    return () => clearInterval(t);
-  }, []);
-
-  useEffect(() => {
-    if (!activeMenu) return;
-    const handleClickOutside = (event) => {
-      if (barRef.current && !barRef.current.contains(event.target)) {
-        setActiveMenu(null);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [activeMenu]);
-
-  const fmtTime = (d) =>
-    d.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true });
-  const fmtDate = (d) =>
-    d.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
 
   const menuOptions = {
     File: ["New Folder", "New Window", "Open...", "Close Window"],
@@ -70,84 +63,76 @@ function MenuBar({ activeApp }) {
 
   const leftItems = [" ", activeApp || "Finder", "File", "Edit", "View", "Window", "Help"];
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (!activeMenu) return;
+
+    const handleClickOutside = (event) => {
+      if (barRef.current && !barRef.current.contains(event.target)) {
+        setActiveMenu(null);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [activeMenu]);
+
+  const fmtTime = (date) => {
+    return date.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    });
+  };
+
+  const fmtDate = (date) => {
+    return date.toLocaleDateString("en-US", {
+      weekday: "short",
+      month: "short",
+      day: "numeric",
+    });
+  };
+
   return (
-    <div
-      ref={barRef}
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        height: 28,
-        background: "rgba(0,0,0,0.55)",
-        backdropFilter: "blur(40px) saturate(1.8)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        padding: "0 6px",
-        zIndex: 9999,
-        color: "white",
-        fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
-        borderBottom: "1px solid rgba(255,255,255,0.07)",
-        userSelect: "none",
-      }}
-    >
-      <div style={{ display: "flex", alignItems: "center", gap: 2 }}>
+    <div ref={barRef} className="menuBar">
+      <div className="menuBar__left">
         {leftItems.map((item, i) => {
           const isClickable = i > 1;
+
           return (
-            <div key={i} style={{ position: "relative" }}>
+            <div key={i} className="menuBar__itemWrapper">
               <span
-                style={{
-                  padding: "2px 9px",
-                  borderRadius: 5,
-                  cursor: isClickable ? "pointer" : "default",
-                  fontSize: i === 0 ? 18 : 13,
-                  fontWeight: i <= 1 ? 600 : 400,
-                  color: i === 0 ? "white" : "rgba(255,255,255,0.88)",
-                  background: activeMenu === item ? "rgba(255,255,255,0.18)" : "transparent",
-                  transition: "background 0.1s",
-                }}
+                className={[
+                  "menuBar__item",
+                  isClickable ? "isClickable" : "",
+                  activeMenu === item ? "isActive" : "",
+                  i === 0 ? "isApple" : "",
+                  i <= 1 ? "isBold" : "",
+                ].join(" ")}
                 onClick={() => {
                   if (!isClickable) return;
                   setActiveMenu(activeMenu === item ? null : item);
                 }}
-                onMouseEnter={(e) => {
-                  if (isClickable) e.currentTarget.style.background = "rgba(255,255,255,0.15)";
-                }}
-                onMouseLeave={(e) => {
-                  if (isClickable && activeMenu !== item) e.currentTarget.style.background = "transparent";
-                }}
               >
-                {item === " " ? "🍎" : item}
+                {item === " " ? <AppleIcon /> : item}
               </span>
+
               {activeMenu === item && menuOptions[item] && (
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 28,
-                    left: 0,
-                    minWidth: 160,
-                    background: "rgba(12,12,14,0.98)",
-                    border: "1px solid rgba(255,255,255,0.1)",
-                    borderRadius: 12,
-                    boxShadow: "0 20px 60px rgba(0,0,0,0.35)",
-                    padding: "6px 0",
-                    zIndex: 10000,
-                  }}
-                >
+                <div className="menuBar__dropdown">
                   {menuOptions[item].map((option, idx) => (
                     <div
                       key={idx}
-                      style={{
-                        padding: "9px 14px",
-                        color: "rgba(255,255,255,0.9)",
-                        fontSize: 12,
-                        whiteSpace: "nowrap",
-                        cursor: "pointer",
-                      }}
-                      onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(255,255,255,0.08)")}
-                      onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+                      className="menuBar__dropdownItem"
                       onClick={() => setActiveMenu(null)}
                     >
                       {option}
@@ -160,16 +145,17 @@ function MenuBar({ activeApp }) {
         })}
       </div>
 
-      <div style={{ display: "flex", alignItems: "center", gap: 14, fontSize: 13 }}>
-        <span style={{ opacity: 0.8 }}>🔋</span>
-        <span style={{ opacity: 0.8 }}>📶</span>
-        <span style={{ opacity: 0.75, fontSize: 12 }}>{fmtDate(time)}</span>
-        <span style={{ fontWeight: 500 }}>{fmtTime(time)}</span>
+      <div className="menuBar__right">
+        <span className="menuBar__icon">🔋</span>
+        <span className="menuBar__icon">📶</span>
+        <span className="menuBar__date">{fmtDate(time)}</span>
+        <span className="menuBar__time">{fmtTime(time)}</span>
       </div>
     </div>
   );
 }
 
+/* ===== APP WINDOW ===== */
 function AppWindow({ win, onClose, onMinimize, onFocus, isActive, children }) {
   const [pos, setPos] = useState({ x: win.x, y: win.y });
   const [size, setSize] = useState({ width: win.width, height: win.height });
@@ -392,6 +378,7 @@ function AppWindow({ win, onClose, onMinimize, onFocus, isActive, children }) {
   );
 }
 
+/* ===== FINDER ===== */
 function FinderContent() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [currentFolder, setCurrentFolder] = useState("Home");
@@ -713,6 +700,7 @@ function FinderContent() {
   );
 }
 
+/* ===== Terminal ===== */
 function TerminalContent() {
   const [history, setHistory] = useState([
     { type: "output", text: "Last login: " + new Date().toDateString() + " on ttys001" },
@@ -1023,6 +1011,7 @@ const renderLine = (text) => {
   );
 }
 
+/* ===== NOTES ===== */
 function NotesContent() {
   const initialNotes = [
     {
@@ -1140,6 +1129,7 @@ function NotesContent() {
   );
 }
 
+/* ================ Placeholder Content ================ */
 function PlaceholderContent({ appId }) {
   const app = APPS.find((a) => a.id === appId);
   return (
