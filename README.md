@@ -62,31 +62,35 @@
 
 ## 📁 Project Structure
 
+You really thought this project had only 5 folders?
+
+Good luck.
+
+The actual structure is already evolving into a small operating system, and documenting every file here would probably require its own README.
+
+If you're brave enough:
+
+```bash
+git checkout code-root
 ```
-hackintosh.web/
-├── src/
-│   ├── components/
-│   │   ├── MenuBar.jsx        # Top menu bar + live clock
-│   │   ├── Dock.jsx           # Dock with magnification
-│   │   ├── AppWindow.jsx      # Draggable window shell
-│   │   └── Desktop.jsx        # Wallpaper + desktop icons
-│   ├── apps/
-│   │   ├── Finder.jsx         # File browser
-│   │   ├── Terminal.jsx       # Shell emulator
-│   │   ├── Notes.jsx          # Text editor
-│   │   └── Safari.jsx         # Browser (coming soon)
-│   ├── hooks/
-│   │   └── useWindowManager.js
-│   ├── constants/
-│   │   └── apps.js            # App definitions & icons
-│   └── App.jsx                # Root entry
-├── public/
-│   └── wallpapers/
-├── docs/
-│   └── preview.png
-├── README.md
-└── package.json
-```
+
+Then enter the rabbit hole yourself.
+
+Or just open the repository and start scrolling until existential dread kicks in.
+
+Current known ecosystem includes:
+- draggable window manager
+- fake Terminal emulator
+- Finder clone
+- Notes app
+- Dock physics
+- live Menu Bar
+- wallpaper renderer
+- app registry
+- custom icon pipeline
+- several questionable architectural decisions at 3 AM
+
+Happy exploring.
 
 ---
 
