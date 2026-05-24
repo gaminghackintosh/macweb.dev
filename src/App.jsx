@@ -16,9 +16,9 @@ import MobileNotSupported from "./components/MNS/MobileNotSupported";
 import { APPS } from "./constants/apps";
 import { AppWindow } from "./components/AppWindow/AppWindow";
 
-import { MenuBar } from "./apps/MenuBar/MenuBar";
-import { TerminalContent } from "./apps/Terminal/Terminal";
-import { NotesContent } from "./apps/Notes/NotesContent";
+import { MenuBar } from "./components/apps/MenuBar/MenuBar";
+import { TerminalContent } from "./components/apps/Terminal/Terminal";
+import { NotesContent } from "./components/apps/Notes/NotesContent";
 
 // Import assets
 import wallpaperDefault from "./assets/images/wallpapers/wallpaper_default.png";

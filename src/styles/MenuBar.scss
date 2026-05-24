@@ -5,7 +5,7 @@
   right: 0;
   height: 28px;
 
-  background: rgba(0, 0, 0, 0.55);
+  background: rgb(0 0 0 / 20%);
   backdrop-filter: blur(40px) saturate(1.8);
 
   display: flex;
@@ -109,11 +109,16 @@
   font-size: 13px;
 }
 
-.menuBar__date {
-  opacity: 0.75;
-  font-size: 12px;
-}
 
-.menuBar__time {
-  font-weight: 500;
+.menuBar__iconImg {
+  width: 18px;
+  height: 18px;
+
+  object-fit: contain;
+
+  opacity: 0.9;
+  filter: brightness(1.1);
+
+  display: flex;
+  align-items: center;
 }

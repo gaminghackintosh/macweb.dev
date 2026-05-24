@@ -6,132 +6,158 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  animation: boot-fade-out 0.5s ease-out 3.2s forwards;
+
+  animation: boot-fade-out 0.6s ease-out 3.2s forwards;
+  background: #000;
 }
 
+/* ── фон ── */
 .boot-bg {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    165deg,
-    #0f3460 0%,
-    #1a4a8a 35%,
-    #0d2d5e 65%,
-    #081e42 100%
-  );
+
+  background: radial-gradient(
+      ellipse at center,
+      rgba(30, 90, 180, 0.35) 0%,
+      rgba(10, 20, 40, 0.9) 60%,
+      #000 100%
+    ),
+    linear-gradient(180deg, #0a0f1f 0%, #05070f 100%);
 }
 
+/* ── контейнер ── */
 .boot-container {
   position: relative;
   z-index: 10;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: 18px;
 }
 
-// ── Logo (Apple emoji) ──────────────────────────────────────
+/* ── LOGO ── */
 .boot-logo {
-  font-size: 120px;
-  line-height: 1;
   opacity: 0;
-  transform: scale(0.3);
-  transition: none;
+  transform: scale(0.85) translateY(10px);
+  filter: blur(10px);
 
   &--show {
-    animation: boot-logo-appear 0.6s cubic-bezier(0.34, 1.4, 0.64, 1) forwards;
+    animation: boot-logo-appear 0.9s cubic-bezier(0.2, 0.9, 0.2, 1) forwards;
   }
 }
 
 @keyframes boot-logo-appear {
   0% {
     opacity: 0;
-    transform: scale(0.3);
-    filter: blur(8px);
+    transform: scale(0.8) translateY(10px);
+    filter: blur(14px);
   }
   60% {
     opacity: 1;
-    transform: scale(1.1);
+    transform: scale(1.05) translateY(0);
+    filter: blur(0px);
   }
   100% {
     opacity: 1;
-    transform: scale(1);
-    filter: blur(0);
+    transform: scale(1) translateY(0);
+    filter: blur(0px);
   }
 }
 
-// ── Text (hackintosh.web) ──────────────────────────────────
+/* ── Apple logo image ── */
+.apple-logo {
+  width: 110px;
+  height: 110px;
+
+  background-image: url("./../../src/assets/icons/preloader/Apple_Hack.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.6));
+}
+
+/* ── TEXT ── */
 .boot-text {
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
-  font-size: 20px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.9);
-  letter-spacing: -0.5px;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.2px;
+
+  color: rgba(255, 255, 255, 0.85);
+
   opacity: 0;
-  transform: translateY(8px);
+  transform: translateY(6px);
 
   &--show {
-    animation: boot-text-appear 0.5s cubic-bezier(0.34, 1.2, 0.64, 1) 0.3s forwards;
+    animation: boot-text-appear 0.7s ease-out 0.25s forwards;
   }
 }
 
 @keyframes boot-text-appear {
-  0% {
+  from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(6px);
   }
-  100% {
+  to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-// ── Progress bar ───────────────────────────────────────────
+/* ── PROGRESS ── */
 .boot-progress {
-  width: 200px;
+  width: 220px;
   height: 3px;
-  border-radius: 2px;
-  background: rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.08);
   overflow: hidden;
-  margin-top: 16px;
-  box-shadow: 0 0 16px rgba(106, 179, 248, 0.2);
+
+  margin-top: 10px;
+
+  opacity: 0;
   animation: boot-progress-appear 0.4s ease-out forwards;
 }
 
 @keyframes boot-progress-appear {
   from {
     opacity: 0;
+    transform: translateY(4px);
   }
   to {
     opacity: 1;
+    transform: translateY(0);
   }
 }
 
 .boot-progress-bar {
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    #6ab3f8 0%,
-    #5ac8fa 50%,
-    #4bb8ec 100%
-  );
-  border-radius: 2px;
-  box-shadow: 0 0 12px rgba(106, 179, 248, 0.6);
-  transition: width 0.3s ease-out;
+  border-radius: 999px;
+
+  background: linear-gradient(90deg, #6ab3f8, #7fd3ff, #5aa9ff);
+
+  box-shadow: 0 0 12px rgba(120, 180, 255, 0.35);
+
+  transition: width 0.25s ease-out;
 }
 
-// ── Footer text ────────────────────────────────────────────
+/* ── FOOTER ── */
 .boot-footer {
   position: absolute;
-  bottom: 60px;
+  bottom: 55px;
+
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.5);
-  letter-spacing: 0.5px;
+
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.3px;
+
   opacity: 0;
 
   &--show {
-    animation: boot-footer-appear 0.4s ease-out 0.9s forwards;
+    animation: boot-footer-appear 0.6s ease-out 0.8s forwards;
   }
 }
 
@@ -144,7 +170,7 @@
   }
 }
 
-// ── Fade out the whole screen ──────────────────────────────
+/* ── FADE OUT ── */
 @keyframes boot-fade-out {
   from {
     opacity: 1;
@@ -153,16 +179,4 @@
     opacity: 0;
     pointer-events: none;
   }
-}
-
-.apple-logo {
-  width: 120px;
-  height: 120px;
-
-  background-image: url("./../../src/assets/icons/preloader/Apple_Hack.png"); // ← поменяешь только это
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.4));
 }

@@ -1,5 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import AppleIcon from "../../components/AppleIcon";
+import AppleIcon from "../../AppleIcon";
+
+/* ===== ASSETS ===== */
+import batteryIcon from "../../../assets/icons/menuBar/battery_charge.png";
+import wifiIcon from "../../../assets/icons/menuBar/wi-fi.png";
 
 /* ===== MENU BAR ===== */
 export function MenuBar({ activeApp }) {
@@ -35,27 +39,22 @@ export function MenuBar({ activeApp }) {
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [activeMenu]);
 
-  const fmtTime = (date) => {
-    return date.toLocaleTimeString("en-US", {
+  const fmtTime = (date) =>
+    date.toLocaleTimeString("en-US", {
       hour: "numeric",
       minute: "2-digit",
       hour12: true,
     });
-  };
 
-  const fmtDate = (date) => {
-    return date.toLocaleDateString("en-US", {
+  const fmtDate = (date) =>
+    date.toLocaleDateString("en-US", {
       weekday: "short",
       month: "short",
       day: "numeric",
     });
-  };
 
   return (
     <div ref={barRef} className="menuBar">
@@ -100,8 +99,17 @@ export function MenuBar({ activeApp }) {
       </div>
 
       <div className="menuBar__right">
-        <span className="menuBar__icon">🔋</span>
-        <span className="menuBar__icon">📶</span>
+        <img
+          src={batteryIcon}
+          alt="Battery"
+          className="menuBar__iconImg"
+        />
+
+        <img
+          src={wifiIcon}
+          alt="Wifi"
+          className="menuBar__iconImg"
+        />
         <span className="menuBar__date">{fmtDate(time)}</span>
         <span className="menuBar__time">{fmtTime(time)}</span>
       </div>

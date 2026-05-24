@@ -10,6 +10,7 @@ export function AppWindow({ win, onClose, onMinimize, onFocus, isActive, childre
   const offset = useRef({ x: 0, y: 0 });
   const windowRef = useRef(null);
   const [cursor, setCursor] = useState("default");
+  const [hoverEdge, setHoverEdge] = useState(null);
 
   const RESIZE_EDGE_SIZE = 10;
   const TITLE_BAR_HEIGHT = 40;
@@ -51,6 +52,7 @@ export function AppWindow({ win, onClose, onMinimize, onFocus, isActive, childre
   const onWindowMouseMove = (e) => {
     const edge = getResizeEdge(e);
     setCursor(getCursorStyle(edge));
+    setHoverEdge(edge);
   };
 
   const onWindowMouseDown = (e) => {
@@ -152,15 +154,18 @@ export function AppWindow({ win, onClose, onMinimize, onFocus, isActive, childre
         height: size.height,
         background: "rgba(25,25,28,0.88)",
         backdropFilter: "blur(40px) saturate(1.8)",
+        border: hoverEdge ? "1px solid rgba(255,255,255,0.18)" : "1px solid transparent",
+        transition: "border 0.15s, box-shadow 0.2s",
         borderRadius: 12,
         overflow: "hidden",
         boxShadow: isActive
-          ? "0 32px 100px rgba(0,0,0,0.75), 0 0 0 1px rgba(255,255,255,0.1)"
+          ? hoverEdge
+            ? "0 32px 100px rgba(0,0,0,0.75), 0 0 0 1px rgba(255,255,255,0.25)"
+            : "0 32px 100px rgba(0,0,0,0.75), 0 0 0 1px rgba(255,255,255,0.1)"
           : "0 14px 40px rgba(0,0,0,0.45)",
         zIndex: win.zIndex,
         display: "flex",
         flexDirection: "column",
-        transition: "box-shadow 0.2s",
         cursor: cursor,
       }}
     >
@@ -219,6 +224,40 @@ export function AppWindow({ win, onClose, onMinimize, onFocus, isActive, childre
       </div>
 
       <div style={{ flex: 1, overflow: "hidden" }}>{children}</div>
+
+      <div
+        style={{
+          position: "absolute",
+          right: 2,
+          bottom: 2,
+          width: 14,
+          height: 14,
+          opacity: 0.35,
+          pointerEvents: "none",
+        }}
+      >
+        <svg width="14" height="14" viewBox="0 0 14 14">
+          <path
+            d="M14 0 L14 14 L0 14"
+            fill="none"
+            stroke="white"
+            strokeWidth="1"
+            opacity="0.6"
+          />
+          <path
+            d="M10 14 L14 10"
+            stroke="white"
+            strokeWidth="1"
+            opacity="0.6"
+          />
+          <path
+            d="M6 14 L14 6"
+            stroke="white"
+            strokeWidth="1"
+            opacity="0.4"
+          />
+        </svg>
+      </div>
     </div>
   );
 }

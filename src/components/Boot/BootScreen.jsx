@@ -29,7 +29,7 @@ export default function BootScreen({ onComplete }) {
       });
     }, 400);
 
-    // Complete boot after 3.2 seconds
+    // Timing for the complete animation
     const completeTimer = setTimeout(() => {
       setProgress(100);
       setTimeout(onComplete, 300);
