@@ -50,7 +50,7 @@ export default function BootScreen({ onComplete }) {
       <div className="boot-container">
         {/* Apple logo */}
         <div className={`boot-logo ${showLogo ? "boot-logo--show" : ""}`}>
-          🍎
+          <div className="apple-logo"></div>
         </div>
 
         {/* Loading text */}
@@ -69,7 +69,6 @@ export default function BootScreen({ onComplete }) {
         )}
       </div>
 
-      {/* Optional: "Starting up..." text at bottom */}
       <div className={`boot-footer ${showProgress ? "boot-footer--show" : ""}`}>
         Starting up...
       </div>

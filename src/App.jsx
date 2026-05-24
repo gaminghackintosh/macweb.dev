@@ -21,7 +21,7 @@ import { TerminalContent } from "./apps/Terminal/Terminal";
 import { NotesContent } from "./apps/Notes/NotesContent";
 
 // Import assets
-import wallpaperDefault from "./assets/wallpapers/wallpaper_default.png";
+import wallpaperDefault from "./assets/images/wallpapers/wallpaper_default.png";
 import DocumentsIcon from "./assets/icons/finder/Folder.png";
 
 
