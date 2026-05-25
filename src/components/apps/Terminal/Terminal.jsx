@@ -168,18 +168,45 @@ export function TerminalContent() {
     }
 
     if (cmd === "neofetch") {
-      return {
-        clear: false,
-        lines: [
-          "",
-          "gaminghackintosh@hackintosh.web",
-          "OS: hackintosh.web 1.0.0",
-          "Shell: hacksh 1.0.0",
-          "Runtime: React 18",
-          `Resolution: ${window.innerWidth}x${window.innerHeight}`,
-          `Uptime: ${Math.floor(performance.now() / 1000)}s`,
-        ],
-      };
+      // Получаем динамические значения
+      const resolution = `${window.innerWidth}x${window.innerHeight}`;
+      const uptime = Math.floor(performance.now() / 1000);
+      const memory = (performance?.memory?.usedJSHeapSize 
+        ? Math.round(performance.memory.usedJSHeapSize / 1048576) 
+        : 128) + " MB";
+
+      const neofetchLines = [
+        "",
+        " \x1b[38;5;39m                                     ,\x1b[0m                          \x1b[32mgaminghackintosh\x1b[0m@\x1b[36mhackintosh.web\x1b[0m",
+        " \x1b[38;5;39m                                    ;o\\\\\x1b[0m                         ─────────────────────────────",
+        " \x1b[38;5;45m                                    ;Ob`.\x1b[0m                       OS:          \x1b[37mhackintosh.web 1.0.0\x1b[0m",
+        " \x1b[38;5;45m                                   ;OOOOb`.\x1b[0m                     Kernel:      \x1b[37mhackintosh-core\x1b[0m",
+        " \x1b[38;5;51m                                  ;OOOOOY\" )\x1b[0m                    Host:        \x1b[37mMacBook Pro (Simulated)\x1b[0m",
+        " \x1b[38;5;51m                                 ;OOOO' ,%%)\x1b[0m                    Shell:       \x1b[37mhacksh 1.0.0\x1b[0m",
+        " \x1b[38;5;87m                             \\\\  /OOO ,%%%%,%\\\\\x1b[0m                 Runtime:     \x1b[37mReact 18 / V8\x1b[0m",
+        " \x1b[38;5;87m                              |:  ,%%%%%%;%%/\x1b[0m                  Resolution:  \x1b[37m" + resolution + "\x1b[0m",
+        " \x1b[38;5;123m                              ||,%%%%%%%%%%/\x1b[0m                   Theme:       \x1b[35mhackintosh Dark\x1b[0m",
+        " \x1b[38;5;123m                              ;|%%%%%%%%%'/`-\"\"`.\x1b[0m             Engine:      \x1b[37mChromium Terminal\x1b[0m",
+        " \x1b[38;5;159m                             /: %%%%%%%%'/ c$$$$.`.\x1b[0m            Memory:      \x1b[37m" + memory + "\x1b[0m",
+        " \x1b[38;5;159m                `.______     \\\\ \\\\%%%%%%%'/.$$YF\"Y$: )\x1b[0m          Uptime:      \x1b[37m" + uptime + "s\x1b[0m",
+        " \x1b[38;5;195m              _________ \"`..\\\\`o \\\\`%%' ,',$F,.   $F )\x1b[0m         Packages:    \x1b[37m1337 (npm)\x1b[0m",
+        " \x1b[38;5;195m     ___,--\"\"'dOOO;,:%%`-._ o_,O_   ,'\"',d88)  '  )\x1b[0m",
+        " \x1b[38;5;45m  -\"'. YOOOOOOO';%%%%%%%%%;`-O   )_     ,X888F   _/\x1b[0m",
+        " \x1b[38;5;45m      \\\\ YOOOO',%%%%%%%%%%Y    \\\\__;`),-.  `\"\"F  ,'\x1b[0m",
+        " \x1b[38;5;51m       \\\\ `\" ,%%%%%%%%%%,' _,-   \\\\-' \\\\_ `------'\x1b[0m",
+        " \x1b[38;5;51m        \\\\_ %%%%',%%%%%_,-' ,;    ( _,-\\\\\x1b[0m",
+        " \x1b[38;5;87m          `-.__`%%',-' .c$$'     |\\\\-_,-\\\\\x1b[0m",
+        " \x1b[38;5;87m               `\"\"; ,$$$',md8oY  : `\\\\_,')\x1b[0m",
+        " \x1b[38;5;123m                 ( ,$$$F `88888  ;   `--'\x1b[0m",
+        " \x1b[38;5;123m                  \\\\`$$(    `\"\"' /\x1b[0m",
+        " \x1b[38;5;159m                   \\\\`\"$$c'   _,'\x1b[0m",
+        " \x1b[38;5;159m                    `.____,-'\x1b[0m",
+        "",
+        " \x1b[40m   \x1b[0m\x1b[41m   \x1b[0m\x1b[42m   \x1b[0m\x1b[43m   \x1b[0m\x1b[44m   \x1b[0m\x1b[45m   \x1b[0m\x1b[46m   \x1b[0m\x1b[47m   \x1b[0m",
+        "",
+      ];
+
+      return { clear: false, lines: neofetchLines };
     }
 
     if (cmd === "clear") {
