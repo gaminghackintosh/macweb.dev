@@ -40,7 +40,7 @@
 | Terminal — working shell emulator | ✅ Done |
 | Notes — editable markdown-ish notes | ✅ Done |
 | Desktop icons | ✅ Done |
-| Safari browser (iframe) | 🔲 Planned |
+| Safari browser (iframe) | Do you seriously think that’s even possible? 😉 |
 | Spotlight search (⌘ Space) | 🔲 Planned |
 | Mission Control | 🔲 Planned |
 | Notifications Center | 🔲 Planned |
