@@ -874,14 +874,6 @@ function PlaceholderContent({ appId }) {
         }}
       />
       <span style={{ fontSize: 20, fontWeight: 300 }}>{app?.name}</span>
-      <span style={{
-        fontSize: 12, opacity: 0.5,
-        background: "rgba(255,255,255,0.06)",
-        padding: "4px 12px", borderRadius: 20,
-        border: "1px solid rgba(255,255,255,0.1)",
-      }}>
-        Coming soon
-      </span>
     </div>
   );
 }

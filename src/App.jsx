@@ -395,7 +395,7 @@ function PlaceholderContent({ appId }) {
           borderRadius: 20,
         }}
       >
-        Coming soon
+        Do you seriously think that’s even possible? 😉
       </span>
     </div>
   );

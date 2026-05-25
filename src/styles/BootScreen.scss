@@ -1,3 +1,4 @@
+/*=== Основной экран загрузки ===*/
 .boot-screen {
   position: fixed;
   inset: 0;
@@ -5,118 +6,59 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-
-  animation: boot-fade-out 0.6s ease-out 3.2s forwards;
   background: #000;
+  animation: boot-fade-out 0.6s ease-out 3.5s forwards;
 }
 
-/* ── фон ── */
 .boot-bg {
   position: absolute;
   inset: 0;
-
-  background: radial-gradient(
-      ellipse at center,
-      rgba(30, 90, 180, 0.35) 0%,
-      rgba(10, 20, 40, 0.9) 60%,
-      #000 100%
-    ),
-    linear-gradient(180deg, #0a0f1f 0%, #05070f 100%);
+  background: #000;
 }
 
-/* ── контейнер ── */
 .boot-container {
   position: relative;
   z-index: 10;
-
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 18px;
+  gap: 24px;
 }
 
-/* ── LOGO ── */
+/*=== Логотип ===*/
 .boot-logo {
   opacity: 0;
-  transform: scale(0.85) translateY(10px);
-  filter: blur(10px);
-
+  transition: opacity 0.5s ease-out;
+  
   &--show {
-    animation: boot-logo-appear 0.9s cubic-bezier(0.2, 0.9, 0.2, 1) forwards;
+    opacity: 1;
   }
 }
 
-@keyframes boot-logo-appear {
-  0% {
-    opacity: 0;
-    transform: scale(0.8) translateY(10px);
-    filter: blur(14px);
-  }
-  60% {
-    opacity: 1;
-    transform: scale(1.05) translateY(0);
-    filter: blur(0px);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-    filter: blur(0px);
-  }
-}
-
-/* ── Apple logo image ── */
 .apple-logo {
-  width: 110px;
-  height: 110px;
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+  background: transparent;
+  mix-blend-mode: screen;
 
-  background-image: url("./../../src/assets/icons/preloader/Apple_Hack.png");
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
+  filter:
+    drop-shadow(0 0 12px rgba(255,255,255,0.25))
+    brightness(1.05);
 
-  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.6));
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
-/* ── TEXT ── */
-.boot-text {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
-  font-size: 18px;
-  font-weight: 500;
-  letter-spacing: -0.2px;
 
-  color: rgba(255, 255, 255, 0.85);
-
-  opacity: 0;
-  transform: translateY(6px);
-
-  &--show {
-    animation: boot-text-appear 0.7s ease-out 0.25s forwards;
-  }
-}
-
-@keyframes boot-text-appear {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ── PROGRESS ── */
+/*=== Прогресс-бар ===*/
 .boot-progress {
-  width: 220px;
-  height: 3px;
-  border-radius: 999px;
-
-  background: rgba(255, 255, 255, 0.08);
+  width: 280px;
+  max-width: 70vw;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
   overflow: hidden;
-
-  margin-top: 10px;
-
   opacity: 0;
   animation: boot-progress-appear 0.4s ease-out forwards;
 }
@@ -134,43 +76,14 @@
 
 .boot-progress-bar {
   height: 100%;
-  border-radius: 999px;
-
-  background: linear-gradient(90deg, #6ab3f8, #7fd3ff, #5aa9ff);
-
-  box-shadow: 0 0 12px rgba(120, 180, 255, 0.35);
-
-  transition: width 0.25s ease-out;
+  width: 0%;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.7);
+  transition: width 0.1s linear;
 }
 
-/* ── FOOTER ── */
-.boot-footer {
-  position: absolute;
-  bottom: 55px;
-
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 12px;
-
-  color: rgba(255, 255, 255, 0.35);
-  letter-spacing: 0.3px;
-
-  opacity: 0;
-
-  &--show {
-    animation: boot-footer-appear 0.6s ease-out 0.8s forwards;
-  }
-}
-
-@keyframes boot-footer-appear {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-/* ── FADE OUT ── */
+/*=== Финальное исчезновение ===*/
 @keyframes boot-fade-out {
   from {
     opacity: 1;

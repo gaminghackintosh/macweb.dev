@@ -59,7 +59,6 @@ export const WALLPAPERS = [
 
 export const DEFAULT_WALLPAPER = WALLPAPERS[0];
 
-// Helper to get wallpaper by ID
 export function getWallpaperById(id) {
   return WALLPAPERS.find((w) => w.id === id) || DEFAULT_WALLPAPER;
 }
