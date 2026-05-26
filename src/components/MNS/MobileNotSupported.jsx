@@ -1,21 +1,21 @@
 import React, { useState } from "react";
-import "./scss/main.scss"; 
+import "./scss/main.scss";
 
 const FEATURES = [
   {
-    icon: "🖥",
-    title: "Оптимизировано для ПК",
-    desc: "Для корректного отображения требуется ширина экрана от 1024px",
+    icon: "🌄",
+    title: "Для большого экрана",
+    desc: "Интерфейс macOS воссоздан для разрешения от 1024 px",
   },
   {
-    icon: "🪄",
-    title: "Современный интерфейс",
-    desc: "Эффекты матового стекла, глубокого размытия и плавные анимации",
+    icon: "✨",
+    title: "Живая атмосфера",
+    desc: "Матовое стекло, мягкие тени и плавные анимации",
   },
   {
-    icon: "⚡",
-    title: "Полная функциональность",
-    desc: "Управление окнами, интерактивный Док и живой Терминал",
+    icon: "🖥️",
+    title: "Настоящие приложения",
+    desc: "Finder, Терминал, Notes, Dock — всё как на Mac",
   },
 ];
 
@@ -25,21 +25,15 @@ export default function MobileNotSupported() {
   const handleCopyLink = () => {
     navigator.clipboard.writeText(window.location.href);
     setCopied(true);
-    
-    setTimeout(() => {
-      setCopied(false);
-    }, 2500);
+    setTimeout(() => setCopied(false), 2500);
   };
 
   return (
     <div className="mns-backdrop">
-      {/* фон macOS */}
       <div className="mns-desktop-bg" />
 
-      {/* Блок окна */}
       <div className="mns-window" role="dialog" aria-modal="true">
-
-        {/* ── Единая панель заголовка ── */}
+        {/* ── Заголовок окна ── */}
         <div className="mns-titlebar">
           <div className="mns-traffic">
             <div className="tl tl-close" title="Доступно только на ПК" />
@@ -50,25 +44,23 @@ export default function MobileNotSupported() {
           <div className="mns-titlebar-spacer" />
         </div>
 
-        {/* ── Основной контент ── */}
+        {/* ── Контент ── */}
         <div className="mns-body">
-
-          {/* Главный блок */}
           <div className="mns-hero">
             <div className="mns-app-icon" aria-hidden="true">
-              <span className="mns-app-icon-inner">🖥</span>
+              <span className="mns-app-icon-inner">🏔️</span>
             </div>
             <div className="mns-hero-text">
-              <h1 className="mns-title">Пересядьте за компьютер</h1>
-              <p className="mns-subtitle">Desktop Only Environment</p>
+              <h1 className="mns-title">Откройте на большом экране</h1>
+              <p className="mns-subtitle">macOS Experience</p>
               <p className="mns-description">
-                Этот проект полностью воссоздает систему macOS. На экранах телефонов она физически не помещается. 
-                Скопируйте ссылку и откройте её на компьютере.
+                hackintosh.web — это полноценная среда macOS прямо в браузере.
+                На телефоне ей тесно. Возьмите ноутбук или компьютер, чтобы
+                погрузиться в атмосферу настоящего Mac.
               </p>
             </div>
           </div>
 
-          {/* Список системных требований */}
           <div className="mns-features-box">
             <div className="mns-features" role="list">
               {FEATURES.map((f) => (
@@ -90,7 +82,9 @@ export default function MobileNotSupported() {
               className={`mns-btn ${copied ? "mns-btn--success" : "mns-btn--primary"}`}
               onClick={handleCopyLink}
             >
-              {copied ? "Ссылка скопирована! 📋 Отправьте её себе" : "Скопировать ссылку для ПК"}
+              {copied
+                ? "Ссылка скопирована! Отправьте её на компьютер"
+                : "Скопировать ссылку"}
             </button>
           </div>
 

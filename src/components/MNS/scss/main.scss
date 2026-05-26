@@ -1,31 +1,26 @@
 // ════════════════════════════════════════════════════════
-//  MobileNotSupported — Modern macOS Style (Strict Block)
+//  MobileNotSupported — macOS Sierra / Yosemite Style
 // ════════════════════════════════════════════════════════
 
-// ── Переменные / Токены ─────────────────────────────────
 $win-w           : 92%;
-$max-win-w       : 460px;
+$max-win-w       : 440px;
 $titlebar-h      : 38px;
-$radius          : 16px;
+$radius          : 12px;
 $font-ui         : -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", sans-serif;
 
-// Цвета материалов
-$window-bg       : rgba(255, 255, 255, 0.75);
-$window-border   : rgba(255, 255, 255, 0.4);
-$inner-stroke    : rgba(0, 0, 0, 0.06);
-
-// Кнопки
-$btn-radius      : 8px;
+// Цвета
+$window-bg       : rgba(255, 255, 255, 0.82);
+$window-border   : rgba(255, 255, 255, 0.5);
+$inner-stroke    : rgba(0, 0, 0, 0.04);
+$btn-radius      : 10px;
 $apple-blue      : #007aff;
 $apple-blue-hover: #0063ce;
 $apple-green     : #34c759;
 
-// Traffic Lights 
-$tl-r            : #ff5f56;
-$tl-y            : #ffbd2e;
-$tl-g            : #27c93f;
+// Traffic Lights
+$tl-r: #ff5f56; $tl-y: #ffbd2e; $tl-g: #27c93f;
 
-// ── Задний фон (Размытый Mesh-градиент) ──────────────────
+// ── Задний фон: горы Sierra ──
 .mns-backdrop {
   position         : fixed;
   inset            : 0;
@@ -36,22 +31,20 @@ $tl-g            : #27c93f;
   overflow         : hidden;
   font-family      : $font-ui;
 
-  background-color : #0c0822;
-  background-image : 
-    radial-gradient(at 0% 0%, rgba(255, 90, 150, 0.4) 0px, transparent 50%),
-    radial-gradient(at 100% 0%, rgba(100, 70, 255, 0.45) 0px, transparent 50%),
-    radial-gradient(at 50% 100%, rgba(0, 198, 255, 0.3) 0px, transparent 60%),
-    radial-gradient(at 100% 100%, rgba(238, 70, 211, 0.25) 0px, transparent 50%);
+  background:
+    linear-gradient(to bottom, #1b2c4c 0%, #3b5b8c 30%, #a1c4e5 70%, #d4e3f5 100%);
 }
+
 
 .mns-desktop-bg {
   position       : absolute;
   inset          : 0;
+  backdrop-filter: blur(18px) saturate(1.5); 
   pointer-events : none;
-  backdrop-filter: blur(40px);
+  opacity        : 0.4;
 }
 
-// ── Окно-материал (Glassmorphism) ────────────────────────
+// ── Окно-материал ───────────────────────────────────────
 .mns-window {
   position       : relative;
   width          : $win-w;
@@ -59,29 +52,29 @@ $tl-g            : #27c93f;
   border-radius  : $radius;
   overflow       : hidden;
   background     : $window-bg;
-  backdrop-filter: blur(35px) saturate(190%);
+  backdrop-filter: blur(25px) saturate(180%);
   border         : 1px solid $window-border;
-
   box-shadow:
     0 0 0 1px $inner-stroke,
-    0 4px 16px rgba(0, 0, 0, 0.05),
-    0 24px 64px rgba(0, 0, 0, 0.2);
-
-  animation: mns-modern-open 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+    0 8px 32px rgba(0,0,0,0.08),
+    0 2px 8px rgba(0,0,0,0.05);
+  animation: mns-sierra-open 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-@keyframes mns-modern-open {
-  from { opacity: 0; transform: scale(0.95) translateY(8px); }
+@keyframes mns-sierra-open {
+  from { opacity: 0; transform: scale(0.96) translateY(10px); }
   to   { opacity: 1; transform: scale(1) translateY(0); }
 }
 
-// ── Единый Заголовок ────────────────────────────────────
+// ── Заголовок ───────────────────────────────────────────
 .mns-titlebar {
   height         : $titlebar-h;
   display        : flex;
   align-items    : center;
-  padding        : 0 16px;
-  position       : relative;
+  padding        : 0 14px;
+  background     : rgba(255,255,255,0.4);
+  backdrop-filter: blur(10px);
+  border-bottom  : 0.5px solid rgba(0,0,0,0.08);
   user-select    : none;
 }
 
@@ -89,23 +82,22 @@ $tl-g            : #27c93f;
   position       : absolute;
   left           : 50%;
   transform      : translateX(-50%);
-  font-size      : 13px;
+  font-size      : 12px;
   font-weight    : 600;
-  color          : rgba(0, 0, 0, 0.7);
+  color          : rgba(0, 0, 0, 0.55);
   letter-spacing : -0.1px;
 }
 
 .mns-titlebar-spacer {
   width          : 52px;
-  flex-shrink    : 0;
   margin-left    : auto;
 }
 
-// ── Декоративные цветные точки ────────
+// ── Точки (traffic lights) ────────────────────────────
 .mns-traffic {
   display        : flex;
   align-items    : center;
-  gap            : 8px;
+  gap            : 7px;
   z-index        : 2;
 }
 
@@ -113,21 +105,17 @@ $tl-g            : #27c93f;
   width          : 12px;
   height         : 12px;
   border-radius  : 50%;
-  border         : none;
-  position       : relative;
+  background     : rgba(0,0,0,0.12);
+  transition     : background 0.15s;
 }
-
-.tl-close { background: rgba(0, 0, 0, 0.15); }
-.tl-min   { background: rgba(0, 0, 0, 0.15); }
-.tl-max   { background: rgba(0, 0, 0, 0.15); }
 
 .mns-window:hover .tl-close { background: $tl-r; }
 .mns-window:hover .tl-min   { background: $tl-y; }
 .mns-window:hover .tl-max   { background: $tl-g; }
 
-// ── Основное тело окна ──────────────────────────────────
+// ── Тело окна ───────────────────────────────────────────
 .mns-body {
-  padding: 4px 24px 18px;
+  padding: 18px 24px 20px;
 }
 
 // ── Hero-секция ─────────────────────────────────────────
@@ -136,93 +124,82 @@ $tl-g            : #27c93f;
   flex-direction : column;
   align-items    : center;
   text-align     : center;
-  gap            : 14px;
-  padding        : 8px 0 16px;
+  gap            : 12px;
+  margin-bottom  : 18px;
 }
 
 .mns-app-icon {
-  width          : 64px;
-  height         : 64px;
-  border-radius  : 15px;
+  width          : 60px;
+  height         : 60px;
+  border-radius  : 14px;
+  background     : white;
+  box-shadow     : 0 4px 12px rgba(0,0,0,0.05), inset 0 -0.5px 0 rgba(0,0,0,0.08);
   display        : flex;
   align-items    : center;
   justify-content: center;
-  background     : white;
-  box-shadow     : 0 4px 12px rgba(0, 0, 0, 0.06), inset 0 -1px 0 rgba(0, 0, 0, 0.05);
 }
 
-.mns-app-icon-inner { font-size: 32px; }
-
-.mns-hero-text {
-  display        : flex;
-  flex-direction : column;
-  align-items    : center;
+.mns-app-icon-inner {
+  font-size: 30px;
 }
 
 .mns-title {
-  font-size      : 20px;
-  font-weight    : 700;
-  color          : #111111;
-  letter-spacing : -0.4px;
+  font-size      : 19px;
+  font-weight    : 650;
+  color          : #1c1c1e;
+  letter-spacing : -0.3px;
   margin         : 0 0 2px 0;
 }
 
 .mns-subtitle {
   font-size      : 11px;
-  font-weight    : 600;
-  color          : rgba(0, 0, 0, 0.4);
+  font-weight    : 500;
+  color          : rgba(0,0,0,0.45);
   text-transform : uppercase;
-  letter-spacing : 0.8px;
-  margin         : 0 0 10px 0;
+  letter-spacing : 0.6px;
+  margin         : 0 0 6px 0;
 }
 
 .mns-description {
   font-size      : 13px;
   line-height    : 1.5;
-  color          : #4f4f4f;
+  color          : #5a5a5e;
   margin         : 0;
-  max-width      : 340px;
+  max-width      : 320px;
 }
 
-// ── Список требований ───────────────────────────────────
-.mns-features-box {
-  background     : rgba(0, 0, 0, 0.03);
-  border         : 1px solid rgba(0, 0, 0, 0.02);
-  border-radius  : 12px;
-  padding        : 2px 0;
-  margin-bottom  : 20px;
-}
-
-.mns-features { display: flex; flex-direction: column; }
-
+// ── Блок с характеристиками (как в About This Mac) ─────
 .mns-feature-row {
   display        : flex;
-  align-items    : center;
-  gap            : 14px;
-  padding        : 10px 16px;
-
-  & + & { border-top: 1px solid rgba(0, 0, 0, 0.04); }
+  align-items    : flex-start;  
+  gap            : 12px;
+  padding        : 10px 14px;
+  & + & { border-top: 1px solid rgba(0,0,0,0.04); }
 }
 
-.mns-feature-icon {
-  font-size      : 18px;
-  width          : 28px;
-  height         : 28px;
+.mns-feature-text {
+  flex           : 1;
+  min-width      : 0;        
   display        : flex;
-  align-items    : center;
-  justify-content: center;
+  flex-direction : column;
+  word-break     : break-word;   
+  overflow-wrap  : break-word;
 }
 
-.mns-feature-text { display: flex; flex-direction: column; }
-.mns-feature-title { font-size: 13px; font-weight: 600; color: #1e1e1e; }
-.mns-feature-desc { font-size: 11px; color: #666666; line-height: 1.3; }
-
-// ── Кнопки действий ───────────────────────────────────────
-.mns-actions {
-  display        : flex;
-  margin-bottom  : 16px;
+.mns-feature-title {
+  font-size      : 12px;
+  font-weight    : 600;
+  color          : #1c1c1e;
+  line-height    : 1.4;
 }
 
+.mns-feature-desc {
+  font-size      : 11px;
+  color          : #8e8e93;
+  line-height    : 1.4;
+}
+
+// ── Кнопка ──────────────────────────────────────────────
 .mns-btn {
   width          : 100%;
   height         : 38px;
@@ -234,42 +211,33 @@ $tl-g            : #27c93f;
   display        : flex;
   align-items    : center;
   justify-content: center;
-  transition     : all 0.2s ease;
+  transition     : background 0.2s, transform 0.1s;
 
   &:active {
     transform: scale(0.98);
   }
 }
 
-// Кнопка в обычном состоянии (Синяя)
 .mns-btn--primary {
   background     : $apple-blue;
   color          : white;
   font-weight    : 600;
-  box-shadow     : 0 2px 6px rgba(0, 122, 255, 0.3);
+  box-shadow     : 0 2px 8px rgba(0, 122, 255, 0.25);
 
   &:hover { background: $apple-blue-hover; }
 }
 
-// Кнопка при успешном копировании (Зеленая)
 .mns-btn--success {
   background     : $apple-green;
   color          : white;
   font-weight    : 600;
-  box-shadow     : 0 2px 6px rgba(52, 199, 89, 0.3);
-  animation      : mns-bounce 0.3s ease;
-}
-
-@keyframes mns-bounce {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.03); }
+  box-shadow     : 0 2px 8px rgba(52, 199, 89, 0.25);
 }
 
 // ── Подвал ───────────────────────────────────────────────
 .mns-footer {
   text-align     : center;
   font-size      : 10px;
-  color          : rgba(0, 0, 0, 0.3);
-  margin         : 0;
-  font-weight    : 500;
+  color          : rgba(0,0,0,0.25);
+  margin-top     : 12px;
 }
