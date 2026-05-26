@@ -47,7 +47,7 @@ export function TerminalContent() {
 
           return [
             `\x1b[33mcommit ${commit.sha.slice(0, 7)}\x1b[0m`,
-            `Author: ${author.name || "Unknown"} <${author.email || "noreply@github.com"}>`,
+            `Author: ${author.name || "Unknown"}`,
             `Date:   ${date.toUTCString()}`,
             "",
             `    ${ message}`,
@@ -243,30 +243,74 @@ export function TerminalContent() {
     setInput("");
   };
 
-  const renderLine = (text) => {
-    const ansiMap = {
-      "\x1b[0m": "</span>",
-      "\x1b[31m": '<span style="color:#ff5f56">',
-      "\x1b[32m": '<span style="color:#27c93f">',
-      "\x1b[33m": '<span style="color:#ffbd2e">',
-      "\x1b[34m": '<span style="color:#0a84ff">',
-      "\x1b[35m": '<span style="color:#bf5af2">',
-      "\x1b[36m": '<span style="color:#5ac8fa">',
-      "\x1b[37m": '<span style="color:#f2f2f7">',
-    };
-
-    let result = text;
-    Object.entries(ansiMap).forEach(([code, tag]) => {
-      result = result.split(code).join(tag);
-    });
-
-    return (
-      <span
-        dangerouslySetInnerHTML={{ __html: result }}
-        style={{ whiteSpace: "pre" }}
-      />
-    );
+// Безопасный парсинг ANSI-цветов без dangerouslySetInnerHTML
+const renderLine = (text) => {
+  // Карта ANSI-кодов → цвет CSS
+  const ansiColorMap = {
+    '31': '#ff5f56', // red
+    '32': '#27c93f', // green
+    '33': '#ffbd2e', // yellow
+    '34': '#0a84ff', // blue
+    '35': '#bf5af2', // purple
+    '36': '#5ac8fa', // cyan
+    '37': '#f2f2f7', // white
+    '0': undefined,   // reset – вернёмся к дефолтному цвету
   };
+
+  const ansiEscape = '\x1b';
+  const segments = [];
+  let currentColor = undefined;
+  let buffer = '';
+
+  for (let i = 0; i < text.length; i++) {
+    if (text[i] === ansiEscape && text[i + 1] === '[') {
+      // Нашли начало ANSI-последовательности
+      const endIdx = text.indexOf('m', i + 2);
+      if (endIdx === -1) {
+        // Некорректная последовательность – добавим как текст
+        buffer += text[i];
+        continue;
+      }
+
+      // Сохраняем накопленный текст с текущим цветом
+      if (buffer.length > 0) {
+        segments.push({ text: buffer, color: currentColor });
+        buffer = '';
+      }
+
+      const code = text.slice(i + 2, endIdx); // например, '31'
+      currentColor = ansiColorMap[code] !== undefined ? ansiColorMap[code] : currentColor;
+
+      i = endIdx; // перемещаемся к 'm'
+      continue;
+    }
+
+    buffer += text[i];
+  }
+
+  // Добавляем остаток
+  if (buffer.length > 0) {
+    segments.push({ text: buffer, color: currentColor });
+  }
+
+  // Ограничение по длине ввода
+  if (input.length > 2000) return;
+
+
+  return (
+    <span style={{ whiteSpace: 'pre' }}>
+      {segments.map((seg, idx) => (
+        <span
+          key={idx}
+          style={seg.color ? { color: seg.color } : {}}
+          // React автоматически экранирует HTML-теги внутри текста
+        >
+          {seg.text}
+        </span>
+      ))}
+    </span>
+  );
+};
 
   return (
     <div
