@@ -44,7 +44,7 @@
   &-view-controls {
     display: flex;
     gap: 4px;
-    background: rgba(255, 255, 255, 0.06); // можно вынести в переменную, но пока оставим
+    background: rgba(255, 255, 255, 0.06);
     border-radius: 8px;
     padding: 2px;
   }
@@ -106,7 +106,7 @@
     width: 200px;
     flex-shrink: 0;
     background: vars.$color-finder-sidebar-bg;
-    border-right: 1px solid rgba(255, 255, 255, 0.06); // можно вынести
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
     padding: 12px 0;
     overflow-y: auto;
   }
@@ -425,25 +425,5 @@
       border-radius: 12px;
       object-fit: cover;
     }
-  }
-}
-
-/* Глобальный скроллбар (можно оставить общим в main.scss) */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: vars.$color-scrollbar-thumb;
-  border-radius: 4px;
-
-  &:hover {
-    background: vars.$color-scrollbar-thumb-hover;
   }
 }

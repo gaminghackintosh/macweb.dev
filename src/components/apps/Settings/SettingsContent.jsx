@@ -1,65 +1,75 @@
-import React, { useState, useEffect } from "react";
-import { WALLPAPER_GROUPS, DEFAULT_WALLPAPER } from "../../../constants/wallpapers";
+import React, { useState, useContext } from "react";
+import { WALLPAPER_GROUPS } from "../../../constants/wallpapers";
+import { WindowContext } from "../../AppWindow/AppWindow";
+
+// Иконки
+import WiFi from "./../../../assets/icons/Settings_menuSections/Wi-Fi.png";
+import Bluetooth from "./../../../assets/icons/Settings_menuSections/Bluetooth.png";
+
+import LogoType from "./../../../assets/images/logo/logo_butterfly.png";
 
 export function SettingsContent({ currentWallpaper, onWallpaperChange }) {
   const [activeTab, setActiveTab] = useState("wallpaper");
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Структура меню в настройках
+  // Получаем функции управления окном из контекста
+  const { onClose, onMinimize, onFocus, onTitleMouseDown } = useContext(WindowContext);
+
+  // Структура меню (оставьте свою, здесь пример)
   const menuSections = [
     {
       id: "network",
       items: [
-        { id: "wifi", label: "Wi-Fi", icon: "📶", badge: null },
-        { id: "bluetooth", label: "Bluetooth", icon: "🔄", badge: null },
-        { id: "network", label: "Network", icon: "🌐", badge: null },
-        { id: "vpn", label: "VPN", icon: "🔒", badge: null }
+        { id: "wifi", label: "Wi-Fi", icon: WiFi, iconType: "image" },
+        { id: "bluetooth", label: "Bluetooth", icon: Bluetooth, iconType: "image" },
+        { id: "network", label: "Network", icon: "🌐", iconType: "image" },
+        { id: "vpn", label: "VPN", icon: "🔒", iconType: "image" }
       ]
     },
     {
       id: "system",
       items: [
-        { id: "notifications", label: "Notifications", icon: "🔔", badge: null },
-        { id: "sound", label: "Sound", icon: "🔊", badge: null },
-        { id: "focus", label: "Focus", icon: "🧘", badge: null },
-        { id: "screentime", label: "Screen Time", icon: "⏱️", badge: null }
+        { id: "notifications", label: "Notifications", icon: "🔔", iconType: "image" },
+        { id: "sound", label: "Sound", icon: "🔊", iconType: "image" },
+        { id: "focus", label: "Focus", icon: "🧘", iconType: "image" },
+        { id: "screentime", label: "Screen Time", icon: "⏱️", iconType: "image" }
       ]
     },
     {
       id: "general",
       items: [
-        { id: "general", label: "General", icon: "⚙️", badge: null },
-        { id: "appearance", label: "Appearance", icon: "🎨", badge: null },
-        { id: "accessibility", label: "Accessibility", icon: "♿", badge: null },
-        { id: "controlcenter", label: "Control Center", icon: "🎮", badge: null },
-        { id: "siri", label: "Siri & Spotlight", icon: "🔍", badge: null },
-        { id: "privacy", label: "Privacy & Security", icon: "🔐", badge: null }
+        { id: "general", label: "General", icon: "⚙️", iconType: "image" },
+        { id: "appearance", label: "Appearance", icon: "🎨", iconType: "image" },
+        { id: "accessibility", label: "Accessibility", icon: "♿", iconType: "image" },
+        { id: "controlcenter", label: "Control Center", icon: "🎮", iconType: "image" },
+        { id: "siri", label: "Siri & Spotlight", icon: "🔍", iconType: "image" },
+        { id: "privacy", label: "Privacy & Security", icon: "🔐", iconType: "image" }
       ]
     },
     {
       id: "desktop",
       items: [
-        { id: "desktopdock", label: "Desktop & Dock", icon: "🖥️", badge: null },
-        { id: "displays", label: "Displays", icon: "🖥️", badge: null },
-        { id: "wallpaper", label: "Wallpaper", icon: "🖼️", badge: null },
-        { id: "screensaver", label: "Screen Saver", icon: "✨", badge: null },
-        { id: "energysaver", label: "Energy Saver", icon: "🔋", badge: null }
+        { id: "desktopdock", label: "Desktop & Dock", icon: "🖥️", iconType: "image" },
+        { id: "displays", label: "Displays", icon: "🖥️", iconType: "image" },
+        { id: "wallpaper", label: "Wallpaper", icon: "🖼️", iconType: "image" },
+        { id: "screensaver", label: "Screen Saver", icon: "✨", iconType: "image" },
+        { id: "energysaver", label: "Energy Saver", icon: "🔋", iconType: "image" }
       ]
     },
     {
       id: "security",
       items: [
-        { id: "lockscreen", label: "Lock Screen", icon: "🔒", badge: null },
-        { id: "loginpassword", label: "Login Password", icon: "🔑", badge: null },
-        { id: "usersgroups", label: "Users & Groups", icon: "👥", badge: null }
+        { id: "lockscreen", label: "Lock Screen", icon: "🔒", iconType: "image" },
+        { id: "loginpassword", label: "Login Password", icon: "🔑", iconType: "image" },
+        { id: "usersgroups", label: "Users & Groups", icon: "👥", iconType: "image" }
       ]
     },
     {
       id: "accounts",
       items: [
-        { id: "passwords", label: "Passwords", icon: "🔐", badge: null },
-        { id: "internetaccounts", label: "Internet Accounts", icon: "🌍", badge: null },
-        { id: "gamecenter", label: "Game Center", icon: "🎮", badge: null }
+        { id: "passwords", label: "Passwords", icon: "🔐", iconType: "image" },
+        { id: "internetaccounts", label: "Internet Accounts", icon: "🌍", iconType: "image" },
+        { id: "gamecenter", label: "Game Center", icon: "🎮", iconType: "image" }
       ]
     }
   ];
@@ -79,6 +89,13 @@ export function SettingsContent({ currentWallpaper, onWallpaperChange }) {
     if (itemId === "wallpaper") setActiveTab(itemId);
     else if (itemId === "appleid") setActiveTab("about");
     else console.log(`Clicked: ${itemId} (not implemented yet)`);
+  };
+
+  // Перетаскивание за верхнюю область сайдбара (но не за input/button)
+  const handleSidebarMouseDown = (e) => {
+    if (e.target.tagName === "INPUT" || e.target.tagName === "BUTTON") return;
+    onFocus();
+    onTitleMouseDown(e);
   };
 
   const renderTabContent = () => {
@@ -115,7 +132,6 @@ export function SettingsContent({ currentWallpaper, onWallpaperChange }) {
             ))}
           </div>
         );
-
       case "about":
         return (
           <div className="settings-panel">
@@ -145,7 +161,6 @@ export function SettingsContent({ currentWallpaper, onWallpaperChange }) {
             </div>
           </div>
         );
-
       default:
         return (
           <div className="settings-panel">
@@ -160,10 +175,16 @@ export function SettingsContent({ currentWallpaper, onWallpaperChange }) {
 
   return (
     <div className="settings-container">
-      <div className="settings-sidebar">
-        <div className="sidebar-header">
-          <h1>System Settings</h1>
+      {/* САЙДБАР с кнопками управления и перетаскиванием */}
+      <div className="settings-sidebar" onMouseDown={handleSidebarMouseDown}>
+        {/* Кастомные кнопки управления окном */}
+        <div className="sidebar-traffic-lights">
+          <button className="traffic-light traffic-light--close" onClick={onClose} />
+          <button className="traffic-light traffic-light--minimize" onClick={onMinimize} />
+          <button className="traffic-light traffic-light--zoom" />
         </div>
+
+        {/* Поиск */}
         <div className="sidebar-search">
           <input
             type="text"
@@ -172,6 +193,27 @@ export function SettingsContent({ currentWallpaper, onWallpaperChange }) {
             onChange={e => setSearchQuery(e.target.value)}
           />
         </div>
+
+        {/* Учётная запись */}
+        <div className="sidebar-apple-id">
+          <div className="apple-id-avatar" aria-hidden="true">
+            <div className="apple-id-avatar_logo">
+              <img
+                src={LogoType} 
+                alt="User Avatar"
+                style={{ width: 28, height: 28, borderRadius: '50%', objectFit: 'cover' }}
+              />
+            </div>
+          </div>
+          <div className="apple-id-info">
+            <div className="apple-id-name">ghost</div>
+            <div className="apple-id-email">Apple ID</div>
+          </div>
+        </div>
+
+        <div className="sidebar-divider" />
+
+        {/* Список разделов */}
         <div className="tabs-list">
           {filteredSections.map((section, idx) => (
             <div key={section.id} className="menu-section">
@@ -179,22 +221,30 @@ export function SettingsContent({ currentWallpaper, onWallpaperChange }) {
               {section.items.map(item => (
                 <div
                   key={item.id}
-                  className={`tab-item ${activeTab === item.id ? "active" : ""} ${item.isAppleId ? "apple-id" : ""}`}
+                  className={`tab-item ${activeTab === item.id ? "active" : ""}`}
                   onClick={() => handleItemClick(item.id)}
                 >
-                  <span className="tab-icon">{item.icon}</span>
+                  <span className="tab-icon">
+                    {item.iconType === "image" ? (
+                      <img
+                        src={item.icon}
+                        alt={item.label}
+                        style={{ width: 22, height: 22, objectFit: "contain", opacity: 0.7 }}
+                      />
+                    ) : (
+                      item.icon
+                    )}
+                  </span>
                   <span className="tab-label">{item.label}</span>
-                  {item.badge && (
-                    <span className="tab-badge" style={{ backgroundColor: item.badgeColor || "#ff3b30" }}>
-                      {item.badge}
-                    </span>
-                  )}
+                  {item.badge && <span className="tab-badge">{item.badge}</span>}
                 </div>
               ))}
             </div>
           ))}
         </div>
       </div>
+
+      {/* ПРАВАЯ ЧАСТЬ – КОНТЕНТ */}
       <div className="settings-content">
         {renderTabContent()}
       </div>

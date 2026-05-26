@@ -1,0 +1,126 @@
+@use "./../variables" as vars;
+
+.app-window {
+  position: fixed;
+  background: rgba(25, 25, 28, 0.88);
+  backdrop-filter: blur(40px) saturate(1.8);
+  border: 1px solid transparent;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border 0.15s, box-shadow 0.2s;
+
+  &--active {
+    box-shadow:
+      0 32px 100px rgba(0, 0, 0, 0.75),
+      0 0 0 1px rgba(255, 255, 255, 0.1);
+
+    &.app-window--resizing {
+      border-color: rgba(255, 255, 255, 0.18);
+      box-shadow:
+        0 32px 100px rgba(0, 0, 0, 0.75),
+        0 0 0 1px rgba(255, 255, 255, 0.25);
+    }
+  }
+
+  &--inactive {
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45);
+  }
+}
+
+/* ===== Title Bar ===== */
+.title-bar {
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  cursor: move;
+  background: rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(15px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  user-select: none;
+  transition: background 0.2s;
+}
+
+/* ===== Traffic Lights ===== */
+.traffic-lights {
+  display: flex;
+  gap: 7px;
+  z-index: 1;
+}
+
+.traffic-light {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  transition: opacity 0.2s, filter 0.1s;
+
+  &--close {
+    background: #ff5f57;
+    cursor: pointer;
+  }
+
+  &--minimize {
+    background: #ffbd2e;
+    cursor: pointer;
+  }
+
+  &--zoom {
+    background: #28c840;
+    cursor: default;
+  }
+
+  &:hover {
+    filter: brightness(0.8);
+  }
+}
+
+.traffic-lights--inactive .traffic-light {
+  opacity: 0.4;
+  box-shadow: none;
+}
+
+.traffic-lights--active .traffic-light {
+  opacity: 1;
+  box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== Title ===== */
+.title-bar__title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  letter-spacing: 0.15px;
+  pointer-events: none;
+
+  &--active {
+    color: rgba(255, 255, 255, 0.82);
+  }
+
+  &--inactive {
+    color: rgba(255, 255, 255, 0.35);
+  }
+}
+
+/* ===== Content Area ===== */
+.app-window__content {
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ===== Resize Handle ===== */
+.resize-handle {
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+  width: 14px;
+  height: 14px;
+  opacity: 0.35;
+  pointer-events: none;
+}

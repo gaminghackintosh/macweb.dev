@@ -1,4 +1,4 @@
-@use "./variables" as vars;
+@use "./../variables" as vars;
 
 .settings-container {
   display: flex;
@@ -11,106 +11,149 @@
 
 /* ========== SIDEBAR ========== */
 .settings-sidebar {
-  width: 280px;
+  width: 210px;
   flex-shrink: 0;
-  background: vars.$color-bg-sidebar;
-  backdrop-filter: blur(20px);
-  border-right: 1px solid vars.$color-border-light;
-  padding: 20px 0;
+  backdrop-filter: blur(25px);
+  border-right: 1px solid rgba(255, 255, 255, 0.07);
+  padding: 0;                              
   overflow-y: auto;
   display: flex;
   flex-direction: column;
 }
 
-.sidebar-header {
-  padding: 0 20px 16px 20px;
-  h1 {
-    margin: 0;
-    font-size: 24px;
-    font-weight: 600;
-    color: vars.$color-white;
-    letter-spacing: -0.5px;
-  }
-}
-
+/* ========== Поиск ========== */
 .sidebar-search {
-  padding: 0 16px 20px;
+  padding: 18px 12px 12px 12px;           
   input {
     width: 100%;
-    background: vars.$color-bg-input;
-    border: none;
-    border-radius: 10px;
-    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 8px;
+    padding: 7px 12px;
     color: vars.$color-white;
-    font-size: 13px;
+    font-size: 12px;
     outline: none;
-    transition: vars.$transition-smooth;
+    transition: all 0.2s;
     &::placeholder {
-      color: vars.$color-placeholder;
+      color: rgba(255, 255, 255, 0.35);
     }
     &:focus {
-      background: vars.$color-bg-input-focus;
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.1);
     }
   }
 }
 
+/* ---------- Apple ID ---------- */
+.sidebar-apple-id {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  margin: 0 8px;
+  border-radius: 8px;
+  cursor: default;
+  transition: background 0.12s;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.06);
+  }
+}
+
+.apple-id-avatar {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.apple-id-info {
+  min-width: 0;
+  flex: 1;
+}
+.apple-id-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: #fff;
+  line-height: 1.2;
+}
+.apple-id-email {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.3;
+}
+
+.sidebar-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 8px 12px;
+}
+
+/* ========== Список меню ========== */
 .tabs-list {
   flex: 1;
-  padding: 0 12px;
+  padding: 0 8px 12px 8px;              
 }
 
 .menu-section {
-  margin-bottom: 20px;
+  margin-bottom: 8px;
 }
 
 .section-divider {
   height: 1px;
-  background: vars.$color-divider;
-  margin: 12px 0;
+  background: rgba(255, 255, 255, 0.06);
+  margin: 8px 12px;
 }
 
 .tab-item {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 12px;
-  margin: 2px 0;
-  border-radius: 10px;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: all 0.15s;
-  color: vars.$color-text-secondary;
-  font-size: 14px;
-  font-weight: 500;
+  transition: background 0.12s, color 0.12s;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 13px;
+  font-weight: 450;
   position: relative;
 
   &:hover:not(.active) {
-    background: vars.$color-bg-sidebar-hover;
-    color: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.9);
   }
 
   &.active {
-    background: vars.$color-bg-sidebar-active;
-    color: vars.$color-white;
-    .tab-icon {
-      transform: scale(1.05);
-    }
-  }
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    font-weight: 500;
 
-  &.apple-id {
-    font-weight: 600;
-    color: vars.$color-white;
-    margin-bottom: 8px;
     .tab-icon {
-      font-size: 24px;
+      opacity: 1;
     }
   }
 }
 
 .tab-icon {
-  font-size: 18px;
-  width: 28px;
-  text-align: center;
-  transition: transform 0.15s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+  opacity: 0.6;
+  transition: opacity 0.12s;
+
+  img {
+    object-fit: contain;
+    opacity: 0.7;
+  }
+
+  .tab-item.active & {
+    opacity: 1;
+    img {
+      opacity: 1;
+    }
+  }
 }
 
 .tab-label {
@@ -121,15 +164,15 @@
 }
 
 .tab-badge {
-  background: vars.$color-badge;
-  color: vars.$color-white;
-  font-size: 11px;
+  background: #ff375f;
+  color: #fff;
+  font-size: 10px;
   font-weight: 600;
-  padding: 2px 8px;
-  border-radius: 20px;
-  min-width: 22px;
+  padding: 1px 7px;
+  border-radius: 10px;
+  min-width: 20px;
   text-align: center;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 /* ========== CONTENT ========== */
@@ -138,14 +181,17 @@
   overflow-y: auto;
   background: vars.$color-bg-content;
 }
+
 .settings-panel {
   max-width: 840px;
   margin: 0 auto;
   padding: 40px 48px;
 }
+
 .panel-header {
   margin-bottom: 32px;
 }
+
 .panel-title {
   font-size: 32px;
   font-weight: 700;
@@ -153,10 +199,12 @@
   letter-spacing: -0.6px;
   color: vars.$color-white;
 }
+
 .panel-description {
   font-size: 14px;
   color: vars.$color-text-tertiary;
 }
+
 
 /* ========== WALLPAPER GROUP ========== */
 .wallpaper-group {
@@ -241,5 +289,37 @@
   border-radius: 10px;
   &:hover {
     background: vars.$color-scrollbar-thumb-hover;
+  }
+}
+
+/* ==========  Traffic Lights ==========  */
+.sidebar-traffic-lights {
+  display: flex;
+  gap: 7px;
+  padding: 12px 12px 6px 12px;
+  z-index: 1;
+
+  .traffic-light {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    border: none;
+    cursor: pointer;
+    transition: background 0.1s;
+
+    &:hover {
+      background: rgba(255,255,255,0.5);
+    }
+
+    &--close {
+      background: #ff5f57;
+    }
+    &--minimize {
+      background: #ffbd2e;
+    }
+    &--zoom {
+      background: #28c840;
+    }
   }
 }

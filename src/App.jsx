@@ -253,6 +253,7 @@ export default function App() {
           onClose={() => closeWindow(win.id)}
           onMinimize={() => closeWindow(win.id)}
           onFocus={() => focusWindow(win.id)}
+          titleBarHidden={win.id === 'settings'}
         >
           {renderContent(win.id)}
         </AppWindow>
