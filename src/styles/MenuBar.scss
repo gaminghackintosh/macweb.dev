@@ -1,38 +1,27 @@
+@use "./mixins" as *;
 @use "./variables" as vars;
 
 /* =========================================================
-   MENU BAR
+   MENU BAR — ТЁМНОЕ СТЕКЛО
 ========================================================= */
 
 .menuBar {
   position: fixed;
   inset: 0 0 auto 0;
-
   height: 28px;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   padding: 0 6px;
-
   z-index: 9999;
-
   user-select: none;
+  color: #f5f5f7;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
 
-  color: vars.$color-white;
-
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "SF Pro Text",
-    sans-serif;
-
-  background: vars.$color-menubar-bg;
-
+  /* Тёмное стекло для самой панели */
+  background: rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(40px) saturate(1.8);
-
-  border-bottom: 1px solid vars.$color-menubar-border;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 /* =========================================================
@@ -66,25 +55,16 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   height: 22px;
-
   padding: 0 9px;
-
   border-radius: 5px;
-
   font-size: 13px;
   font-weight: 400;
-
-  color: vars.$color-menubar-item;
-
-  transition:
-    background-color 0.12s ease,
-    color 0.12s ease;
+  color: rgba(255, 255, 255, 0.85);
+  transition: background-color 0.12s ease, color 0.12s ease;
 
   &.isClickable {
     cursor: default;
-
     &:hover {
       background: rgba(255, 255, 255, 0.14);
     }
@@ -105,35 +85,22 @@
 }
 
 /* =========================================================
-   DROPDOWN MENU
+   DROPDOWN MENU — ТЁМНОЕ СТЕКЛО (все меню)
 ========================================================= */
 
 .menuBar__dropdown {
   position: absolute;
-
   top: 32px;
   left: 0;
-
   min-width: 240px;
-
   padding: 4px 0;
-
   border-radius: 12px;
-
   z-index: 10000;
-
   overflow: hidden;
 
-  background: rgba(248, 248, 248, 0.92);
-
-  backdrop-filter: blur(40px) saturate(1.8);
-
-  border: 1px solid rgba(0, 0, 0, 0.08);
-
-  box-shadow:
-    0 24px 64px rgba(0, 0, 0, 0.28),
-    0 0 0 0.5px rgba(255, 255, 255, 0.1);
-
+  /* Тёмное стекло через миксин */
+  @include glass-dark(rgba(28, 28, 32, 0.95), 40px, 0.12, true);
+  
   animation: menuFade 0.12s ease-out;
 }
 
@@ -145,23 +112,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   min-height: 28px;
-
   padding: 6px 16px;
-
   font-size: 13px;
   font-weight: 400;
-
-  color: #1c1c1e;
-
+  color: #f5f5f7;
   white-space: nowrap;
-
   cursor: default;
-
-  transition:
-    background-color 0.08s ease,
-    color 0.08s ease;
+  transition: background-color 0.08s ease, color 0.08s ease;
 
   &:hover {
     background: #007aff;
@@ -189,51 +147,53 @@
 
 .menuBar__dropdownShortcut {
   margin-left: 18px;
-
   font-size: 11px;
-
-  color: #8e8e93;
-
+  color: rgba(255, 255, 255, 0.5);
   letter-spacing: 0.2px;
-
   transition: color 0.08s ease;
 }
 
 .menuBar__dropdownIcon {
   margin-left: 10px;
-
   font-size: 10px;
-
-  color: #8e8e93;
-
+  color: rgba(255, 255, 255, 0.5);
   transition: color 0.08s ease;
 }
 
 .menuBar__dropdownBadge {
   margin-left: 8px;
-
   padding: 1px 8px;
-
   border-radius: 999px;
-
   font-size: 10px;
   font-weight: 600;
-
-  background: rgba(0, 0, 0, 0.06);
-
-  color: #1c1c1e;
-
-  transition:
-    background-color 0.08s ease,
-    color 0.08s ease;
+  background: rgba(255, 255, 255, 0.1);
+  color: #f5f5f7;
+  transition: background-color 0.08s ease, color 0.08s ease;
 }
 
 .menuBar__dropdownDivider {
   height: 1px;
-
   margin: 4px 8px;
+  background: rgba(255, 255, 255, 0.08);
+}
 
-  background: rgba(0, 0, 0, 0.08);
+/* =========================================================
+   APPLE MENU (тоже тёмное стекло)
+========================================================= */
+
+.menuBar__dropdown.apple-menu {
+  min-width: 260px;
+  padding: 6px 0;
+  border-radius: 10px;
+
+  /* Разделители в Apple меню */
+  .menuBar__dropdownItem:nth-child(4),
+  .menuBar__dropdownItem:nth-child(6),
+  .menuBar__dropdownItem:nth-child(9) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 8px;
+    margin-bottom: 4px;
+  }
 }
 
 /* =========================================================
@@ -243,11 +203,8 @@
 .menuBar__iconImg {
   width: 18px;
   height: 18px;
-
   object-fit: contain;
-
   opacity: 0.92;
-
   filter: brightness(1.1) invert(1);
 }
 
@@ -259,55 +216,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
   height: 22px;
-
   padding: 0 6px;
-
   border-radius: 6px;
-
   transition: background-color 0.12s ease;
 
   &:hover {
     background: rgba(255, 255, 255, 0.14);
-  }
-}
-
-/* =========================================================
-   DARK MODE
-========================================================= */
-
-.dark-mode {
-  .menuBar__dropdown {
-    background: rgba(42, 42, 42, 0.92);
-
-    border: 1px solid rgba(255, 255, 255, 0.08);
-
-    box-shadow:
-      0 24px 64px rgba(0, 0, 0, 0.5),
-      0 0 0 0.5px rgba(255, 255, 255, 0.04);
-  }
-
-  .menuBar__dropdownItem {
-    color: #ffffff;
-  }
-
-  .menuBar__dropdownLabel {
-    color: #ffffff;
-  }
-
-  .menuBar__dropdownShortcut,
-  .menuBar__dropdownIcon {
-    color: rgba(255, 255, 255, 0.62);
-  }
-
-  .menuBar__dropdownBadge {
-    background: rgba(255, 255, 255, 0.1);
-    color: #ffffff;
-  }
-
-  .menuBar__dropdownDivider {
-    background: rgba(255, 255, 255, 0.08);
   }
 }
 
@@ -320,7 +235,6 @@
     opacity: 0;
     transform: translateY(-6px) scale(0.985);
   }
-
   to {
     opacity: 1;
     transform: translateY(0) scale(1);

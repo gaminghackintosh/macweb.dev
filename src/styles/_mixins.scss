@@ -1,0 +1,33 @@
+// Светлое стекло (если понадобится)
+@mixin glass-light(
+  $bg-opacity: 0.6,
+  $blur: 30px,
+  $border-opacity: 0.15,
+  $shadow: true
+) {
+  background: rgba(255, 255, 255, $bg-opacity);
+  backdrop-filter: blur($blur) saturate(180%);
+  -webkit-backdrop-filter: blur($blur) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, $border-opacity);
+  
+  @if $shadow {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 0 0 0 0.5px rgba(0, 0, 0, 0.02);
+  }
+}
+
+// Тёмное стекло (действует)
+@mixin glass-dark(
+  $bg-color: rgba(25, 25, 28, 0.85),
+  $blur: 40px,
+  $border-opacity: 0.12,
+  $shadow: true
+) {
+  background: $bg-color;
+  backdrop-filter: blur($blur) saturate(1.5);
+  -webkit-backdrop-filter: blur($blur) saturate(1.5);
+  border: 1px solid rgba(255, 255, 255, $border-opacity);
+  
+  @if $shadow {
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6), 0 0 0 0.5px rgba(255, 255, 255, 0.03);
+  }
+}

@@ -94,3 +94,11 @@ $color-cc-toggle-off-bg: transparent;
 $color-cc-toggle-on-gradient-start: #0a84ff;
 $color-cc-toggle-on-gradient-end: #0066ff;
 $color-cc-toggle-slider-knob: #ffffff;
+
+/* ===== Базовые переменные (можно переопределить в компонентах) ===== */
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-blur: 30px;
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}

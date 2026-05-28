@@ -7,72 +7,74 @@ body {
   background: #0b0f1a;
   color: vars.$color-text-primary;
 
-  // ------------------------------------------------------------
-  //  Основные системные курсоры macOS
-  //  Применяются к стандартным элементам интерфейса
-  // ------------------------------------------------------------
-  --cursor-default: url("./../assets/icons/Custom_Cursor/default.svg"), default;
-  --cursor-pointer: url("./../assets/icons/Custom_Cursor/handpointing.svg"), pointer;
-  --cursor-text: url("./../assets/icons/Custom_Cursor/textcursor.svg"), text;
-  --cursor-vertical-text: url("./../assets/icons/Custom_Cursor/textcursorvertical.svg"), vertical-text;
-  --cursor-help: url("./../assets/icons/Custom_Cursor/help.svg"), help;
-  --cursor-context-menu: url("./../assets/icons/Custom_Cursor/contextualmenu.svg"), context-menu;
-  --cursor-copy: url("./../assets/icons/Custom_Cursor/copy.svg"), copy;
-  --cursor-alias: url("./../assets/icons/Custom_Cursor/makealias.svg"), alias;
-  --cursor-no-drop: url("./../assets/icons/Custom_Cursor/notallowed.svg"), no-drop;
-  --cursor-all-scroll: url("./../assets/icons/Custom_Cursor/move.svg"), all-scroll;
-  --cursor-crosshair: url("./../assets/icons/Custom_Cursor/cross.svg"), crosshair;
-  --cursor-cell: url("./../assets/icons/Custom_Cursor/cell.svg"), cell;
-  --cursor-grab: url("./../assets/icons/Custom_Cursor/handopen.svg"), grab;
-  --cursor-grabbing: url("./../assets/icons/Custom_Cursor/handgrabbing.svg"), grabbing;
-  --cursor-zoom-in: url("./../assets/icons/Custom_Cursor/zoomin.svg"), zoom-in;
-  --cursor-zoom-out: url("./../assets/icons/Custom_Cursor/zoomout.svg"), zoom-out;
+/* (временно отключено, для решении проблем)
+    // ------------------------------------------------------------
+    //  Основные системные курсоры macOS
+    //  Применяются к стандартным элементам интерфейса
+    // ------------------------------------------------------------
+    --cursor-default: url("./../assets/icons/Custom_Cursor/default.svg"), default;
+    --cursor-pointer: url("./../assets/icons/Custom_Cursor/handpointing.svg"), pointer;
+    --cursor-text: url("./../assets/icons/Custom_Cursor/textcursor.svg"), text;
+    --cursor-vertical-text: url("./../assets/icons/Custom_Cursor/textcursorvertical.svg"), vertical-text;
+    --cursor-help: url("./../assets/icons/Custom_Cursor/help.svg"), help;
+    --cursor-context-menu: url("./../assets/icons/Custom_Cursor/contextualmenu.svg"), context-menu;
+    --cursor-copy: url("./../assets/icons/Custom_Cursor/copy.svg"), copy;
+    --cursor-alias: url("./../assets/icons/Custom_Cursor/makealias.svg"), alias;
+    --cursor-no-drop: url("./../assets/icons/Custom_Cursor/notallowed.svg"), no-drop;
+    --cursor-all-scroll: url("./../assets/icons/Custom_Cursor/move.svg"), all-scroll;
+    --cursor-crosshair: url("./../assets/icons/Custom_Cursor/cross.svg"), crosshair;
+    --cursor-cell: url("./../assets/icons/Custom_Cursor/cell.svg"), cell;
+    --cursor-grab: url("./../assets/icons/Custom_Cursor/handopen.svg"), grab;
+    --cursor-grabbing: url("./../assets/icons/Custom_Cursor/handgrabbing.svg"), grabbing;
+    --cursor-zoom-in: url("./../assets/icons/Custom_Cursor/zoomin.svg"), zoom-in;
+    --cursor-zoom-out: url("./../assets/icons/Custom_Cursor/zoomout.svg"), zoom-out;
 
-  // ------------------------------------------------------------
-  //  Курсоры для изменения размера (однонаправленные)
-  //  Используются при ресайзе окон / элементов
-  // ------------------------------------------------------------
-  --cursor-n-resize: url("./../assets/icons/Custom_Cursor/resizenorth.svg"), n-resize;
-  --cursor-s-resize: url("./../assets/icons/Custom_Cursor/resizesouth.svg"), s-resize;
-  --cursor-e-resize: url("./../assets/icons/Custom_Cursor/resizeeast.svg"), e-resize;
-  --cursor-w-resize: url("./../assets/icons/Custom_Cursor/resizewest.svg"), w-resize;
-  --cursor-ne-resize: url("./../assets/icons/Custom_Cursor/resizenortheast.svg"), ne-resize;
-  --cursor-nw-resize: url("./../assets/icons/Custom_Cursor/resizenorthwest.svg"), nw-resize;
-  --cursor-se-resize: url("./../assets/icons/Custom_Cursor/resizesoutheast.svg"), se-resize;
-  --cursor-sw-resize: url("./../assets/icons/Custom_Cursor/resizesouthwest.svg"), sw-resize;
+    // ------------------------------------------------------------
+    //  Курсоры для изменения размера (однонаправленные)
+    //  Используются при ресайзе окон / элементов
+    // ------------------------------------------------------------
+    --cursor-n-resize: url("./../assets/icons/Custom_Cursor/resizenorth.svg"), n-resize;
+    --cursor-s-resize: url("./../assets/icons/Custom_Cursor/resizesouth.svg"), s-resize;
+    --cursor-e-resize: url("./../assets/icons/Custom_Cursor/resizeeast.svg"), e-resize;
+    --cursor-w-resize: url("./../assets/icons/Custom_Cursor/resizewest.svg"), w-resize;
+    --cursor-ne-resize: url("./../assets/icons/Custom_Cursor/resizenortheast.svg"), ne-resize;
+    --cursor-nw-resize: url("./../assets/icons/Custom_Cursor/resizenorthwest.svg"), nw-resize;
+    --cursor-se-resize: url("./../assets/icons/Custom_Cursor/resizesoutheast.svg"), se-resize;
+    --cursor-sw-resize: url("./../assets/icons/Custom_Cursor/resizesouthwest.svg"), sw-resize;
 
-  // ------------------------------------------------------------
-  //  Курсоры для изменения размера (двунаправленные)
-  //  Используются при ресайзе по диагонали или по двум осям
-  // ------------------------------------------------------------
-  --cursor-ns-resize: url("./../assets/icons/Custom_Cursor/resizenorthsouth.svg"), ns-resize;
-  --cursor-ew-resize: url("./../assets/icons/Custom_Cursor/resizewesteast.svg"), ew-resize;
-  --cursor-nesw-resize: url("./../assets/icons/Custom_Cursor/resizenortheastsouthwest.svg"), nesw-resize;
-  --cursor-nwse-resize: url("./../assets/icons/Custom_Cursor/resizenorthwestsoutheast.svg"), nwse-resize;
-  --cursor-row-resize: url("./../assets/icons/Custom_Cursor/resizeupdown.svg"), row-resize;
-  --cursor-col-resize: url("./../assets/icons/Custom_Cursor/resizeleftright.svg"), col-resize;
+    // ------------------------------------------------------------
+    //  Курсоры для изменения размера (двунаправленные)
+    //  Используются при ресайзе по диагонали или по двум осям
+    // ------------------------------------------------------------
+    --cursor-ns-resize: url("./../assets/icons/Custom_Cursor/resizenorthsouth.svg"), ns-resize;
+    --cursor-ew-resize: url("./../assets/icons/Custom_Cursor/resizewesteast.svg"), ew-resize;
+    --cursor-nesw-resize: url("./../assets/icons/Custom_Cursor/resizenortheastsouthwest.svg"), nesw-resize;
+    --cursor-nwse-resize: url("./../assets/icons/Custom_Cursor/resizenorthwestsoutheast.svg"), nwse-resize;
+    --cursor-row-resize: url("./../assets/icons/Custom_Cursor/resizeupdown.svg"), row-resize;
+    --cursor-col-resize: url("./../assets/icons/Custom_Cursor/resizeleftright.svg"), col-resize;
 
-  // ------------------------------------------------------------
-  //  Курсоры состояний (загрузка, фоновая работа)
-  // ------------------------------------------------------------
-  --cursor-wait: url("./../assets/icons/Custom_Cursor/beachball.svg"), wait;
-  --cursor-progress: url("./../assets/icons/Custom_Cursor/busy.svg"), progress;
-  --cursor-working: url("./../assets/icons/Custom_Cursor/working.svg"), progress;
+    // ------------------------------------------------------------
+    //  Курсоры состояний (загрузка, фоновая работа)
+    // ------------------------------------------------------------
+    --cursor-wait: url("./../assets/icons/Custom_Cursor/beachball.svg"), wait;
+    --cursor-progress: url("./../assets/icons/Custom_Cursor/busy.svg"), progress;
+    --cursor-working: url("./../assets/icons/Custom_Cursor/working.svg"), progress;
 
-  // ------------------------------------------------------------
-  //  Специальные / 
-  //  (удаление, скриншоты, нестандартные ресайзы)
-  // ------------------------------------------------------------
-  --cursor-poof: url("./../assets/icons/Custom_Cursor/poof.svg"), none;
-  --cursor-screenshot-selection: url("./../assets/icons/Custom_Cursor/screenshotselection.svg"), crosshair;
-  --cursor-screenshot-window: url("./../assets/icons/Custom_Cursor/screenshotwindow.svg"), pointer;
-  --cursor-resize-left: url("./../assets/icons/Custom_Cursor/resizeleft.svg"), w-resize;
-  --cursor-resize-right: url("./../assets/icons/Custom_Cursor/resizeright.svg"), e-resize;
-  --cursor-resize-up: url("./../assets/icons/Custom_Cursor/resizeup.svg"), n-resize;
-  --cursor-resize-down: url("./../assets/icons/Custom_Cursor/resizedown.svg"), s-resize;
+    // ------------------------------------------------------------
+    //  Специальные / 
+    //  (удаление, скриншоты, нестандартные ресайзы)
+    // ------------------------------------------------------------
+    --cursor-poof: url("./../assets/icons/Custom_Cursor/poof.svg"), none;
+    --cursor-screenshot-selection: url("./../assets/icons/Custom_Cursor/screenshotselection.svg"), crosshair;
+    --cursor-screenshot-window: url("./../assets/icons/Custom_Cursor/screenshotwindow.svg"), pointer;
+    --cursor-resize-left: url("./../assets/icons/Custom_Cursor/resizeleft.svg"), w-resize;
+    --cursor-resize-right: url("./../assets/icons/Custom_Cursor/resizeright.svg"), e-resize;
+    --cursor-resize-up: url("./../assets/icons/Custom_Cursor/resizeup.svg"), n-resize;
+    --cursor-resize-down: url("./../assets/icons/Custom_Cursor/resizedown.svg"), s-resize;
 
-  // Базовый курсор для всей страницы
-  cursor: var(--cursor-default);
+    // Базовый курсор для всей страницы
+    cursor: var(--cursor-default);
+*/
 }
 
 // ------------------------------------------------------------

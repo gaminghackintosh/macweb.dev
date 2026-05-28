@@ -257,20 +257,6 @@ export function MenuBar({ activeApp }) {
                     <div className="controlCenter__networkStatus">{wifiName}</div>
                   </div>
                 </div>
-                
-                <div className="controlCenter__networkItem">
-                  <span className="controlCenter__themeIcon" style={{ fontSize: 20 }}>
-                    {darkMode ? "🌙" : "☀️"}
-                  </span>
-                  <div>
-                    <div className="controlCenter__networkLabel">Theme</div>
-                    <div className="controlCenter__networkStatus">{darkMode ? "Dark" : "Light"}</div>
-                  </div>
-                  <label className="controlCenter__toggle">
-                    <input type="checkbox" checked={darkMode} onChange={toggleTheme} />
-                    <span className="controlCenter__toggleSlider" />
-                  </label>
-                </div>
               </div>
             </div>
           </div>

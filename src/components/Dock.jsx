@@ -2,18 +2,26 @@ import React, { useState } from "react";
 import { APPS } from "./../constants/apps";
 import { AssetIcon } from "./AssetIcon";
 
+// Trash assets
+import Trash_Empty from "./../assets/icons/desktop/Dark_Themes/Trash_Empty.png";
+import Trash_Full from "./../assets/icons/desktop/Dark_Themes/Trash_Full.png";
+
 const GITHUB_APP = {
   id: "github",
   name: "View Source by GitHub",
   isLink: true,
   url: "https://github.com/gaminghackintosh/hackintosh.web",
-  iconPath:
+  icon:
     "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
-  icon: "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
 };
 
-export default function Dock({ onOpen, openApps }) {
+export default function Dock({
+  onOpen,
+  openApps,
+  isTrashFull = false,
+}) {
   const [hoverIdx, setHoverIdx] = useState(null);
+
   const dockItems = [...APPS, GITHUB_APP];
 
   const getScale = (i) => {
@@ -39,12 +47,22 @@ export default function Dock({ onOpen, openApps }) {
       {dockItems.map((app, i) => {
         const scale = getScale(i);
         const ty = getTranslate(i);
-        const isOpen = openApps.includes(app.id);
+
+        const isOpen = openApps?.includes(app.id);
         const isGitHub = app.id === "github";
+        const isTrash = app.id === "trash";
+
+        const currentIconPath = isTrash
+          ? isTrashFull
+            ? Trash_Full
+            : Trash_Empty
+          : app.iconPath;
 
         return (
           <React.Fragment key={app.id}>
-            {isGitHub && <div className="dock__separator" aria-hidden="true" />}
+            {isGitHub && (
+              <div className="dock__separator" aria-hidden="true" />
+            )}
 
             <div
               className="dock__item"
@@ -61,27 +79,27 @@ export default function Dock({ onOpen, openApps }) {
                 }
               }}
             >
-              {hoverIdx === i && <div className="dock__tooltip">{app.name}</div>}
+              {hoverIdx === i && (
+                <div className="dock__tooltip">{app.name}</div>
+              )}
 
-              {/* GitHub — белый контейнер */}
               {isGitHub ? (
                 <div className="dock__icon-wrapper dock__icon-wrapper--white-bg">
                   <img src={app.icon} alt={app.name} />
                 </div>
               ) : (
-                /* Все остальные приложения (включая Safari) — без белого фона */
                 <AssetIcon
-                  path={app.iconPath}
+                  path={currentIconPath}
                   fallback={app.icon}
                   size={58}
                   alt={app.name}
-                  style={{ borderRadius: 14, overflow: "hidden" }}
-                  imgStyle={{ borderRadius: 14, objectFit: "cover" }}
                 />
               )}
 
               <div className="dock__indicator">
-                {isOpen && !app.isLink && <div className="dock__indicator-dot" />}
+                {isOpen && !app.isLink && (
+                  <div className="dock__indicator-dot" />
+                )}
               </div>
             </div>
           </React.Fragment>
