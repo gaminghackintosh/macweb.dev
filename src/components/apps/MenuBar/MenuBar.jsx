@@ -46,7 +46,7 @@ export function MenuBar({ activeApp }) {
     { id: "shutdown", label: "Shut Down...", icon: null, badge: null, shortcut: null },
     { id: "divider5", type: "divider" },
     { id: "lockscreen", label: "Lock Screen", icon: null, badge: null, shortcut: "⌃⌘Q" },
-    { id: "logout", label: `Log Out ${activeApp || "gamehack..."}`, icon: null, badge: null, shortcut: "⇧⌘Q" },
+    { id: "logout", label: `Log Out ghost...`, icon: null, badge: null, shortcut: "⇧⌘Q" },
   ];
 
   const menuOptions = {

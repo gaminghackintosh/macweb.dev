@@ -1,7 +1,5 @@
 import React, { useState, useRef } from "react";
 
-
-// Экспортируем контекст, чтобы им могли пользоваться дочерние компоненты
 export const WindowContext = React.createContext({
   onClose: () => {},
   onMinimize: () => {},
@@ -17,6 +15,7 @@ export function AppWindow({
   isActive,
   children,
   titleBarHidden = false,
+  onZoom = null, // Добавляем проп onZoom
 }) {
   const [pos, setPos] = useState({ x: win.x, y: win.y });
   const [size, setSize] = useState({ width: win.width, height: win.height });
@@ -141,7 +140,7 @@ export function AppWindow({
   const trafficLights = [
     { type: "close", action: onClose },
     { type: "minimize", action: onMinimize },
-    { type: "zoom", action: null },
+    { type: "zoom", action: onZoom },
   ];
 
   return (
@@ -163,7 +162,7 @@ export function AppWindow({
           cursor: cursor,
         }}
       >
-        {/* Скрываем стандартный заголовок, если titleBarHidden = true */}
+
         {!titleBarHidden && (
           <div className="title-bar" onMouseDown={onTitleMouseDown}>
             <div

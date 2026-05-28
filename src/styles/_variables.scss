@@ -95,10 +95,14 @@ $color-cc-toggle-on-gradient-start: #0a84ff;
 $color-cc-toggle-on-gradient-end: #0066ff;
 $color-cc-toggle-slider-knob: #ffffff;
 
-/* ===== Базовые переменные (можно переопределить в компонентах) ===== */
+/* ===== Базовые переменные  ===== */
 :root {
   --glass-bg: rgba(255, 255, 255, 0.6);
   --glass-blur: 30px;
   --glass-border: rgba(255, 255, 255, 0.15);
   --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+
+  --font-app: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", 
+              "Helvetica Neue", "Segoe UI", "Inter", Arial, sans-serif;
+  --font-mono: "SF Mono", "Menlo", "Monaco", "Consolas", "Liberation Mono", monospace;  
 }

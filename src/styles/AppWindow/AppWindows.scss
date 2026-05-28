@@ -9,6 +9,9 @@
   display: flex;
   flex-direction: column;
   transition: border 0.15s, box-shadow 0.2s;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 
   &--active {
     border-color: rgba(255, 255, 255, 0.1);

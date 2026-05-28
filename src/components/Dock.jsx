@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import { APPS } from "./../constants/apps";
 import { AssetIcon } from "./AssetIcon";
 
-// Trash assets
-import Trash_Empty from "./../assets/icons/desktop/Dark_Themes/Trash_Empty.png";
-import Trash_Full from "./../assets/icons/desktop/Dark_Themes/Trash_Full.png";
 
 const GITHUB_APP = {
   id: "github",
@@ -18,7 +15,6 @@ const GITHUB_APP = {
 export default function Dock({
   onOpen,
   openApps,
-  isTrashFull = false,
 }) {
   const [hoverIdx, setHoverIdx] = useState(null);
 

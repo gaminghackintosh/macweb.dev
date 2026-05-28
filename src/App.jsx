@@ -53,15 +53,28 @@ export default function App() {
   const [windows, setWindows] = useState([]);
   const [openApps, setOpenApps] = useState([]);
   const [activeWin, setActiveWin] = useState(null);
-
   const [bootComplete, setBootComplete] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [windowStates, setWindowStates] = useState({}); // Для сохранения позиций при максимизации
 
   const [wallpaperState, setWallpaperState] = useState({
     id: DEFAULT_WALLPAPER.id,
     type: "image",
     value: DEFAULT_WALLPAPER.image,
   });
+
+  useEffect(() => {
+    let timeout;
+    const handler = () => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => setIsMobile(window.innerWidth <= 1024), 100);
+    };
+    window.addEventListener('resize', handler);
+    return () => {
+      clearTimeout(timeout);
+      window.removeEventListener('resize', handler);
+    };
+  }, []);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 1024);
@@ -108,10 +121,55 @@ export default function App() {
     setActiveWin(appId);
   };
 
+  // Логика максимизации/восстановления окна
+  const maximizeWindow = (appId) => {
+    setWindows((prev) => {
+      const win = prev.find((w) => w.id === appId);
+      if (!win) return prev;
+
+      const isMaximized = win.x === 0 && win.y === 0;
+      const savedState = windowStates[appId];
+      const p = INITIAL_POSITIONS[appId] || { x: 120, y: 80, w: 600, h: 420 };
+
+      if (isMaximized) {
+        // Восстанавливаем позицию
+        return prev.map((w) =>
+          w.id === appId
+            ? {
+                ...w,
+                x: savedState?.x || p.x,
+                y: savedState?.y || p.y,
+                width: savedState?.w || p.w,
+                height: savedState?.h || p.h,
+              }
+            : w
+        );
+      } else {
+        // Сохраняем текущую позицию и разворачиваем на весь экран
+        setWindowStates((prevState) => ({
+          ...prevState,
+          [appId]: { x: win.x, y: win.y, w: win.width, h: win.height },
+        }));
+        return prev.map((w) =>
+          w.id === appId
+            ? { ...w, x: 0, y: 28, width: window.innerWidth, height: window.innerHeight - 28 }
+            : w
+        );
+      }
+    });
+  };
+
   const renderContent = (appId) => {
     switch (appId) {
       case "finder":
-        return <FinderContent openApp={openApp} />;
+        return (
+          <FinderContent
+            openApp={openApp}
+            onClose={() => closeWindow("finder")}
+            onMinimize={() => closeWindow("finder")}
+            onMaximize={() => maximizeWindow("finder")}
+          />
+        );
       case "terminal":
         return <TerminalContent />;
       case "notes":
@@ -159,7 +217,8 @@ export default function App() {
           onClose={() => closeWindow(win.id)}
           onMinimize={() => closeWindow(win.id)}
           onFocus={() => focusWindow(win.id)}
-          titleBarHidden={win.id === "settings"}
+          onZoom={() => maximizeWindow(win.id)} // Передаём функцию максимизации
+          titleBarHidden={win.id === 'settings' || win.id === 'finder'}
         >
           {renderContent(win.id)}
         </AppWindow>
