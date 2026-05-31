@@ -9,17 +9,17 @@
 @use "./ContextMenu";
 
 // Settings_Components
-@use "./Settings/Settings";
-@use "./Settings/WiFiSettings";
+@use "./_Settings/Settings";
+@use "./_Settings/WiFiSettings";
 
 @use "./BootScreen";
 @use "./Finder";
 @use "./_ControlCenter";
 @use "./AppWindow/AppWindows";
-@use "./AboutThisMac/ATM";
+@use "./_AboutThisMac/ATM";
 
 // APP
-@use "./NotesWindow/Notes";
+@use "./_NotesWindow/Notes";
 @use "./_Musics/Music";
 @use "./_Terminal/Terminal";
 

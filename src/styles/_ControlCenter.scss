@@ -1,62 +1,67 @@
 @use "./_variables" as vars;
 
-// ─── Tokens ───────────────────────────────────────────────────────
-$cc-bg-start:   rgba(40, 40, 44, 0.72);
-$cc-bg-end:     rgba(24, 24, 28, 0.82);
-$cc-border:     rgba(255, 255, 255, 0.08);
-$cc-shadow:     rgba(0, 0, 0, 0.55);
-$cc-inset:      rgba(255, 255, 255, 0.06);
+// ─── Tokens (macOS Control Center compact) ───────────────────────
+$cc-bg:         rgba(28, 28, 30, 0.78);
+$cc-border:     rgba(255, 255, 255, 0.1);
+$cc-shadow:     0 6px 28px rgba(0, 0, 0, 0.45);
+$cc-inset-highlight: rgba(255, 255, 255, 0.06);
 
-$card-bg:       rgba(255, 255, 255, 0.06);
+$card-bg:       rgba(255, 255, 255, 0.05);
 $card-border:   rgba(255, 255, 255, 0.06);
 $card-hover:    rgba(255, 255, 255, 0.1);
 
-$tile-bg:       rgba(255, 255, 255, 0.06);
-$tile-active:   rgba(255, 255, 255, 0.16);
+$tile-bg:       rgba(255, 255, 255, 0.05);
+$tile-active:   rgba(10, 132, 255, 0.16);
+$tile-hover:    rgba(255, 255, 255, 0.1);
 
-$net-on:        vars.$color-accent;   // #0a84ff
-$net-off:       rgba(255,255,255,0.15);
+$net-on:        vars.$color-accent;           // #0a84ff
+$net-off:       rgba(255, 255, 255, 0.15);
+$net-active-bg: rgba(255, 255, 255, 0.05);
 
-$text-primary:  rgba(255,255,255,0.92);
-$text-sub:      rgba(255,255,255,0.45);
+$text-primary:  rgba(255, 255, 255, 0.92);
+$text-sub:      rgba(255, 255, 255, 0.42);
 
-$radius-panel:  24px;
-$radius-card:   18px;
-$radius-tile:   16px;
+$radius-panel:  18px;
+$radius-card:   14px;
+$radius-tile:   12px;
+$radius-btn:    8px;
 
 // ═══════════════════════════════════════════════════════════════════
 //  ROOT PANEL
 // ═══════════════════════════════════════════════════════════════════
 .cc {
   position: absolute;
-  top: 38px;
-  right: 12px;
-  padding: 14px;
+  top: 36px;
+  right: 10px;
+  width: 310px;                 // фиксированная ширина как в оригинале
+  padding: 12px;
   display: flex;
   flex-direction: column;
   gap: 10px;
   border-radius: $radius-panel;
-  background: linear-gradient(175deg, $cc-bg-start 0%, $cc-bg-end 100%);
-  backdrop-filter: blur(60px) saturate(200%);
-  -webkit-backdrop-filter: blur(60px) saturate(200%);
+  background: $cc-bg;
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
   border: 1px solid $cc-border;
-  box-shadow: 0 24px 64px $cc-shadow;
+  box-shadow:
+    inset 0 1px 0 $cc-inset-highlight,
+    0 6px 28px $cc-shadow;
   z-index: 10001;
-  animation: cc-in 0.20s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: cc-in 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: visible;
 }
 
 @keyframes cc-in {
-  from { opacity: 0; transform: translateY(-8px) scale(0.96); }
+  from { opacity: 0; transform: translateY(-6px) scale(0.97); }
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 // ═══════════════════════════════════════════════════════════════════
-//  TOP ROW  ─  network group  +  tiles column
+//  TOP ROW  ─  network + tiles
 // ═══════════════════════════════════════════════════════════════════
 .cc__top-row {
   display: grid;
-  grid-template-columns: 1fr 155px;
+  grid-template-columns: 1fr 138px;
   gap: 8px;
   align-items: stretch;
 }
@@ -75,7 +80,7 @@ $radius-tile:   16px;
 .cc__net-divider {
   height: 1px;
   background: rgba(255,255,255,0.04);
-  margin: 0 14px;
+  margin: 0 12px;
 }
 
 .cc__net-item {
@@ -88,12 +93,13 @@ $radius-tile:   16px;
   flex: 1;
 
   &:hover { background: $card-hover; }
+  &--active { background: $net-active-bg; }
 }
 
 // ── Network icon dot ──────────────────────────────────────────────
 .cc-net-icon {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -104,7 +110,7 @@ $radius-tile:   16px;
   &--on {
     background: $net-on;
     color: #fff;
-    box-shadow: 0 4px 12px rgba(10, 132, 255, 0.35);
+    box-shadow: 0 3px 10px rgba(10, 132, 255, 0.3);
   }
   &--off {
     background: $net-off;
@@ -119,30 +125,28 @@ $radius-tile:   16px;
 }
 
 .cc__net-label {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   color: $text-primary;
-  letter-spacing: -0.1px;
   line-height: 1;
 }
 
 .cc__net-sub {
-  font-size: 11px;
+  font-size: 10.5px;
   color: $text-sub;
-  margin-top: 2px;
 }
 
 // ── Tiles column ──────────────────────────────────────────────────
 .cc__tiles-col {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .cc__tiles-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  gap: 6px;
   flex: 1;
 }
 
@@ -153,7 +157,7 @@ $radius-tile:   16px;
   align-items: flex-start;
   justify-content: flex-end;
   gap: 4px;
-  padding: 12px 10px 10px;
+  padding: 12px 10px;
   border-radius: $radius-tile;
   border: 1px solid $card-border;
   background: $tile-bg;
@@ -163,27 +167,23 @@ $radius-tile:   16px;
   min-height: 0;
   text-align: left;
 
-  // Focus tile is the tall one
   &:first-child:not(:last-child) {
     flex: 1;
     justify-content: space-between;
-    align-items: flex-start;
     padding: 14px 12px;
 
-    .cc-tile__icon {
-      margin-bottom: auto;
-    }
-    .cc-tile__label {
-      font-size: 12px;
-    }
+    .cc-tile__icon { margin-bottom: auto; }
+    .cc-tile__label { font-size: 11px; }
   }
 
-  &:hover:not(.cc-tile--active) { background: rgba(255,255,255,0.1); transform: scale(1.02); }
+  &:hover:not(.cc-tile--active) {
+    background: $tile-hover;
+    transform: scale(1.02);
+  }
 
   &--active {
     background: $tile-active;
     border-color: rgba(255,255,255,0.12);
-
     .cc-tile__icon { color: #fff; }
   }
 
@@ -191,23 +191,22 @@ $radius-tile:   16px;
 }
 
 .cc-tile__icon {
-  color: rgba(255,255,255,0.80);
+  color: rgba(255,255,255,0.8);
   display: flex;
   align-items: center;
   transition: color 0.15s;
 }
 
 .cc-tile__label {
-  font-size: 10.5px;
+  font-size: 10px;
   font-weight: 500;
   color: $text-primary;
   line-height: 1.2;
   white-space: pre-line;
-  word-break: break-word;
 }
 
 // ═══════════════════════════════════════════════════════════════════
-//  CARD  (Display + Sound)
+//  CARD (Display + Sound) + дополнительные ряды
 // ═══════════════════════════════════════════════════════════════════
 .cc__card {
   background: $card-bg;
@@ -216,11 +215,11 @@ $radius-tile:   16px;
   padding: 10px 14px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .cc__card-label {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   color: $text-primary;
   letter-spacing: -0.1px;
@@ -244,58 +243,99 @@ $radius-tile:   16px;
 
 .cc__airplay-btn {
   background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   justify-content: center;
   cursor: pointer;
-  color: rgba(255,255,255,0.70);
-  transition: background 0.12s;
+  color: rgba(255,255,255,0.7);
+  transition: background 0.12s, color 0.12s;
   padding: 0;
 
   &:hover { background: rgba(255,255,255,0.12); color: #fff; }
 }
 
-// ── Custom slider ─────────────────────────────────────────────────
+// ── Slider track (macOS thin) ─────────────────────────────────────
 .cc__slider {
   -webkit-appearance: none;
   appearance: none;
   flex: 1;
-  height: 20px;
-  border-radius: 10px;
+  height: 5px;
+  border-radius: 2.5px;
   outline: none;
   cursor: pointer;
-  // Two-tone fill via background gradient on the track
   background: linear-gradient(
     to right,
-    rgba(255,255,255,0.80) 0%,
-    rgba(255,255,255,0.80) var(--val, 50%),
-    rgba(255,255,255,0.12) var(--val, 50%),
-    rgba(255,255,255,0.12) 100%
+    rgba(255,255,255,0.75) 0%,
+    rgba(255,255,255,0.75) var(--val, 50%),
+    rgba(255,255,255,0.1) var(--val, 50%),
+    rgba(255,255,255,0.1) 100%
   );
   transition: background 0.05s;
 
-  // Thumb
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
     background: #fff;
-    box-shadow: 0 1px 6px rgba(0,0,0,0.35);
+    box-shadow: 0 1px 5px rgba(0,0,0,0.3);
     cursor: pointer;
     transition: transform 0.1s;
   }
   &::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
     background: #fff;
-    box-shadow: 0 1px 6px rgba(0,0,0,0.35);
-    border: none;
+    border: 0.5px solid rgba(0,0,0,0.1);
+    box-shadow: 0 1px 5px rgba(0,0,0,0.3);
     cursor: pointer;
   }
 
   &:hover::-webkit-slider-thumb { transform: scale(1.1); }
+  &:hover::-moz-range-thumb      { transform: scale(1.1); }
+}
+
+// ── Дополнительные кнопки Display / Sound ───────────────────────
+.cc__option-row {
+  display: flex;
+  gap: 8px;
+}
+
+.cc__option-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: $radius-btn;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.05);
+  color: $text-primary;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.12s;
+  white-space: nowrap;
+
+  &:hover { background: rgba(255,255,255,0.1); }
+
+  &--active {
+    background: rgba(10,132,255,0.18);
+    border-color: rgba(10,132,255,0.3);
+  }
+}
+
+.cc__option-btn-icon {
+  color: rgba(255,255,255,0.7);
+  display: flex;
+  align-items: center;
+}
+
+.cc__output-name {
+  font-size: 10.5px;
+  color: $text-sub;
+  padding-left: 28px; // выровнять по иконкам вывода
 }

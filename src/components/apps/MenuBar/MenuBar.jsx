@@ -23,6 +23,8 @@ const AirDropIcon = () => (
   </svg>
 );
 
+
+
 export function MenuBar({ activeApp, openApp, onCloseWindow, onMinimizeWindow, onZoomWindow }) {
   const [time, setTime] = useState(new Date());
   const [activeMenu, setActiveMenu] = useState(null);
@@ -44,6 +46,11 @@ export function MenuBar({ activeApp, openApp, onCloseWindow, onMinimizeWindow, o
   const barRef                  = useRef(null);
   const controlCenterRef        = useRef(null);
   const controlCenterButtonRef  = useRef(null);
+
+  const [darkMode, setDarkMode]     = useState(false);
+const [nightShift, setNightShift] = useState(false);
+const [trueTone, setTrueTone]     = useState(true);
+const [audioOutput, setAudioOutput] = useState("MacBook Pro Speakers");
 
   // Apple menu items
   const appleMenuOptions = [
@@ -222,6 +229,7 @@ export function MenuBar({ activeApp, openApp, onCloseWindow, onMinimizeWindow, o
       ════════════════════════════════════════════ */}
       {showControlCenter && (
         <div ref={controlCenterRef} className="cc">
+
           {/* ── Row 1: network group + focus / stage / mirror ── */}
           <div className="cc__top-row">
 
@@ -270,33 +278,16 @@ export function MenuBar({ activeApp, openApp, onCloseWindow, onMinimizeWindow, o
 
             {/* Right tiles column */}
             <div className="cc__tiles-col">
-              {/* Focus — tall tile */}
-              <Tile
-                icon={MdOutlineBedtime}
-                label="Focus"
-                active={focus}
-                onClick={() => setFocus(p => !p)}
-              />
+              <Tile icon={MdOutlineBedtime} label="Focus" active={focus} onClick={() => setFocus(p => !p)} />
 
-              {/* Stage + Mirror — two small tiles */}
               <div className="cc__tiles-row">
-                <Tile
-                  icon={TbLayoutSidebar}
-                  label="Stage Manager"
-                  active={stageManager}
-                  onClick={() => setStageManager(p => !p)}
-                />
-                <Tile
-                  icon={MdOutlineScreenShare}
-                  label="Screen Mirroring"
-                  active={screenMirror}
-                  onClick={() => setScreenMirror(p => !p)}
-                />
+                <Tile icon={TbLayoutSidebar} label="Stage Manager" active={stageManager} onClick={() => setStageManager(p => !p)} />
+                <Tile icon={MdOutlineScreenShare} label="Screen Mirroring" active={screenMirror} onClick={() => setScreenMirror(p => !p)} />
               </div>
             </div>
           </div>
 
-          {/* ── Display brightness ── */}
+          {/* ── Display ── */}
           <div className="cc__card">
             <div className="cc__card-label">Display</div>
             <div className="cc__slider-row">
@@ -310,6 +301,27 @@ export function MenuBar({ activeApp, openApp, onCloseWindow, onMinimizeWindow, o
                 style={{ "--val": `${brightness}%` }}
               />
             </div>
+            {/* Доп. кнопки (Dark Mode, Night Shift, True Tone) */}
+            <div className="cc__option-row">
+              <button
+                className={`cc__option-btn ${darkMode ? "cc__option-btn--active" : ""}`}
+                onClick={() => setDarkMode(!darkMode)}
+              >
+                <span className="cc__option-btn-icon">🌙</span> Dark Mode
+              </button>
+              <button
+                className={`cc__option-btn ${nightShift ? "cc__option-btn--active" : ""}`}
+                onClick={() => setNightShift(!nightShift)}
+              >
+                <span className="cc__option-btn-icon">🌗</span> Night Shift
+              </button>
+              <button
+                className={`cc__option-btn ${trueTone ? "cc__option-btn--active" : ""}`}
+                onClick={() => setTrueTone(!trueTone)}
+              >
+                <span className="cc__option-btn-icon">👁️</span> True Tone
+              </button>
+            </div>
           </div>
 
           {/* ── Sound ── */}
@@ -317,7 +329,6 @@ export function MenuBar({ activeApp, openApp, onCloseWindow, onMinimizeWindow, o
             <div className="cc__card-label">Sound</div>
             <div className="cc__slider-row">
               <span className="cc__headphone-icon">
-                {/* headphone SVG */}
                 <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15">
                   <path d="M12 3a9 9 0 0 0-9 9v3a3 3 0 0 0 3 3h1a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1H5.07A7 7 0 0 1 19 12h-2a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h1a3 3 0 0 0 3-3v-3a9 9 0 0 0-9-9z"/>
                 </svg>
@@ -331,9 +342,11 @@ export function MenuBar({ activeApp, openApp, onCloseWindow, onMinimizeWindow, o
                 style={{ "--val": `${volume}%` }}
               />
               <button className="cc__airplay-btn" title="AirPlay">
-                <MdOutlineAirplay size={17} />
+                <MdOutlineAirplay size={15} />
               </button>
             </div>
+            {/* Текущий вывод */}
+            <div className="cc__output-name">{audioOutput}</div>
           </div>
 
         </div>
