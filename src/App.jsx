@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 
 import {
   DESKTOP_ICONS,
@@ -118,7 +118,7 @@ export default function App() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const openApp = (appId) => {
+  const openApp = useCallback((appId) => {
     // Если окно свёрнуто — разворачиваем его
     if (minimizedApps.has(appId)) {
       setMinimizedApps((prev) => { const s = new Set(prev); s.delete(appId); return s; });
@@ -147,30 +147,30 @@ export default function App() {
 
     setOpenApps((prev) => [...new Set([...prev, appId])]);
     setActiveWin(appId);
-  };
+  }, [minimizedApps, windows]);
 
-  const closeWindow = (appId) => {
+  const closeWindow = useCallback((appId) => {
     setWindows((prev) => prev.filter((w) => w.id !== appId));
     setOpenApps((prev) => prev.filter((id) => id !== appId));
     setMinimizedApps((prev) => { const s = new Set(prev); s.delete(appId); return s; });
-  };
+  }, []);
 
-  const minimizeWindow = (appId) => {
+  const minimizeWindow = useCallback((appId) => {
     setMinimizedApps((prev) => new Set([...prev, appId]));
     setActiveWin(null);
-  };
+  }, []);
 
-  const focusWindow = (appId) => {
+  const focusWindow = useCallback((appId) => {
     setWindows((prev) =>
       prev.map((w) =>
         w.id === appId ? { ...w, zIndex: ++zCounter } : w
       )
     );
     setActiveWin(appId);
-  };
+  }, []);
 
   // ✅ Максимизация/восстановление с учётом Dock
-  const maximizeWindow = (appId) => {
+  const maximizeWindow = useCallback((appId) => {
     setWindows((prev) => {
       const win = prev.find((w) => w.id === appId);
       if (!win) return prev;
@@ -205,10 +205,14 @@ export default function App() {
         );
       }
     });
-  };
+  }, [windowStates]);
 
-  // ─── УНИВЕРСАЛЬНЫЙ renderContent ──────────────────────────────────────
-  const renderContent = (appId) => {
+  const activeApp = activeWin
+    ? APPS.find((a) => a.id === activeWin)?.name
+    : "Finder";
+
+  // ✅ Мемоизированный renderContent
+  const renderContent = useCallback((appId) => {
     // Общие пропсы управления окном
     const commonProps = {
       onClose: () => closeWindow(appId),
@@ -242,15 +246,10 @@ export default function App() {
       case "music":
         return <MusicContent {...commonProps} />;
 
-
       default:
         return <PlaceholderContent appId={appId} {...commonProps} />;
     }
-  };
-
-  const activeApp = activeWin
-    ? APPS.find((a) => a.id === activeWin)?.name
-    : "Finder";
+  }, [closeWindow, minimizeWindow, maximizeWindow, openApp, wallpaperState.id]);
 
   // ✅ Мемоизированный список окон
   const renderedWindows = useMemo(() => 

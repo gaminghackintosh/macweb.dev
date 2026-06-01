@@ -1,12 +1,15 @@
-import React, { useState, useRef, useLayoutEffect, memo } from "react";
+import React, { useState, useRef, useLayoutEffect, memo, useMemo, useCallback } from "react";
 
-export const WindowContext = React.createContext({
+// Мемоизированное значение контекста по умолчанию
+const defaultWindowContextValue = {
   onClose: () => {},
   onMinimize: () => {},
   onZoom: () => {},
   onFocus: () => {},
   onTitleMouseDown: () => {},
-});
+};
+
+export const WindowContext = React.createContext(defaultWindowContextValue);
 
 export const AppWindow = memo(function AppWindow({
   win,
@@ -206,14 +209,17 @@ export const AppWindow = memo(function AppWindow({
     e.preventDefault();
   };
 
-  const trafficLights = [
-    { type: "close", action: onClose },
-    { type: "minimize", action: onMinimize },
-    { type: "zoom", action: onZoom },
-  ];
+  // Мемоизированное значение контекста
+  const contextValue = useMemo(() => ({
+    onClose,
+    onMinimize,
+    onZoom,
+    onFocus,
+    onTitleMouseDown,
+  }), [onClose, onMinimize, onZoom, onFocus, onTitleMouseDown]);
 
   return (
-    <WindowContext.Provider value={{ onClose, onMinimize, onZoom, onFocus, onTitleMouseDown }}>
+    <WindowContext.Provider value={contextValue}>
       <div
         ref={windowRef}
         className={[

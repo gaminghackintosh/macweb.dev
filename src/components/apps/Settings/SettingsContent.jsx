@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useMemo, useCallback, memo } from "react";
 import { WALLPAPER_GROUPS } from "../../../constants/wallpapers";
 import { WindowContext } from "../../AppWindow/AppWindow";
 
@@ -39,6 +39,8 @@ import {
   NetworkSettings,
   NotificationsSettings,
   PasswordsSettings,
+  PrivacySettings,
+  SoundSettings,
   VPNSettings,
 } from "./Settings_Components/panels";
 
@@ -112,30 +114,59 @@ const MENU_SECTIONS = [
   },
 ];
 
-// ─── Tab content renderer ─────────────────────────────────────────────────────
-
-function renderTab(activeTab, currentWallpaper, onWallpaperChange) {
+// ─── Tab content renderer (memoized) ──────────────────────────────────────────
+const renderTab = (activeTab, currentWallpaper, onWallpaperChange) => {
   switch (activeTab) {
     case "wifi":             return <WiFiSettings />;
-    case "accessibility":    return <AccessibilitySettings />;
-    case "appearance":       return <AppearanceSettings />;
     case "bluetooth":        return <BluetoothSettings />;
+    case "network":          return <NetworkSettings />;
+    case "vpn":              return <VPNSettings />;
+    
+    case "notifications":    return <NotificationsSettings />;
+    case "sound":            return <SoundSettings />;
+    case "focus":            return <FocusSettings />;
+    
+    case "general":          return <GeneralSettings />;
+    case "appearance":       return <AppearanceSettings />;
+    case "accessibility":    return <AccessibilitySettings />;
     case "controlcenter":    return <ControlCenterSettings />;
+    case "privacy":          return <PrivacySettings />;
+    
     case "desktopdock":      return <DesktopDockSettings />;
     case "displays":         return <DisplaysSettings />;
     case "energysaver":      return <EnergySaverSettings />;
-    case "focus":            return <FocusSettings />;
-    case "gamecenter":       return <GameCenterSettings />;
-    case "gamecontrollers":  return <GameControllersSettings />;
-    case "general":          return <GeneralSettings />;
-    case "internetaccounts": return <InternetAccountsSettings />;
+    
     case "lockscreen":       return <LockScreenSettings />;
     case "loginpassword":    return <LoginPasswordSettings />;
-    case "mouse":            return <MouseSettings />;
-    case "network":          return <NetworkSettings />;
-    case "notifications":    return <NotificationsSettings />;
+    
     case "passwords":        return <PasswordsSettings />;
-    case "vpn":              return <VPNSettings />;
+    case "internetaccounts": return <InternetAccountsSettings />;
+    case "gamecenter":       return <GameCenterSettings />;
+    
+    case "mouse":            return <MouseSettings />;
+    case "gamecontrollers":  return <GameControllersSettings />;
+
+    // Неподдерживаемые разделы - показываем заглушку
+    case "screentime":
+    case "siri":
+    case "usersgroups":
+    case "wallet":
+    case "keyboard":
+    case "printersscanners":
+    case "screensaver":
+      return (
+        <SettingsPanel title={activeTab === "screentime" ? "Screen Time" : 
+                               activeTab === "siri" ? "Siri & Spotlight" :
+                               activeTab === "usersgroups" ? "Users & Groups" :
+                               activeTab === "wallet" ? "Wallet & Apple Pay" :
+                               activeTab === "keyboard" ? "Keyboard" :
+                               activeTab === "printersscanners" ? "Printers & Scanners" :
+                               "Screen Saver"}>
+          <SettingsGroup>
+            <SettingsRow label="This section is not yet implemented." />
+          </SettingsGroup>
+        </SettingsPanel>
+      );
 
     case "wallpaper":
       return (
@@ -153,7 +184,11 @@ function renderTab(activeTab, currentWallpaper, onWallpaperChange) {
                       onClick={() => onWallpaperChange?.({ id: wp.id, type: "image", value: wp.image })}
                     >
                       <div className="wallpaper-thumbnail">
-                        <img src={wp.thumbnail} alt={wp.name} />
+                        <img 
+                          src={wp.thumbnail} 
+                          alt={wp.name} 
+                          loading="lazy"
+                        />
                         {isSelected && <div className="check-badge">✓</div>}
                       </div>
                       <span className="wallpaper-title">{wp.name}</span>
@@ -200,33 +235,48 @@ function renderTab(activeTab, currentWallpaper, onWallpaperChange) {
         </SettingsPanel>
       );
   }
-}
+};
 
 // ─── Main component ───────────────────────────────────────────────────────────
 
-export function SettingsContent({ currentWallpaper, onWallpaperChange }) {
+export const SettingsContent = memo(function SettingsContent({ currentWallpaper, onWallpaperChange }) {
   const [activeTab,   setActiveTab]   = useState("wallpaper");
   const [searchQuery, setSearchQuery] = useState("");
 
   const { onClose, onMinimize, onFocus, onTitleMouseDown, onZoom } = useContext(WindowContext);
 
-  // Filter sidebar items by search query
-  const filteredSections = MENU_SECTIONS
-    .map(section => ({
-      ...section,
-      items: section.items.filter(item =>
-        item.label.toLowerCase().includes(searchQuery.toLowerCase())
-      ),
-    }))
-    .filter(section => section.items.length > 0);
+  // Memoized filtered sidebar items
+  const filteredSections = useMemo(() => 
+    MENU_SECTIONS
+      .map(section => ({
+        ...section,
+        items: section.items.filter(item =>
+          item.label.toLowerCase().includes(searchQuery.toLowerCase())
+        ),
+      }))
+      .filter(section => section.items.length > 0),
+    [searchQuery]
+  );
 
-  const handleItemClick = (id) => setActiveTab(id === "appleid" ? "about" : id);
+  const handleItemClick = useCallback((id) => {
+    setActiveTab(id === "appleid" ? "about" : id);
+  }, []);
 
-  const handleSidebarMouseDown = (e) => {
+  const handleSidebarMouseDown = useCallback((e) => {
     if (e.target.tagName === "INPUT" || e.target.tagName === "BUTTON") return;
     onFocus();
     onTitleMouseDown(e);
-  };
+  }, [onFocus, onTitleMouseDown]);
+
+  const handleWallpaperChange = useCallback((wp) => {
+    onWallpaperChange?.(wp);
+  }, [onWallpaperChange]);
+
+  // Memoized render tab content
+  const tabContent = useMemo(() => 
+    renderTab(activeTab, currentWallpaper, handleWallpaperChange),
+    [activeTab, currentWallpaper, handleWallpaperChange]
+  );
 
   return (
     <div className="settings-container">
@@ -295,8 +345,8 @@ export function SettingsContent({ currentWallpaper, onWallpaperChange }) {
 
       {/* ── CONTENT ── */}
       <div className="settings-content">
-        {renderTab(activeTab, currentWallpaper, onWallpaperChange)}
+        {tabContent}
       </div>
     </div>
   );
-}
+});

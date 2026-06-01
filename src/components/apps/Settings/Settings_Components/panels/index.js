@@ -17,4 +17,6 @@ export * from "./MouseSettings";
 export * from "./NetworkSettings";
 export * from "./NotificationsSettings";
 export * from "./PasswordsSettings";
+export * from "./PrivacySettings";
+export * from "./SoundSettings";
 export * from "./VirtualPersonalNetwork-Settings";
