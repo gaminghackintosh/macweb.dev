@@ -1,7 +1,6 @@
 @use "./../variables" as vars;
 
 .wifi-settings-wrapper {
-  // Специфические стили для Wi-Fi панели
   .wifi-header-row {
     display: flex;
     align-items: center;
@@ -25,6 +24,7 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    background: rgba(255, 255, 255, 0.06);
   }
 
   .wifi-header-label {
@@ -37,19 +37,19 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    padding: 11px 16px;
-    min-height: 44px;
+    padding: 8px 16px;
+    min-height: 36px;
 
     .dot {
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: vars.$color-accent; // Или vars.$color-wifi-success, если вы её добавите
+      background: vars.$color-accent;
     }
 
     .status-text {
       font-size: 13px;
-      color: vars.$color-accent; // Или vars.$color-wifi-success, если вы её добавите
+      color: vars.$color-accent;
       font-weight: 500;
     }
 
@@ -59,7 +59,6 @@
     }
   }
 
-  // Сетевые строки (Known Networks)
   .network-row {
     display: flex;
     align-items: center;
@@ -70,13 +69,13 @@
     transition: background 0.08s;
 
     &:hover {
-      background: vars.$color-bg-sidebar-hover; // Изменено с $hover-bg
+      background: rgba(255, 255, 255, 0.06);
     }
 
     .network-left {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .network-name {
@@ -93,9 +92,8 @@
     .network-icons {
       display: flex;
       align-items: center;
-      gap: 4px;
-      font-size: 12px;
-      color: vars.$color-text-secondary; // Изменено с $text-secondary
+      gap: 5px;
+      color: rgba(255, 255, 255, 0.4);
     }
 
     .details-btn {
@@ -114,27 +112,17 @@
     }
   }
 
-  // Секция "Other Networks"
   .other-networks {
-    padding: 16px;
+    padding: 20px 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     min-height: 60px;
 
     .searching-text {
       font-size: 13px;
-      color: vars.$color-text-secondary; // Изменено с $text-secondary
-    }
-
-    .searching-spinner {
-      width: 16px;
-      height: 16px;
-      border: 2px solid vars.$color-divider; // Изменено с $divider
-      border-top-color: vars.$color-text-secondary; // Изменено с $text-secondary
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
+      color: vars.$color-text-secondary;
     }
 
     .other-btn {
@@ -154,7 +142,6 @@
     }
   }
 
-  // Переключатели
   .toggle-row {
     display: flex;
     align-items: center;
@@ -174,13 +161,12 @@
       }
       .toggle-desc {
         font-size: 11px;
-        color: vars.$color-text-secondary; // Изменено с $text-secondary
+        color: vars.$color-text-secondary;
         line-height: 1.3;
       }
     }
   }
 
-  // Кнопка Advanced внизу
   .advanced-row {
     display: flex;
     justify-content: flex-end;
@@ -197,12 +183,14 @@
       transition: background 0.15s;
 
       &:hover {
-        background: vars.$color-bg-sidebar-hover; // Изменено с $hover-bg
+        background: rgba(255, 255, 255, 0.08);
       }
     }
   }
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }

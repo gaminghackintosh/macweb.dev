@@ -1,0 +1,168 @@
+@use "./../variables" as vars;
+
+.bluetooth-settings-wrapper {
+  // Заголовок с переключателем
+  .bt-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 11px 16px;
+    min-height: 44px;
+    gap: 12px;
+  }
+
+  .bt-header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .bt-icon-circle {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .bt-header-label {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: vars.$color-text-primary;
+  }
+
+  // Строка устройства
+  .bt-device-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 11px 16px;
+    min-height: 44px;
+    cursor: default;
+    transition: background 0.08s;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .bt-device-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .bt-device-icon {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 8px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .bt-device-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .bt-device-name {
+      font-size: 13.5px;
+      color: vars.$color-text-primary;
+    }
+
+    .bt-device-status {
+      font-size: 11px;
+      &.connected {
+        color: vars.$color-accent; // #007aff
+        font-weight: 500;
+      }
+      &.disconnected {
+        color: vars.$color-text-secondary;
+      }
+    }
+
+    .bt-device-right {
+      .bt-action-btn {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 6px;
+        color: vars.$color-text-primary;
+        font-size: 12px;
+        padding: 4px 12px;
+        cursor: pointer;
+        transition: background 0.15s, border-color 0.15s;
+        &:hover {
+          background: rgba(255, 255, 255, 0.15);
+          border-color: rgba(255, 255, 255, 0.2);
+        }
+        &.connect {
+          background: rgba(10, 132, 255, 0.2);
+          border-color: rgba(10, 132, 255, 0.3);
+          color: #fff;
+          &:hover {
+            background: rgba(10, 132, 255, 0.3);
+          }
+        }
+        &.disconnect {
+          background: rgba(255, 69, 58, 0.15);
+          border-color: rgba(255, 69, 58, 0.3);
+          color: #ff6961;
+          &:hover {
+            background: rgba(255, 69, 58, 0.25);
+          }
+        }
+      }
+    }
+  }
+
+  // Поиск
+  .bt-scanning-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px;
+    color: vars.$color-text-secondary;
+    font-size: 13px;
+
+    .spinner-container {
+      width: 16px;
+      height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .spinner {
+      animation: spin 1.2s linear infinite;
+    }
+  }
+
+  // Advanced кнопка
+  .bt-advanced-row {
+    display: flex;
+    justify-content: flex-end;
+    padding: 8px 16px 0;
+
+    .bt-advanced-btn {
+      background: transparent;
+      border: none;
+      color: vars.$color-text-primary;
+      font-size: 12px;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: background 0.15s;
+      &:hover {
+        background: rgba(255, 255, 255, 0.08);
+      }
+    }
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

@@ -230,7 +230,6 @@ export const AppWindow = memo(function AppWindow({
         onMouseLeave={() => setCursor("default")}
         onContextMenu={(e) => e.stopPropagation()}
         onTransitionEnd={() => {
-          // Снимаем флаг анимации после завершения перехода
           setAnimating(false);
         }}
         style={{
@@ -240,7 +239,6 @@ export const AppWindow = memo(function AppWindow({
           height: size.height,
           zIndex: win.zIndex,
           cursor,
-          // will-change только во время анимации или ресайза для производительности
           willChange: animating || hoverEdge ? "transform, width, height" : "auto",
         }}
       >
