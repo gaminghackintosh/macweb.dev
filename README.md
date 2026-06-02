@@ -57,7 +57,6 @@
 - **React 19** — component model & context-driven architecture
 - **Vite 5** — lightning-fast dev server and bundler
 - **SCSS / SASS (Modules & Globals)** — advanced architecture with deep glassmorphism mixins (`backdrop-filter`), native macOS cursor management, custom theme tokens, and semantic BEM styling
-- **No UI libraries** — 100% handcrafted components, context menus, and states
 
 ---
 
