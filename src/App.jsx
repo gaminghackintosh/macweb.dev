@@ -1,11 +1,7 @@
 import React, { Suspense, useState } from "react";
-
-// Импортируем хуки
 import { useMobileCheck } from "./hooks/useMobileCheck";
 import { useWindowManager } from "./hooks/useWindowManager";
 import { useContextMenu } from "./hooks/useContextMenu";
-
-// Компоненты UI
 import BootScreen from "./components/Boot/BootScreen";
 import MobileNotSupported from "./components/MNS/MobileNotSupported";
 import Dock from "./components/Dock";
@@ -13,12 +9,8 @@ import { AppWindow } from "./components/AppWindow/AppWindow";
 import { MenuBar } from "./components/apps/MenuBar/MenuBar";
 import { ContextMenu } from "./components/ContextMenu/ContextMenu";
 import { Desktop } from "./components/Desktop";
-
-// Константы и лоадеры
 import { WindowLoading } from "./components/Loaders/WindowLoading"; 
 import { renderAppContent } from "./utils/renderAppContent"; 
-
-// Импорт обоев (убедись, что путь верный)
 import defaultWallpaper from "./assets/images/wallpapers/Tahoe/Tahoe Light.png";
 
 export default function App() {
@@ -29,22 +21,28 @@ export default function App() {
 
   const { contextMenu, openContextMenu, closeContextMenu } = useContextMenu();
   const isMobile = useMobileCheck();
-  
   const [bootComplete, setBootComplete] = useState(false);
   
-  // Инициализируем обои объектом, чтобы не было ошибки undefined.value
   const [wallpaper, setWallpaper] = useState({
     id: "sequoia_11",
     type: "image",
     value: defaultWallpaper,
   });
 
+  // Обработчик для десктопа
+  const handleDesktopContextMenu = (e) => {
+    openContextMenu(e, [
+      { label: "New Folder", action: () => console.log("New Folder") },
+      { type: "divider" },
+      { label: "Change Wallpaper", action: () => console.log("Wallpaper settings") }
+    ]);
+  };
+
   if (!bootComplete) return <BootScreen onComplete={() => setBootComplete(true)} />;
   if (isMobile) return <MobileNotSupported />;
 
   return (
-    <Desktop wallpaper={wallpaper.value} onContextMenu={openContextMenu}>
-      {/* Верхняя панель */}
+    <Desktop wallpaper={wallpaper.value} onContextMenu={handleDesktopContextMenu}>
       <MenuBar 
         activeApp={activeWin} 
         onClose={() => closeWindow(activeWin)}
@@ -52,7 +50,6 @@ export default function App() {
         onZoom={() => maximizeWindow(activeWin)}
       />
 
-      {/* Окна */}
       {windows.map((win) => (
         <AppWindow
           key={win.id}
@@ -73,10 +70,8 @@ export default function App() {
         </AppWindow>
       ))}
 
-      {/* Док */}
       <Dock onOpen={openApp} openApps={openApps} minimizedApps={minimizedApps} />
 
-      {/* Контекстное меню */}
       {contextMenu && (
         <ContextMenu 
           x={contextMenu.x} 
