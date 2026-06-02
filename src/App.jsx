@@ -13,6 +13,19 @@ import { WindowLoading } from "./components/Loaders/WindowLoading";
 import { renderAppContent } from "./utils/renderAppContent"; 
 import defaultWallpaper from "./assets/images/wallpapers/Tahoe/Tahoe Light.png";
 
+// Мемоизированный компонент окна
+const MemoizedAppWindow = React.memo(AppWindow, (prevProps, nextProps) => {
+  return (
+    prevProps.win.x === nextProps.win.x &&
+    prevProps.win.y === nextProps.win.y &&
+    prevProps.win.width === nextProps.win.width &&
+    prevProps.win.height === nextProps.win.height &&
+    prevProps.isActive === nextProps.isActive &&
+    prevProps.isMinimized === nextProps.isMinimized &&
+    prevProps.win.zIndex === nextProps.win.zIndex
+  );
+});
+
 export default function App() {
   const windowManager = useWindowManager();
   const { contextMenu, openContextMenu, closeContextMenu } = useContextMenu();
@@ -46,20 +59,6 @@ export default function App() {
     return () => window.removeEventListener('theme-change', handleThemeChange);
   }, []);
   
-  // Мемоизированный компонент окна
-  const MemoizedAppWindow = React.memo(AppWindow, (prevProps, nextProps) => {
-    // Кастомная проверка для предотвращения лишних ререндеров
-    return (
-      prevProps.win.x === nextProps.win.x &&
-      prevProps.win.y === nextProps.win.y &&
-      prevProps.win.width === nextProps.win.width &&
-      prevProps.win.height === nextProps.win.height &&
-      prevProps.isActive === nextProps.isActive &&
-      prevProps.isMinimized === nextProps.isMinimized &&
-      prevProps.win.zIndex === nextProps.win.zIndex
-    );
-  });
-
   const handleDesktopContextMenu = useCallback((e) => {
     openContextMenu(e, [
       { label: "New Folder", action: () => console.log("New Folder") },
@@ -68,7 +67,7 @@ export default function App() {
     ]);
   }, [openContextMenu, windowManager.openApp]);
 
-  // Рендерим окна только при изменении списка
+  // Мемоизированный список окон с глубокой оптимизацией
   const windowComponents = useMemo(() => {
     return windowManager.windows.map((win) => (
       <MemoizedAppWindow
@@ -92,13 +91,14 @@ export default function App() {
       </MemoizedAppWindow>
     ));
   }, [
-    windowManager.windows,
+    windowManager.windows.length,
     windowManager.activeWin,
-    windowManager.minimizedApps,
+    windowManager.minimizedApps.size,
     windowManager.closeWindow,
     windowManager.minimizeWindow,
     windowManager.maximizeWindow,
     windowManager.focusWindow,
+    setWallpaper,
   ]);
 
   if (!bootComplete) return <BootScreen onComplete={() => setBootComplete(true)} />;

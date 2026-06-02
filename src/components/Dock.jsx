@@ -12,8 +12,6 @@ const GITHUB_APP = {
 
 // Базовый размер иконки в Dock
 const BASE_ICON_SIZE = 58;
-// Максимальный коэффициент увеличения
-const MAX_SCALE = 1.4;
 
 const DockItem = memo(function DockItem({ 
   app, 
@@ -34,8 +32,6 @@ const DockItem = memo(function DockItem({
     }
   }, [app, onOpen]);
   
-  const tooltip = app.name;
-  
   return (
     <div
       ref={itemRef}
@@ -51,13 +47,6 @@ const DockItem = memo(function DockItem({
         }
       }}
     >
-      {/* Tooltip */}
-      <div 
-        className={`dock__tooltip ${isHovered ? "dock__tooltip--visible" : ""}`}
-      >
-        {tooltip}
-      </div>
-
       {/* Icon */}
       {isGitHub ? (
         <div className="dock__icon-wrapper dock__icon-wrapper--white-bg">
@@ -90,6 +79,15 @@ const DockItem = memo(function DockItem({
       </div>
     </div>
   );
+}, (prevProps, nextProps) => {
+  // Кастомная проверка для минимизации ререндеров
+  return (
+    prevProps.isHovered === nextProps.isHovered &&
+    prevProps.isOpen === nextProps.isOpen &&
+    prevProps.isMinimized === nextProps.isMinimized &&
+    prevProps.isLightTheme === nextProps.isLightTheme &&
+    prevProps.app.id === nextProps.app.id
+  );
 });
 
 export default function Dock({ onOpen, openApps, minimizedApps = new Set(), isLightTheme = false }) {
@@ -116,6 +114,13 @@ export default function Dock({ onOpen, openApps, minimizedApps = new Set(), isLi
               onMouseEnter={() => setHoverIndex(index)}
               onMouseLeave={() => setHoverIndex(null)}
             >
+              {/* Tooltip - moved to wrapper for stable positioning */}
+              <div 
+                className={`dock__tooltip ${hoverIndex === index ? "dock__tooltip--visible" : ""}`}
+              >
+                {app.name}
+              </div>
+              
               <DockItem
                 app={app}
                 isHovered={hoverIndex === index}
