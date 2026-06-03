@@ -42,7 +42,7 @@
 | Music — Apple Music replica with custom track management, waveforms, and playback | ✅ Done |
 | Notes — editable markdown-ish notes | ✅ Done |
 | Desktop icons | ✅ Done |
-| Dark / Light mode & Wallpaper toggle | ❌ Currently unavailable until the technical issues have been resolved |
+| Dark / Light mode & Wallpaper toggle | ✅ Done |
 | Safari browser | 🟡 02.06.2026 — It turned out to be possible... just not in the way you think. |
 | App Store | ❌ Stop thinking that it’s possible 🫢 |
 | Spotlight search (⌘ Space) | 🔲 Planned |
