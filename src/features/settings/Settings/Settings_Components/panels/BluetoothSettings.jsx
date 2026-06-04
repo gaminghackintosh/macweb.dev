@@ -5,7 +5,7 @@ import { SettingsRow } from "../SettingsRow";
 import { ToggleSwitch } from "../ToggleSwitch";
 
 // 👇 Импортируем PNG-иконку Bluetooth (как ты просил)
-import bluetoothIcon from "./../../../../../assets/icons/Settings_menuSections/Bluetooth.png";
+import bluetoothIcon from "./../../../../../assets/icons/Settings_menuSections/Network/Bluetooth.png";
 
 // Векторные иконки (SVG)
 const DisconnectedIcon = () => (

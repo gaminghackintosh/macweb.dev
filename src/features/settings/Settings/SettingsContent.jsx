@@ -4,39 +4,29 @@ import { WindowContext } from "@/windows";
 import appleIdAvatar from "@/assets/images/logo/logo_butterfly.png";
 
 // Icons - PNG images for network section
-import WiFi_Icon      from "@/assets/icons/Settings_menuSections/Wi-Fi.png";
-import Bluetooth_Icon from "@/assets/icons/Settings_menuSections/Bluetooth.png";
-import Network_Icon   from "@/assets/icons/Settings_menuSections/Network.ico";
+import WiFi_Icon      from "@/assets/icons/Settings_menuSections/Network/Wi-Fi.png";
+import Bluetooth_Icon from "@/assets/icons/Settings_menuSections/Network/Bluetooth.png";
+import Network_Icon   from "@/assets/icons/Settings_menuSections/Network/Network.ico";
+import Vpn_Icon from '@/assets/icons/Settings_menuSections/Network/VPN.png';
+
+import Notification_Icon from "@/assets/icons/Settings_menuSections/Second_Part/notifications.png";
+import Sounds_Icon from "@/assets/icons/Settings_menuSections/Second_Part/Sounds.webp";
+import Focus_Icon from "@/assets/icons/Settings_menuSections/Second_Part/Focus.webp";
+import ScreenTime_Icon from "@/assets/icons/Settings_menuSections/Second_Part/Screen_Time.webp";
+
+import GeneralSettings_Icon from "@/assets/icons/apps/Light_Themes/settings_1.png";
+import Appearance_Icon from "@/assets/icons/Settings_menuSections/General/Appearance.png";
+import Accessibility_Icon from "@/assets/icons/Settings_menuSections/General/Accessibility.png";
+import ControlCenter_Icon from "@/assets/icons/Settings_menuSections/General/Control_Center.svg";
+import Siri_Icon from "@/assets/icons/Settings_menuSections/General/Siri.webp";
+import Security_Icon from "@/assets/icons/Settings_menuSections/General/security_privacy.png";
+
+import DesktopAndDock_Icon from "@/assets/icons/Settings_menuSections/Personalization/DesktopAndDock.png";
+import Displays_Icon from "@/assets/icons/Settings_menuSections/Personalization/Displays.png";
+
+
 import GameCenter_Icon from "@/assets/icons/Settings_menuSections/Game_Center.png";
 
-// SVG icons
-import {
-  NotificationsIcon,
-  SoundIcon,
-  FocusIcon,
-  ScreenTimeIcon,
-  BatteryIcon,
-  GeneralIcon,
-  AppearanceIcon,
-  AccessibilityIcon,
-  ControlCenterIcon,
-  SiriIcon,
-  PrivacyIcon,
-  DesktopDockIcon,
-  DisplaysIcon,
-  ScreenSaverIcon,
-  EnergySaverIcon,
-  LockScreenIcon,
-  LoginPasswordIcon,
-  TouchIDIcon,
-  UsersGroupsIcon,
-  PasswordsIcon,
-  InternetAccountsIcon,
-  KeyboardIcon,
-  MouseIcon,
-  GameControllersIcon,
-  PrintersScannersIcon,
-} from "./Settings_Components/SettingsIcons";
 
 // Shared components
 import { SettingsPanel } from "./Settings_Components/SettingsPanel";
@@ -48,7 +38,6 @@ import { ToggleSwitch } from "./Settings_Components/ToggleSwitch";
 import {
   AccessibilitySettings,
   AppearanceSettings,
-  BatterySettings,
   BluetoothSettings,
   ControlCenterSettings,
   DesktopDockSettings,
@@ -67,7 +56,6 @@ import {
   PasswordsSettings,
   PrivacySettings,
   SoundSettings,
-  TouchIDSettings,
   UsersSettings,
   VPNSettings,
   WiFiSettings,
@@ -82,54 +70,52 @@ const MENU_SECTIONS = [
       { id: "wifi",      label: "Wi-Fi",      icon: WiFi_Icon,      iconType: "image" },
       { id: "bluetooth", label: "Bluetooth",  icon: Bluetooth_Icon, iconType: "image" },
       { id: "network",   label: "Network",    icon: Network_Icon,   iconType: "image" },
-      { id: "vpn",       label: "VPN",        icon: "🔒",      iconType: "emoji" },
+      { id: "vpn",       label: "VPN",        icon: Vpn_Icon,      iconType: "image" },
     ],
   },
   {
     id: "system",
     items: [
-      { id: "notifications", label: "Notifications", icon: NotificationsIcon, iconType: "svg" },
-      { id: "sound",         label: "Sound",          icon: SoundIcon, iconType: "svg" },
-      { id: "focus",         label: "Focus",          icon: FocusIcon, iconType: "svg" },
-      { id: "screentime",    label: "Screen Time",    icon: ScreenTimeIcon, iconType: "svg" },
-      { id: "battery",       label: "Battery",        icon: BatteryIcon, iconType: "svg" },
+      { id: "notifications", label: "Notifications", icon: Notification_Icon, iconType: "image" },
+      { id: "sound",         label: "Sound",          icon: Sounds_Icon, iconType: "image" },
+      { id: "focus",         label: "Focus",          icon: Focus_Icon, iconType: "image" },
+      { id: "screentime",    label: "Screen Time",    icon: ScreenTime_Icon, iconType: "image" },
     ],
   },
   {
     id: "general",
     items: [
-      { id: "general",       label: "General",            icon: GeneralIcon, iconType: "svg" },
-      { id: "appearance",    label: "Appearance",         icon: AppearanceIcon, iconType: "svg" },
-      { id: "accessibility", label: "Accessibility",      icon: AccessibilityIcon, iconType: "svg" },
-      { id: "controlcenter", label: "Control Center",     icon: ControlCenterIcon, iconType: "svg" },
-      { id: "siri",          label: "Siri & Spotlight",   icon: SiriIcon, iconType: "svg" },
-      { id: "privacy",       label: "Privacy & Security", icon: PrivacyIcon, iconType: "svg" },
+      { id: "general",       label: "General",            icon: GeneralSettings_Icon, iconType: "image" },
+      { id: "appearance",    label: "Appearance",         icon: Appearance_Icon, iconType: "image" },
+      { id: "accessibility", label: "Accessibility",      icon: Accessibility_Icon, iconType: "image" },
+      { id: "controlcenter", label: "Control Center",     icon: ControlCenter_Icon, iconType: "image" },
+      { id: "siri",          label: "Siri & Spotlight",   icon: Siri_Icon, iconType: "image" },
+      { id: "privacy",       label: "Privacy & Security", icon: Security_Icon, iconType: "image" },
     ],
   },
   {
     id: "desktop",
     items: [
-      { id: "desktopdock",  label: "Desktop & Dock", icon: DesktopDockIcon, iconType: "svg" },
-      { id: "displays",     label: "Displays",        icon: DisplaysIcon, iconType: "svg" },
+      { id: "desktopdock",  label: "Desktop & Dock", icon: DesktopAndDock_Icon, iconType: "image" },
+      { id: "displays",     label: "Displays",        icon: Displays_Icon, iconType: "image" },
       { id: "wallpaper",    label: "Wallpaper",       icon: "🖼️", iconType: "emoji" },
-      { id: "screensaver",  label: "Screen Saver",    icon: ScreenSaverIcon, iconType: "svg" },
-      { id: "energysaver",  label: "Energy Saver",    icon: EnergySaverIcon, iconType: "svg" },
+      { id: "screensaver",  label: "Screen Saver",    icon: "🌌", iconType: "emoji" },
+      { id: "energysaver",  label: "Energy Saver",    icon: "🌿", iconType: "emoji" },
     ],
   },
   {
     id: "security",
     items: [
-      { id: "lockscreen",    label: "Lock Screen",    icon: LockScreenIcon, iconType: "svg" },
-      { id: "loginpassword", label: "Login Password", icon: LoginPasswordIcon, iconType: "svg" },
-      { id: "touchid",       label: "Touch ID & Password", icon: TouchIDIcon, iconType: "svg" },
-      { id: "usersgroups",   label: "Users & Groups", icon: UsersGroupsIcon, iconType: "svg" },
+      { id: "lockscreen",    label: "Lock Screen",    icon: "🔒", iconType: "emoji" },
+      { id: "loginpassword", label: "Login Password", icon: "🔑", iconType: "emoji" },
+      { id: "usersgroups",   label: "Users & Groups", icon: "👥", iconType: "emoji" },
     ],
   },
   {
     id: "accounts",
     items: [
-      { id: "passwords",         label: "Passwords",           icon: PasswordsIcon, iconType: "svg" },
-      { id: "internetaccounts",  label: "Internet Accounts",   icon: InternetAccountsIcon, iconType: "svg" },
+      { id: "passwords",         label: "Passwords",           icon: "🔐", iconType: "emoji" },
+      { id: "internetaccounts",  label: "Internet Accounts",   icon: "📧", iconType: "emoji" },
       { id: "gamecenter",        label: "Game Center",         icon: GameCenter_Icon, iconType: "image" },
       { id: "wallet",            label: "Wallet & Apple Pay",  icon: "💳", iconType: "emoji" },
     ],
@@ -137,10 +123,10 @@ const MENU_SECTIONS = [
   {
     id: "hardware",
     items: [
-      { id: "keyboard",           label: "Keyboard",           icon: KeyboardIcon, iconType: "svg" },
-      { id: "mouse",              label: "Mouse",              icon: MouseIcon, iconType: "svg" },
-      { id: "gamecontrollers",    label: "Game Controllers",   icon: GameControllersIcon, iconType: "svg" },
-      { id: "printersscanners",   label: "Printers & Scanners",icon: PrintersScannersIcon, iconType: "svg" },
+      { id: "keyboard",           label: "Keyboard",           icon: "⌨️", iconType: "emoji" },
+      { id: "mouse",              label: "Mouse",              icon: "🖱️", iconType: "emoji" },
+      { id: "gamecontrollers",    label: "Game Controllers",   icon: "🎮", iconType: "emoji" },
+      { id: "printersscanners",   label: "Printers & Scanners",icon: "🖨️", iconType: "emoji" },
     ],
   },
 ];
@@ -260,8 +246,6 @@ const PANELS = {
   gamecenter: GameCenterSettings,
   mouse: MouseSettings,
   gamecontrollers: GameControllersSettings,
-  battery: BatterySettings,
-  touchid: TouchIDSettings,
   usersgroups: UsersSettings,
   screentime: () => <UnimplementedPanel title="Screen Time" />,
   siri: () => <UnimplementedPanel title="Siri & Spotlight" />,

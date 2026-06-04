@@ -1,6 +1,5 @@
 export * from "./AccessibilitySettings";
 export * from "./AppearanceSettings";
-export * from "./BatterySettings";
 export * from "./BluetoothSettings";
 export * from "./ControlCenterSettings";
 export * from "./DesktopDockSettings";
@@ -19,7 +18,6 @@ export * from "./NotificationsSettings";
 export * from "./PasswordsSettings";
 export * from "./PrivacySettings";
 export * from "./SoundSettings";
-export * from "./TouchIDSettings";
 export * from "./UsersSettings";
 export * from "./VirtualPersonalNetwork-Settings";
 export * from "./Wi-Fi";

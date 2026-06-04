@@ -4,7 +4,7 @@ import { SettingsGroup } from "../SettingsGroup";
 import { ToggleSwitch } from "../ToggleSwitch";
 
 // 👇 Импортируем PNG-иконку Wi-Fi (не трогаем)
-import wifiIcon from "../../../../../assets/icons/Settings_menuSections/Wi-Fi.png";
+import wifiIcon from "../../../../../assets/icons/Settings_menuSections/Network/Wi-Fi.png";
 
 // ─── Векторные иконки (SVG) ──────────────────────────────────────
 const LockIcon = () => (
