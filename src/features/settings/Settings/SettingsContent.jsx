@@ -31,7 +31,7 @@ import LockScreen_Icon from "@/assets/icons/Settings_menuSections/Security/lockS
 import LoginPass_Icon from "@/assets/icons/Settings_menuSections/Security/LoginPass.svg";
 import Users_Icon from "@/assets/icons/Settings_menuSections/Security/Users.png";
 
-import Passwords_Icon from "@/assets/icons/Settings_menuSections/6_part/Passwords_dark.webp";
+import Passwords_Icon from "@/assets/icons/Settings_menuSections/6_part/Passwords_dark.png";
 import Mail_Icon from "@/assets/icons/Settings_menuSections/6_part/mail.png";
 import GameCenter_Icon from "@/assets/icons/Settings_menuSections/6_Part/Game_Center.png";
 import Wallet_Icon from "@/assets/icons/Settings_menuSections/6_part/Wallet.png";
