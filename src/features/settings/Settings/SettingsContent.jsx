@@ -31,7 +31,7 @@ import LockScreen_Icon from "@/assets/icons/Settings_menuSections/Security/lockS
 import LoginPass_Icon from "@/assets/icons/Settings_menuSections/Security/LoginPass.svg";
 import Users_Icon from "@/assets/icons/Settings_menuSections/Security/Users.png";
 
-import Passwords_Icon from "@/assets/icons/Settings_menuSections/OtherPart/Passwords_dark.png";
+import Pass_Icon from "@/assets/icons/Settings_menuSections/OtherPart/Passwords_dark.png";
 import Mail_Icon from "@/assets/icons/Settings_menuSections/OtherPart/mail.png";
 import GameCenter_Icon from "@/assets/icons/Settings_menuSections/OtherPart/Game_Center.png";
 import Wallet_Icon from "@/assets/icons/Settings_menuSections/OtherPart/Wallet.png";
@@ -123,7 +123,7 @@ const MENU_SECTIONS = [
   {
     id: "accounts",
     items: [
-      { id: "passwords",         label: "Passwords",           icon: Mail_Icon, iconType: "image" },
+      { id: "passwords",         label: "Passwords",           icon: Pass_Icon, iconType: "image" },
       { id: "internetaccounts",  label: "Internet Accounts",   icon: Mail_Icon, iconType: "image" },
       { id: "gamecenter",        label: "Game Center",         icon: GameCenter_Icon, iconType: "image" },
       { id: "wallet",            label: "Wallet & Apple Pay",  icon: Wallet_Icon, iconType: "image" },
