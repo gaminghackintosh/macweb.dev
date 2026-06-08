@@ -8,7 +8,7 @@ const NotesContent = lazy(() => import("@/features/notes/Notes/NotesContent").th
 const SettingsContent = lazy(() => import("@/features/settings/Settings/SettingsContent").then(m => ({ default: m.SettingsContent })));
 const MusicContent = lazy(() => import("@/features/music/MusicApp/MusicContent").then(m => ({ default: m.MusicContent })));
 const SafariContent = lazy(() => import("@/features/safari/Safari/SafariContent").then(m => ({ default: m.SafariContent })));
-const CalendarContent = lazy(() => import("@/features/calendar/Calendar/CalendarContent").then(m => ({ default: m.CalendarContent })));
+const CalendarContent = lazy(() => import("@/features/calendar/CalendarContent").then(m => ({ default: m.CalendarContent })));
 
 /**
  * Функция-фабрика для рендеринга контента приложения.
@@ -76,8 +76,8 @@ export const renderAppContent = (appId, {
       );
     default:
       return (
-        <div style={{ padding: 20, color: '#fff' }}>
-          Приложение {appId} не найдено.
+        <div style={{ padding: 20, color: '#707070' }}>
+          App {appId} not found.
         </div>
       );
   }

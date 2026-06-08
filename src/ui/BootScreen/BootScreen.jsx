@@ -87,6 +87,8 @@ export default function BootScreen({ onComplete }) {
             alt="Apple Logo"
             className="apple-logo"
             draggable={false}
+            fetchPriority="high"
+            decoding="async"
           />
         </div>
 

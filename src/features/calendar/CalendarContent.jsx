@@ -3,9 +3,9 @@ import { WindowContext } from "@/windows";
 
 // Списки календарей
 const ICLOUD_CALENDARS = [
-  { id: "home", name: "Домашний", color: "#a855f7", checked: true },
-  { id: "calendar", name: "Календарь", color: "#f97316", checked: true },
-  { id: "work", name: "Рабочий", color: "#a855f7", checked: true },
+  { id: "home", name: "Home", color: "#a855f7", checked: true },
+  { id: "calendar", name: "Calendar", color: "#f97316", checked: true },
+  { id: "work", name: "Work", color: "#a855f7", checked: true },
 ];
 
 const OTHER_CALENDARS = [
@@ -66,11 +66,9 @@ export function CalendarContent() {
     const lastDay = new Date(currentYear, currentMonth + 1, 0);
     const days = [];
 
-    // Смещение дня недели (понедельник = 0)
     let startDay = firstDay.getDay() - 1;
     if (startDay < 0) startDay = 6;
 
-    // Добавляем дни предыдущего месяца
     const prevMonthLastDay = new Date(currentYear, currentMonth, 0).getDate();
     for (let i = startDay - 1; i >= 0; i--) {
       days.push({
@@ -79,7 +77,6 @@ export function CalendarContent() {
       });
     }
 
-    // Добавляем дни текущего месяца
     for (let day = 1; day <= lastDay.getDate(); day++) {
       days.push({
         date: new Date(currentYear, currentMonth, day),
@@ -87,7 +84,6 @@ export function CalendarContent() {
       });
     }
 
-    // Добавляем дни следующего месяца (до 42 ячеек = 6 рядов)
     const remaining = 42 - days.length;
     for (let i = 1; i <= remaining; i++) {
       days.push({
@@ -99,7 +95,7 @@ export function CalendarContent() {
     return days;
   }, [currentYear, currentMonth]);
 
-  // Мини-календарь (текущий месяц)
+  // Мини-календарь
   const miniCalendarDays = useMemo(() => {
     const firstDay = new Date(currentYear, currentMonth, 1);
     const lastDay = new Date(currentYear, currentMonth + 1, 0);

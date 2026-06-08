@@ -87,7 +87,9 @@ function AppInner() {
   return (
     <ThemeProvider>
       <WindowManagerProvider>
-        <AppContent />
+        <main role="main" aria-label="macOS Desktop Environment">
+          <AppContent />
+        </main>
       </WindowManagerProvider>
     </ThemeProvider>
   );

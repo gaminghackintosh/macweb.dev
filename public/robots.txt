@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Disallow admin/private areas if they exist
+# Disallow: /admin/
+# Disallow: /private/
+
+Sitemap: https://gaminghackintosh.github.io/hackintosh.web/sitemap.xml

@@ -19,18 +19,22 @@
 @use "BootScreen";
 @use "MobileNotSupported/main";
 
-// Apps
+// ===== Apps =====
 @use "Finder";
 @use "NotesWindow/Notes";
 @use "Musics/Music";
 @use "Terminal/Terminal";
+// Safari
 @use "Safari/SafariBrowser";
 @use "Safari/SafariPages";
 @use "Safari/SurprisePages";
+// Calendar
 @use "Calendar/Calendar";
-
+@use "Calendar/_calendar_dark";
 // Settings
 @use "Settings/Settings";
+
+
 
 // About This Mac
 @use "AboutThisMac/ATM";

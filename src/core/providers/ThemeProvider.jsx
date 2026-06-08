@@ -12,10 +12,12 @@ export function ThemeProvider({ children }) {
   useEffect(() => {
     const root = document.documentElement;
     if (isLightTheme) {
+      root.classList.remove('dark-theme');
       root.classList.add('light-theme');
       localStorage.setItem('theme', 'light');
     } else {
       root.classList.remove('light-theme');
+      root.classList.add('dark-theme');
       localStorage.setItem('theme', 'dark');
     }
   }, [isLightTheme]);

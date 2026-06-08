@@ -31,7 +31,6 @@ export default defineConfig(({ mode }) => ({
           terminal: ['./src/features/terminal/Terminal/Terminal'],
           music: ['./src/features/music/MusicApp/MusicContent'],
           settings: ['./src/features/settings/Settings/SettingsContent'],
-          calendar: ['./src/features/calendar/Calendar/CalendarContent'],
         },
         // Оптимизация чанков
         chunkFileNames: 'assets/[name]-[hash].js',
@@ -94,6 +93,14 @@ export default defineConfig(({ mode }) => ({
   // ✅ Предзагрузка для критичных зависимостей
   preview: {
     port: 4173,
+    headers: {
+      // Security headers для production
+      'X-Content-Type-Options': 'nosniff',
+      'X-Frame-Options': 'DENY',
+      'X-XSS-Protection': '1; mode=block',
+      'Referrer-Policy': 'strict-origin-when-cross-origin',
+      'Permissions-Policy': 'geolocation=(), microphone=(), camera=()',
+    },
   },
 }));
 
