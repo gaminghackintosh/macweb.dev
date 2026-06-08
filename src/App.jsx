@@ -12,9 +12,7 @@ import { MenuBar } from "@/features/menubar/MenuBar/MenuBar";
 import defaultWallpaperDark from "@/assets/images/wallpapers/Tahoe/Tahoe Dark.png";
 import defaultWallpaperLight from "@/assets/images/wallpapers/Tahoe/Tahoe Light.png";
 
-/**
- * AppContent — основной контент приложения (внутри WindowManagerProvider + ThemeProvider)
- */
+
 function AppContent() {
   const windowManager = useWindowManager();
   const { isLightTheme } = useTheme();

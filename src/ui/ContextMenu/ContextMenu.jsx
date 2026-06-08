@@ -13,7 +13,6 @@ export const ContextMenu = ({ x, y, items, onClose }) => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [onClose]);
 
-  // Корректируем позицию, чтобы меню не вылезало за границы экрана
   useEffect(() => {
     if (menuRef.current) {
       const rect = menuRef.current.getBoundingClientRect();
@@ -37,11 +36,8 @@ export const ContextMenu = ({ x, y, items, onClose }) => {
         return (
           <div
             key={index}
-            className="context-menu__item"
             className={`context-menu__item ${item.disabled ? 'context-menu__item--disabled' : ''}`}
             onClick={() => {
-              item.action?.();
-              onClose();
               if (!item.disabled) {
                 item.action?.();
                 onClose();
