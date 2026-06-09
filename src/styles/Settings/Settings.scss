@@ -1,78 +1,76 @@
 @use "../variables" as *;
 
 // ═══════════════════════════════════════════════════════════════════
-//  macOS SYSTEM SETTINGS — Authentic Design Tokens
+//  macOS System Settings — Authentic Design Tokens
 // ═══════════════════════════════════════════════════════════════════
 
-$sidebar-w:              250px;
-$radius-card:            10px;
-$radius-sm:              6px;
-$accent:                 #007aff;
-$accent-active:          rgba(0, 122, 255, 0.15);
+$sidebar-w:       220px;
+$radius-card:     8px;
+$radius-sm:       5px;
+$accent:          #007aff;
 
-// ─── Dark Theme (Default) ───────────────────────────────────────────
-$text-primary-d:         #ffffff;
-$text-secondary-d:       rgba(255, 255, 255, 0.6);
-$text-tertiary-d:        rgba(255, 255, 255, 0.38);
-$divider-d:              rgba(255, 255, 255, 0.08);
-$sidebar-bg-d:           rgba(44, 44, 46, 0.95);
-$sidebar-hover-d:        rgba(255, 255, 255, 0.06);
-$sidebar-active-d:       #007aff;
-$search-bg-d:            rgba(255, 255, 255, 0.08);
-$search-border-d:        rgba(255, 255, 255, 0.1);
-$content-bg-d:           rgba(24, 24, 24, 0.98);
-$card-bg-d:              rgba(255, 255, 255, 0.06);
-$card-border-d:          rgba(255, 255, 255, 0.08);
-$badge-red-d:            #ff3b30;
+// ─── Dark Theme ─────────────────────────────────────────────────────
+$text-primary-d:    rgba(255, 255, 255, 0.92);
+$text-secondary-d:  rgba(255, 255, 255, 0.52);
+$text-tertiary-d:   rgba(255, 255, 255, 0.32);
+$divider-d:         rgba(255, 255, 255, 0.07);
+$sidebar-bg-d:      rgba(40, 40, 42, 0.97);
+$sidebar-hover-d:   rgba(255, 255, 255, 0.06);
+$sidebar-active-d:  #007aff;
+$search-bg-d:       rgba(255, 255, 255, 0.07);
+$search-border-d:   rgba(255, 255, 255, 0.08);
+$content-bg-d:      rgba(20, 20, 22, 0.99);
+$card-bg-d:         rgba(255, 255, 255, 0.055);
+$card-border-d:     rgba(255, 255, 255, 0.07);
+$badge-red-d:       #ff3b30;
 
 // ─── Light Theme ────────────────────────────────────────────────────
-$text-primary-l:         #1d1d1f;
-$text-secondary-l:       rgba(29, 29, 31, 0.55);
-$text-tertiary-l:        rgba(29, 29, 31, 0.38);
-$divider-l:              rgba(0, 0, 0, 0.08);
-$sidebar-bg-l:           rgba(242, 242, 247, 0.95);
-$sidebar-hover-l:        rgba(0, 0, 0, 0.04);
-$sidebar-active-l:       #007aff;
-$search-bg-l:            rgba(255, 255, 255, 0.8);
-$search-border-l:        rgba(0, 0, 0, 0.1);
-$content-bg-l:           rgba(255, 255, 255, 0.98);
-$card-bg-l:              rgba(245, 245, 247, 0.8);
-$card-border-l:          rgba(0, 0, 0, 0.08);
-$badge-red-l:            #ff3b30;
+$text-primary-l:    #1d1d1f;
+$text-secondary-l:  rgba(29, 29, 31, 0.52);
+$text-tertiary-l:   rgba(29, 29, 31, 0.35);
+$divider-l:         rgba(0, 0, 0, 0.07);
+$sidebar-bg-l:      rgba(238, 238, 243, 0.97);
+$sidebar-hover-l:   rgba(0, 0, 0, 0.05);
+$sidebar-active-l:  #007aff;
+$search-bg-l:       rgba(255, 255, 255, 0.75);
+$search-border-l:   rgba(0, 0, 0, 0.1);
+$content-bg-l:      rgba(246, 246, 248, 0.99);
+$card-bg-l:         rgba(255, 255, 255, 0.82);
+$card-border-l:     rgba(0, 0, 0, 0.07);
+$badge-red-l:       #ff3b30;
 
 // ═══════════════════════════════════════════════════════════════════
-//  ROOT CONTAINER
+//  ROOT — окно фиксированного размера как настоящий macOS
 // ═══════════════════════════════════════════════════════════════════
 
 .settings-container {
   display: flex;
+  width: 100%;
   height: 100%;
+  margin: 0 auto;
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
   overflow: hidden;
   contain: layout style paint;
 }
 
 // ═══════════════════════════════════════════════════════════════════
-//  SIDEBAR — macOS System Settings Style (Dark Default)
+//  SIDEBAR
 // ═══════════════════════════════════════════════════════════════════
 
 .settings-sidebar {
   width: $sidebar-w;
   flex-shrink: 0;
   background: $sidebar-bg-d;
-  backdrop-filter: blur(40px) saturate(180%);
-  -webkit-backdrop-filter: blur(40px) saturate(180%);
-  border-right: 1px solid $divider-d;
+  border-right: 0.5px solid $divider-d;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  position: relative;
 }
 
-// ─── Traffic Lights Area ────────────────────────────────────────────
+// ─── Traffic Lights ──────────────────────────────────────────────────
 .sidebar-drag-handle {
   flex-shrink: 0;
-  height: 52px;
+  height: 46px;
   -webkit-app-region: drag;
   cursor: default;
   position: relative;
@@ -80,8 +78,8 @@ $badge-red-l:            #ff3b30;
 
 .sidebar-traffic-lights {
   position: absolute;
-  top: 16px;
-  left: 16px;
+  top: 15px;
+  left: 14px;
   display: flex;
   gap: 8px;
   z-index: 10;
@@ -96,8 +94,8 @@ $badge-red-l:            #ff3b30;
   padding: 0;
   flex-shrink: 0;
   position: relative;
-  transition: all 0.1s ease;
-  
+  transition: filter 0.1s;
+
   &::after {
     content: "";
     position: absolute;
@@ -109,92 +107,86 @@ $badge-red-l:            #ff3b30;
     background-repeat: no-repeat;
     background-position: center;
   }
-  
+
   &:hover::after { opacity: 1; }
-  
+
   &--close {
     background: #ff5f57;
-    &:hover { background: #ff3b30; }
-    &::after { 
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M3 3l4 4M7 3l-4 4' stroke='%236e0000' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E"); 
+    &:hover { filter: brightness(0.9); }
+    &::after {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M3 3l4 4M7 3l-4 4' stroke='%236e0000' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E");
     }
   }
-  
+
   &--minimize {
     background: #ffbd2e;
-    &:hover { background: #ffb01a; }
-    &::after { 
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2 5h6' stroke='%236e4000' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E"); 
+    &:hover { filter: brightness(0.9); }
+    &::after {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2 5h6' stroke='%236e4000' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E");
     }
   }
-  
+
   &--zoom {
     background: #28c840;
-    &:hover { background: #1fb534; }
-    &::after { 
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2 5h6M5 2v6' stroke='%23004d00' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E"); 
+    &:hover { filter: brightness(0.9); }
+    &::after {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2 5h6M5 2v6' stroke='%23004d00' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E");
     }
   }
 }
 
-// ─── Search ─────────────────────────────────────────────────────────
+// ─── Search ──────────────────────────────────────────────────────────
 .sidebar-search {
-  padding: 12px 14px 10px;
+  padding: 0 10px 8px;
   flex-shrink: 0;
 
   input {
     width: 100%;
     box-sizing: border-box;
     background: $search-bg-d;
-    border: 1px solid $search-border-d;
+    border: 0.5px solid $search-border-d;
     border-radius: $radius-sm;
-    padding: 7px 12px 7px 32px;
+    padding: 5px 10px 5px 26px;
     color: $text-primary-d;
-    font-size: 13px;
-    font-weight: 400;
+    font-size: 12px;
     outline: none;
-    transition: all 0.15s ease;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='M21 21l-4.35-4.35'/%3E%3C/svg%3E");
+    transition: background 0.12s, border-color 0.12s;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='M21 21l-4.35-4.35'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
-    background-position: 10px center;
+    background-position: 8px center;
 
     &::placeholder { color: $text-tertiary-d; }
-    
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.15);
-    }
-    
+
     &:focus {
-      background-color: rgba(255, 255, 255, 0.12);
-      border-color: rgba(255, 255, 255, 0.2);
+      background-color: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.14);
     }
   }
 }
 
-// ─── Apple ID Card ──────────────────────────────────────────────────
+// ─── Apple ID ────────────────────────────────────────────────────────
 .sidebar-apple-id {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 14px;
-  margin: 6px 12px;
-  border-radius: $radius-card;
+  gap: 9px;
+  padding: 7px 10px;
+  margin: 2px 6px 4px;
+  border-radius: 7px;
   cursor: pointer;
-  transition: background 0.12s ease;
+  transition: background 0.1s;
 
   &:hover { background: $sidebar-hover-d; }
-  
-  &.active { 
+
+  &.active {
     background: $sidebar-active-d;
-    
     .apple-id-name { color: #fff; }
+    .apple-id-email { color: rgba(255,255,255,0.75); }
   }
 }
 
 .apple-id-avatar {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
@@ -212,36 +204,36 @@ $badge-red-l:            #ff3b30;
 
 .apple-id-avatar-fallback {
   color: white;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
 }
 
 .apple-id-info { min-width: 0; flex: 1; }
 
-.apple-id-name { 
-  font-size: 13px; 
-  font-weight: 500; 
-  color: $text-primary-d; 
+.apple-id-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: $text-primary-d;
   line-height: 1.3;
 }
 
-.apple-id-email { 
-  font-size: 11px; 
+.apple-id-email {
+  font-size: 10.5px;
   color: $text-secondary-d;
   margin-top: 1px;
 }
 
-// ─── Software Update Section ────────────────────────────────────────
+// ─── Software Update ─────────────────────────────────────────────────
 .software-update {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 14px;
-  margin: 4px 12px;
-  border-radius: $radius-card;
+  padding: 7px 10px;
+  margin: 0 6px 2px;
+  border-radius: 7px;
   cursor: pointer;
-  transition: background 0.12s ease;
+  transition: background 0.1s;
 
   &:hover { background: $sidebar-hover-d; }
 }
@@ -249,12 +241,12 @@ $badge-red-l:            #ff3b30;
 .update-info {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .update-icon {
-  width: 22px;
-  height: 22px;
+  width: 18px;
+  height: 18px;
   color: $text-secondary-d;
   display: flex;
   align-items: center;
@@ -262,8 +254,7 @@ $badge-red-l:            #ff3b30;
 }
 
 .update-text {
-  font-size: 13px;
-  font-weight: 400;
+  font-size: 12px;
   color: $text-primary-d;
 }
 
@@ -272,103 +263,87 @@ $badge-red-l:            #ff3b30;
   color: #fff;
   font-size: 10px;
   font-weight: 600;
-  padding: 2px 7px;
-  border-radius: 10px;
-  min-width: 18px;
+  padding: 1px 6px;
+  border-radius: 8px;
+  min-width: 16px;
   text-align: center;
 }
 
-// ─── Section Headers ────────────────────────────────────────────────
-.sidebar-section {
-  margin-bottom: 8px;
-}
+// ─── Section Headers ─────────────────────────────────────────────────
+.sidebar-section { margin-bottom: 4px; }
 
 .section-header {
-  padding: 8px 16px 6px;
-  font-size: 11px;
+  padding: 6px 14px 4px;
+  font-size: 10.5px;
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: $text-tertiary-d;
 }
 
-// ─── Dividers ───────────────────────────────────────────────────────
+// ─── Dividers ────────────────────────────────────────────────────────
 .sidebar-divider,
 .section-divider {
-  height: 1px;
+  height: 0.5px;
   background: $divider-d;
-  margin: 6px 16px;
+  margin: 4px 12px;
   flex-shrink: 0;
 }
 
-// ─── Tabs List ──────────────────────────────────────────────────────
+// ─── Tabs ────────────────────────────────────────────────────────────
 .tabs-list {
   flex: 1;
   overflow-y: auto;
   scrollbar-width: none;
-  padding: 4px 12px 16px;
-  
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  padding: 2px 6px 12px;
+
+  &::-webkit-scrollbar { display: none; }
 }
 
-.menu-section { 
-  margin-bottom: 4px;
-  
+.menu-section {
+  margin-bottom: 2px;
   &:last-child { margin-bottom: 0; }
 }
 
 .tab-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 7px 12px;
-  margin: 2px 0;
-  border-radius: $radius-card;
+  gap: 8px;
+  padding: 5px 10px;
+  margin: 1px 0;
+  border-radius: 6px;
   cursor: pointer;
-  transition: all 0.1s ease;
+  transition: background 0.08s;
   color: $text-primary-d;
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 400;
 
-  &:hover:not(.active) { 
-    background: $sidebar-hover-d; 
-  }
-  
+  &:hover:not(.active) { background: $sidebar-hover-d; }
+
   &.active {
     background: $sidebar-active-d;
     color: #fff;
     font-weight: 500;
-    
-    .tab-icon { 
-      filter: brightness(1.1);
-    }
   }
 }
 
 .tab-icon {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  font-size: 18px;
-  transition: all 0.1s ease;
 
   img {
-    width: 22px;
-    height: 22px;
+    width: 18px;
+    height: 18px;
     object-fit: contain;
   }
-  
+
   svg {
-    width: 22px;
-    height: 22px;
-    stroke: currentColor;
-    fill: none;
-    stroke-width: 1.8;
+    width: 18px;
+    height: 18px;
   }
 }
 
@@ -384,13 +359,13 @@ $badge-red-l:            #ff3b30;
   color: #fff;
   font-size: 10px;
   font-weight: 600;
-  padding: 2px 7px;
-  border-radius: 8px;
+  padding: 1px 6px;
+  border-radius: 7px;
   line-height: 1.4;
 }
 
 // ═══════════════════════════════════════════════════════════════════
-//  CONTENT AREA — Dark Theme
+//  CONTENT AREA
 // ═══════════════════════════════════════════════════════════════════
 
 .settings-content {
@@ -398,84 +373,90 @@ $badge-red-l:            #ff3b30;
   overflow-y: auto;
   background: $content-bg-d;
   -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar { width: 5px; }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.15);
+    border-radius: 3px;
+  }
 }
 
 .settings-panel {
-  max-width: 740px;
+  // Ограничение ширины контента — не растягивается шире чем нужно
+  max-width: 580px;
   margin: 0 auto;
-  padding: 28px 36px 52px;
-  animation: panel-enter 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 20px 28px 40px;
+  animation: panel-enter 0.15s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes panel-enter {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(5px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .panel-header {
-  margin-bottom: 24px;
-  padding-bottom: 8px;
+  margin-bottom: 16px;
 }
 
 .panel-title {
-  font-size: 28px;
+  font-size: 22px;
   font-weight: 700;
-  letter-spacing: -0.02em;
-  margin: 0 0 4px;
+  letter-spacing: -0.018em;
+  margin: 0 0 2px;
   color: $text-primary-d;
 }
 
 .panel-description {
-  font-size: 14px;
+  font-size: 12.5px;
   color: $text-secondary-d;
   margin: 0;
-  line-height: 1.5;
+  line-height: 1.4;
 }
 
 .panel-body {
   display: flex;
   flex-direction: column;
-  gap: 26px;
+  gap: 16px;   // уменьшено с 26px — более компактно как в macOS
 }
 
 // ═══════════════════════════════════════════════════════════════════
-//  SETTINGS GROUP — macOS Card Style
+//  SETTINGS GROUP
 // ═══════════════════════════════════════════════════════════════════
 
 .sg-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
 }
 
 .sg-label {
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: $text-tertiary-d;
-  padding: 0 16px 6px;
+  padding: 0 14px 5px;
 }
 
 .sg-footer {
   font-size: 11px;
   color: $text-tertiary-d;
-  padding: 8px 16px 0;
-  line-height: 1.5;
+  padding: 6px 14px 0;
+  line-height: 1.4;
 }
 
 .sg-card {
   background: $card-bg-d;
   border: 0.5px solid $card-border-d;
-  border-radius: $radius-card;
+  border-radius: $radius-card;   // 8px — менее закруглённые
   overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  // Убираем box-shadow — в macOS 26 нет теней на карточках
 }
 
 .sg-divider {
   height: 0.5px;
   background: $divider-d;
-  margin: 0 16px;
+  margin: 0 14px;   // отступ как в macOS
 }
 
 // ═══════════════════════════════════════════════════════════════════
@@ -486,94 +467,75 @@ $badge-red-l:            #ff3b30;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 16px;
-  gap: 14px;
-  min-height: 48px;
-  transition: background 0.08s ease;
-  
-  &:first-child { padding-top: 14px; }
-  &:last-child { padding-bottom: 14px; }
-  
+  padding: 9px 14px;   // уменьшено с 12px 16px
+  gap: 12px;
+  min-height: 36px;    // уменьшено с 48px
+  transition: background 0.07s;
+
+  &:first-child { padding-top: 10px; }
+  &:last-child  { padding-bottom: 10px; }
+
   &--clickable {
     cursor: pointer;
-    &:hover { background: rgba(255, 255, 255, 0.08); }
+    &:hover { background: rgba(255, 255, 255, 0.05); }
   }
 }
 
 .sr-left {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 2px;
   flex: 1;
   min-width: 0;
 }
 
 .sr-label {
-  font-size: 14px;
+  font-size: 13px;
   color: $text-primary-d;
   font-weight: 400;
 }
 
 .sr-desc {
-  font-size: 12px;
+  font-size: 11px;
   color: $text-secondary-d;
-  line-height: 1.4;
+  line-height: 1.35;
 }
 
 .sr-right {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   flex-shrink: 0;
 }
 
 .sr-value {
-  font-size: 13px;
+  font-size: 12.5px;
   color: $text-secondary-d;
 }
 
 .sr-chevron {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   color: $text-tertiary-d;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  
-  svg {
-    width: 16px;
-    height: 16px;
-  }
+  font-size: 14px;
 }
 
-// ─── Badges ─────────────────────────────────────────────────────────
+// ─── Badges ──────────────────────────────────────────────────────────
 .sr-badge {
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 500;
-  padding: 3px 8px;
-  border-radius: 8px;
+  padding: 2px 7px;
+  border-radius: 7px;
   line-height: 1.4;
 
-  &--blue {
-    background: rgba(0, 122, 255, 0.15);
-    color: #007aff;
-  }
-  
-  &--green {
-    background: rgba(52, 199, 89, 0.15);
-    color: #34c759;
-  }
-  
-  &--gray {
-    background: rgba(118, 118, 128, 0.15);
-    color: $text-secondary-d;
-  }
-  
-  &--red {
-    background: rgba(255, 59, 48, 0.15);
-    color: #ff3b30;
-  }
+  &--blue  { background: rgba(0, 122, 255, 0.15); color: #007aff; }
+  &--green { background: rgba(52, 199, 89, 0.15);  color: #34c759; }
+  &--gray  { background: rgba(118, 118, 128, 0.15); color: $text-secondary-d; }
+  &--red   { background: rgba(255, 59, 48, 0.15);  color: #ff3b30; }
 }
 
 // ═══════════════════════════════════════════════════════════════════
@@ -596,11 +558,11 @@ $badge-red-l:            #ff3b30;
 
 .toggle__track {
   position: relative;
-  width: 44px;
-  height: 26px;
-  border-radius: 13px;
-  background: rgba(118, 118, 128, 0.32);
-  transition: background 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 38px;    // чуть меньше — точнее соответствует macOS
+  height: 22px;
+  border-radius: 11px;
+  background: rgba(118, 118, 128, 0.28);
+  transition: background 0.18s cubic-bezier(0.4, 0, 0.2, 1);
   flex-shrink: 0;
 }
 
@@ -608,12 +570,12 @@ $badge-red-l:            #ff3b30;
   position: absolute;
   top: 2px;
   left: 2px;
-  width: 22px;
-  height: 22px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   background: #fff;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.22);
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .toggle__input:checked ~ .toggle__track {
@@ -621,7 +583,7 @@ $badge-red-l:            #ff3b30;
 }
 
 .toggle__input:checked ~ .toggle__track .toggle__thumb {
-  transform: translateX(18px);
+  transform: translateX(16px);
 }
 
 // ═══════════════════════════════════════════════════════════════════
@@ -631,28 +593,22 @@ $badge-red-l:            #ff3b30;
 .ctrl-select {
   appearance: none;
   -webkit-appearance: none;
-  background: rgba(255, 255, 255, 0.08);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background: rgba(255, 255, 255, 0.07);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 12 12'%3E%3Cpath fill='%23888' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right 10px center;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background-position: right 9px center;
+  border: 0.5px solid rgba(255, 255, 255, 0.1);
   border-radius: $radius-sm;
   color: $text-primary-d;
-  padding: 6px 32px 6px 12px;
-  font-size: 13px;
+  padding: 5px 26px 5px 10px;
+  font-size: 12.5px;
   outline: none;
   cursor: pointer;
-  transition: all 0.15s ease;
-
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.15);
-  }
+  transition: all 0.12s;
 
   &:focus {
     border-color: $accent;
-    background-color: rgba(255, 255, 255, 0.12);
-    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.15);
+    box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.14);
   }
 
   option {
@@ -663,184 +619,96 @@ $badge-red-l:            #ff3b30;
 
 .ctrl-button {
   appearance: none;
-  -webkit-appearance: none;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.07);
+  border: 0.5px solid rgba(255, 255, 255, 0.1);
   border-radius: $radius-sm;
   color: $text-primary-d;
-  padding: 6px 14px;
-  font-size: 13px;
-  font-weight: 500;
+  padding: 5px 12px;
+  font-size: 12.5px;
+  font-weight: 400;
   font-family: inherit;
   cursor: pointer;
-  transition: all 0.12s ease;
-  
-  &:hover {
-    background: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.15);
-  }
-  
-  &:active {
-    background: rgba(255, 255, 255, 0.15);
-    transform: scale(0.97);
-  }
+  transition: all 0.1s;
+
+  &:hover  { background: rgba(255, 255, 255, 0.1); }
+  &:active { transform: scale(0.97); }
 }
 
 // ═══════════════════════════════════════════════════════════════════
-//  LIGHT THEME — macOS System Settings Style
+//  LIGHT THEME
 // ═══════════════════════════════════════════════════════════════════
 
 .light-theme {
   color: $text-primary-l;
-  
-  .settings-container {
-    background: $content-bg-l;
-  }
-  
+
   .settings-sidebar {
     background: $sidebar-bg-l;
     border-right-color: $divider-l;
   }
-  
-  .settings-content {
-    background: $content-bg-l;
-  }
-  
-  // Search
+
+  .settings-content { background: $content-bg-l; }
+
   .sidebar-search input {
     background: $search-bg-l;
     border-color: $search-border-l;
     color: $text-primary-l;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23555' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='M21 21l-4.35-4.35'/%3E%3C/svg%3E");
-    
-    &::placeholder {
-      color: rgba(29, 29, 31, 0.4);
-    }
-    
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.9);
-      border-color: rgba(0, 0, 0, 0.15);
-    }
-    
-    &:focus {
-      background-color: #fff;
-      border-color: $accent;
-    }
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='M21 21l-4.35-4.35'/%3E%3C/svg%3E");
+    &::placeholder { color: rgba(29, 29, 31, 0.38); }
   }
-  
-  // Apple ID
+
   .sidebar-apple-id {
-    &:hover { background: $sidebar-hover-l; }
-    
-    &.active { 
-      background: $sidebar-active-l;
-      
-      .apple-id-name { color: #fff; }
-    }
+    &:hover  { background: $sidebar-hover-l; }
+    &.active { background: $sidebar-active-l; }
   }
-  
-  .apple-id-name { color: $text-primary-l; }
+
+  .apple-id-name  { color: $text-primary-l; }
   .apple-id-email { color: $text-secondary-l; }
-  
-  // Software Update
+
   .software-update {
-    &:hover { background: $sidebar-hover-l; }
-    
-    .update-text { color: $text-primary-l; }
-    .update-icon { color: $text-secondary-l; }
+    &:hover       { background: $sidebar-hover-l; }
+    .update-text  { color: $text-primary-l; }
+    .update-icon  { color: $text-secondary-l; }
   }
-  
-  // Section headers
-  .section-header {
-    color: $text-tertiary-l;
-  }
-  
-  // Dividers
+
+  .section-header  { color: $text-tertiary-l; }
+
   .sidebar-divider,
-  .section-divider {
-    background: $divider-l;
-  }
-  
-  // Tabs
+  .section-divider { background: $divider-l; }
+
   .tab-item {
     color: $text-primary-l;
-    
-    &:hover:not(.active) { 
-      background: $sidebar-hover-l; 
-    }
-    
-    &.active {
-      background: $sidebar-active-l;
-      color: #fff;
-    }
+    &:hover:not(.active) { background: $sidebar-hover-l; }
+    &.active { background: $sidebar-active-l; color: #fff; }
   }
-  
-  .tab-icon {
-    color: $text-secondary-l;
-  }
-  
-  .tab-item.active .tab-icon {
-    color: #fff;
-  }
-  
-  // Content
-  .panel-title { color: $text-primary-l; }
+
+  .panel-title       { color: $text-primary-l; }
   .panel-description { color: $text-secondary-l; }
-  
-  // Groups
-  .sg-label { color: $text-tertiary-l; }
-  .sg-card {
-    background: $card-bg-l;
-    border-color: $card-border-l;
-  }
-  .sg-divider { background: $divider-l; }
-  
-  // Rows
-  .sr-label { color: $text-primary-l; }
-  .sr-desc { color: $text-secondary-l; }
-  .sr-value { color: $text-secondary-l; }
-  .sr-chevron { color: $text-tertiary-l; }
-  
-  .sr-row--clickable:hover {
-    background: rgba(0, 0, 0, 0.04);
-  }
-  
-  // Toggle
-  .toggle__track {
-    background: rgba(118, 118, 128, 0.24);
-  }
-  
-  // Select
+
+  .sg-label          { color: $text-tertiary-l; }
+  .sg-card           { background: $card-bg-l; border-color: $card-border-l; }
+  .sg-divider        { background: $divider-l; }
+  .sg-footer         { color: $text-tertiary-l; }
+
+  .sr-label          { color: $text-primary-l; }
+  .sr-desc           { color: $text-secondary-l; }
+  .sr-value          { color: $text-secondary-l; }
+  .sr-chevron        { color: $text-tertiary-l; }
+
+  .sr-row--clickable:hover { background: rgba(0, 0, 0, 0.03); }
+
+  .toggle__track { background: rgba(118, 118, 128, 0.2); }
+
   .ctrl-select {
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.75);
     border-color: rgba(0, 0, 0, 0.1);
     color: $text-primary-l;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23555' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-    
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.9);
-      border-color: rgba(0, 0, 0, 0.15);
-    }
-    
-    &:focus {
-      background-color: #fff;
-      border-color: $accent;
-    }
-    
-    option {
-      background: #f5f5f7;
-      color: $text-primary-l;
-    }
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 12 12'%3E%3Cpath fill='%23555' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    option { background: #f5f5f7; color: $text-primary-l; }
   }
-  
-  // Button
+
   .ctrl-button {
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.75);
     border-color: rgba(0, 0, 0, 0.1);
-    
-    &:hover {
-      background: rgba(255, 255, 255, 0.9);
-      border-color: rgba(0, 0, 0, 0.15);
-    }
+    &:hover { background: rgba(255, 255, 255, 0.9); }
   }
 }

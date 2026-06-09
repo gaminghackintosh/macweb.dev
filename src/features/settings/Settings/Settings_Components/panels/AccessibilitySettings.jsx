@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SettingsPanel } from "./../SettingsPanel";
+import { SettingsPanel } from "../SettingsPanel";
 import { SettingsGroup } from "../SettingsGroup";
 import { SettingsRow } from "../SettingsRow";
 import { ToggleSwitch } from "../ToggleSwitch";

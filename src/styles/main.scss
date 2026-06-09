@@ -20,26 +20,7 @@
 // ─── 4. SYSTEM APPS ────────────────────────────────────────────────
 @use "BootScreen";
 @use "Finder";
-@use "Settings";               // Core settings
-@use "Settings/WiFiSettings";
-@use "Settings/BluetoothSettings";
-@use "Settings/NetworkSettings";
-@use "Settings/GeneralSettings";
-@use "Settings/AppearanceSettings";
-@use "Settings/DesktopDockSettings";
-@use "Settings/LockScreenSettings";
-@use "Settings/LoginPasswordSettings";
-@use "Settings/UsersSettings";
-@use "Settings/PrivacySettings";
-@use "Settings/PasswordsSettings";
-@use "Settings/ICloudSettings";
-@use "Settings/FocusSettings";
-@use "Settings/NotificationsSettings";
-@use "Settings/SoundSettings";
-@use "Settings/DisplaysSettings";
-@use "Settings/BatterySettings";
-@use "Settings/TouchIDSettings";
-@use "Settings/AccessibilitySettings";
+@use "Settings/index";         // Core + all settings panels
 @use "AboutThisMac/ATM";
 
 // ─── 5. APPLICATIONS ───────────────────────────────────────────────

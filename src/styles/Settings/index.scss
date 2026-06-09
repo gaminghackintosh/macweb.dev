@@ -2,36 +2,25 @@
 //  Settings Styles Index — macOS System Settings
 // ═══════════════════════════════════════════════════════════════════
 
-// Core Settings styles
+// Core
 @use "Settings";
 
-// Network
+// Active panels
 @use "WiFiSettings";
 @use "BluetoothSettings";
-@use "NetworkSettings";
-
-// System
 @use "GeneralSettings";
 @use "AppearanceSettings";
 @use "DesktopDockSettings";
 @use "LockScreenSettings";
 @use "LoginPasswordSettings";
-
-// User & Privacy
 @use "UsersSettings";
-@use "PrivacySettings";
-@use "PasswordsSettings";
-@use "ICloudSettings";
-
-// Connectivity
 @use "FocusSettings";
 @use "NotificationsSettings";
-
-// Hardware
 @use "SoundSettings";
 @use "DisplaysSettings";
-@use "BatterySettings";
-@use "TouchIDSettings";
 
-// Accessibility
+// Legacy (kept for compatibility)
 @use "AccessibilitySettings";
+@use "ICloudSettings";
+@use "PasswordsSettings";
+@use "PrivacySettings";

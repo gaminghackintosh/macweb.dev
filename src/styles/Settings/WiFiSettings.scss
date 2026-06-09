@@ -1,434 +1,374 @@
 // ═══════════════════════════════════════════════════════════════════
-//  macOS 26 — Wi-Fi Settings Panel
-//  Вставь этот файл рядом с WiFiSettings.jsx и импортируй:
-//  import "./WiFiSettings.scss";
+//  WiFi Settings — Real macOS System Settings Spacing
 // ═══════════════════════════════════════════════════════════════════
 
-// ── Tokens ──────────────────────────────────────────────────────────
-$accent:           #007aff;
-$accent-blue:      #0a84ff;
-$green:            #34c759;
-$radius-card:      10px;
-$radius-sm:        6px;
+.wifi-settings-wrapper {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  padding: 4px 0;
 
-$text-primary:     rgba(255, 255, 255, 0.93);
-$text-secondary:   rgba(255, 255, 255, 0.55);
-$text-tertiary:    rgba(255, 255, 255, 0.35);
+  .apple-settings-block {
+    margin-bottom: 22px;
+  }
 
-$card-bg:          rgba(255, 255, 255, 0.06);
-$card-border:      rgba(255, 255, 255, 0.08);
-$divider:          rgba(255, 255, 255, 0.08);
-$hover-bg:         rgba(255, 255, 255, 0.06);
-$row-hover:        rgba(255, 255, 255, 0.05);
+  .apple-section-container {
+    margin-bottom: 18px;
+  }
 
-// ── Settings Panel wrapper ───────────────────────────────────────────
-.settings-panel {
-  max-width: 680px;
-  margin: 0 auto;
-  padding: 24px 32px 48px;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
-  color: $text-primary;
-  animation: panel-enter 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  // ─── HEADER ROW  ──────────────────────────
+  .apple-wifi-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px; // Внутренний отступ карточки
+  }
 
-  @keyframes panel-enter {
-    from { opacity: 0; transform: translateY(6px); }
-    to   { opacity: 1; transform: translateY(0); }
+  .wifi-title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .wifi-status-icon-blue {
+    width: 32px;
+    height: 32px;
+    border-radius: 7px;
+    background: #007aff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+
+    img {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+    }
+
+    &.disabled {
+      background: rgba(120, 120, 128, 0.24);
+      img {
+        opacity: 0.4;
+      }
+    }
+  }
+
+  .apple-label-main {
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  // ─── CONNECTED CARD (Строка под тумблером Wi-Fi) ──────────────────
+  .apple-wifi-connected-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 0.5px solid rgba(255, 255, 255, 0.08);
+    padding: 10px 12px;
+  }
+
+  .connected-card-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .apple-status-dot-green {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #34c759;
+    flex-shrink: 0;
+    margin-left: 2px;
+  }
+
+  .connected-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .network-title-bold {
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.95);
+  }
+
+  .network-subtitle-status {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .connected-card-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    
+    svg {
+      color: rgba(255, 255, 255, 0.45);
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  // ─── SECTION HEADER (Заголовки групп) ─────────────────────────────
+  .apple-section-header {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.45);
+    padding: 0 0 6px 4px; // Оступы вокруг заголовка
+  }
+
+  // ─── NETWORK ROW ─────────────────────────────────────────────────
+  .apple-list-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    min-height: 38px;
+
+    &:not(:last-child) {
+      border-bottom: 0.5px solid rgba(255, 255, 255, 0.06);
+    }
+  }
+
+  .row-left-content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .checkmark-gutter {
+    width: 14px;
+    height: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    svg {
+      color: rgba(255, 255, 255, 0.85);
+      width: 11px;
+      height: 11px;
+    }
+  }
+
+  .apple-network-name {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 400;
+  }
+
+  .row-right-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+
+    svg {
+      color: rgba(255, 255, 255, 0.45);
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  .apple-icon-circle-btn {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+
+    svg {
+      color: rgba(255, 255, 255, 0.6) !important;
+      width: 12px;
+      height: 12px;
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  // ─── OTHER NETWORKS BOX ──────────────────────────────────────────
+  .apple-other-networks-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    min-height: 38px;
+    width: 100%;
+
+    .searching-text {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.4);
+    }
+  }
+
+  // ─── SYSTEM BUTTONS ──────────────────────────────────────────────
+  .apple-btn-secondary {
+    background: rgba(255, 255, 255, 0.07);
+    border: 0.5px solid rgba(255, 255, 255, 0.04);
+    border-radius: 5px;
+    padding: 3px 10px;
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+  }
+
+  // ─── TOGGLE ROW ──────────────────────────────────────────────────
+  .apple-system-toggle-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 12px;
+    gap: 24px;
+
+    &:not(:last-child) {
+      border-bottom: 0.5px solid rgba(255, 255, 255, 0.06);
+    }
+  }
+
+  .toggle-text-block {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .toggle-main-label {
+    display: block;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 400;
+    margin-bottom: 3px;
+  }
+
+  .toggle-hint-desc {
+    margin: 0;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.45);
+    line-height: 1.4;
+  }
+
+  .toggle-action-block {
+    padding-top: 1px;
+    flex-shrink: 0;
+  }
+
+  // ─── FOOTER CONTROLS ─────────────────────────────────────────────
+  .apple-footer-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 12px;
+    margin-top: 10px;
+  }
+
+  .apple-btn-action-panel {
+    background: rgba(255, 255, 255, 0.07);
+    border: 0.5px solid rgba(255, 255, 255, 0.04);
+    border-radius: 5px;
+    padding: 4px 12px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+  }
+
+  .apple-btn-help-circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.07);
+    border: 0.5px solid rgba(255, 255, 255, 0.04);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.55);
+    padding: 0;
+
+    svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: rgba(255, 255, 255, 0.9);
+    }
   }
 }
 
-.panel-title {
-  font-size: 26px;
-  font-weight: 700;
-  letter-spacing: -0.015em;
-  margin: 0 0 20px;
-  color: $text-primary;
-}
+// ═══════════════════════════════════════════════════════════════════
+//  LIGHT THEME ADAPTATION
+// ═══════════════════════════════════════════════════════════════════
 
-// ── Settings Group (card) ────────────────────────────────────────────
-.sg-card {
-  background: $card-bg;
-  border: 0.5px solid $card-border;
-  border-radius: $radius-card;
-  overflow: hidden;
-  margin-bottom: 6px;
-}
-
-.sg-divider {
-  height: 0.5px;
-  background: $divider;
-  margin: 0 14px;
-}
-
-.sg-label {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: $text-tertiary;
-  padding: 0 4px 6px;
-}
-
-.sg-footer {
-  font-size: 11px;
-  color: $text-tertiary;
-  padding: 8px 4px 0;
-  line-height: 1.5;
-}
-
-// ── Section headers (between groups) ────────────────────────────────
-.apple-section-header {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  color: $text-tertiary;
-  padding: 14px 4px 6px;
-}
-
-// ── Wi-Fi header row ─────────────────────────────────────────────────
-.apple-wifi-header-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 14px;
-}
-
-.wifi-title-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.wifi-status-icon-blue {
-  width: 28px;
-  height: 28px;
-  border-radius: 7px;
-  background: $accent-blue;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  transition: opacity 0.2s;
-
-  img {
-    width: 29px;
-    height: 29px;
-    object-fit: contain;
+.light-theme .wifi-settings-wrapper {
+  .apple-label-main,
+  .network-title-bold,
+  .apple-list-row .apple-network-name,
+  .toggle-main-label {
+    color: #1d1d1f;
   }
 
-  &.disabled {
-    opacity: 0.4;
-  }
-}
-
-.apple-label-main {
-  font-size: 14px;
-  font-weight: 500;
-  color: $text-primary;
-}
-
-// ── Connected network card ───────────────────────────────────────────
-.apple-wifi-connected-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 14px 12px;
-  border-top: 0.5px solid $divider;
-  background: rgba(255, 255, 255, 0.025);
-}
-
-.connected-card-left {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-}
-
-.apple-status-dot-green {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: $green;
-  flex-shrink: 0;
-  box-shadow: 0 0 0 2px rgba(52, 199, 89, 0.2);
-}
-
-.connected-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.network-title-bold {
-  font-size: 14px;
-  font-weight: 500;
-  color: $text-primary;
-}
-
-.network-subtitle-status {
-  font-size: 12px;
-  color: $text-secondary;
-}
-
-.connected-card-right {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-// ── Network list rows ────────────────────────────────────────────────
-.apple-list-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 14px;
-  min-height: 40px;
-  transition: background 0.08s;
-
-  & + .apple-list-row {
-    border-top: 0.5px solid $divider;
+  .apple-wifi-connected-card {
+    border-top-color: rgba(0, 0, 0, 0.06);
   }
 
-  &:hover {
-    background: $row-hover;
-  }
-}
-
-.row-left-content {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.checkmark-gutter {
-  width: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  color: $accent;
-}
-
-.apple-checkmark {
-  color: $accent;
-}
-
-.apple-network-name {
-  font-size: 14px;
-  color: $text-primary;
-
-  &.active-bold {
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.96);
-  }
-}
-
-.row-right-content {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
-
-// ── Icons ────────────────────────────────────────────────────────────
-.apple-icon {
-  color: $text-secondary;
-  flex-shrink: 0;
-}
-
-// ── More (···) circle button ─────────────────────────────────────────
-.apple-icon-circle-btn {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: $text-secondary;
-  transition: background 0.12s;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.16);
+  .network-subtitle-status {
+    color: rgba(0, 0, 0, 0.5);
   }
 
-  svg { color: inherit; }
-}
-
-// ── Other Networks box ───────────────────────────────────────────────
-.apple-other-networks-box {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 14px;
-  gap: 10px;
-}
-
-.searching-text {
-  font-size: 13px;
-  color: $text-secondary;
-  flex: 1;
-  margin-left: 4px;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-.spinner-icon {
-  color: $text-tertiary;
-  animation: spin 1.4s linear infinite;
-  flex-shrink: 0;
-}
-
-// ── Toggle rows (Ask to join) ────────────────────────────────────────
-.apple-system-toggle-row {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  padding: 12px 14px;
-  gap: 14px;
-
-  & + .apple-system-toggle-row {
-    border-top: 0.5px solid $divider;
-  }
-}
-
-.toggle-text-block {
-  flex: 1;
-  min-width: 0;
-  padding-top: 1px;
-}
-
-.toggle-main-label {
-  font-size: 14px;
-  color: $text-primary;
-  display: block;
-}
-
-.toggle-hint-desc {
-  font-size: 12px;
-  color: $text-secondary;
-  line-height: 1.45;
-  margin-top: 4px;
-}
-
-// ── Toggle Switch ────────────────────────────────────────────────────
-//  Применяется к компоненту <ToggleSwitch>
-//  Оберни его label в .toggle
-.toggle {
-  display: inline-flex;
-  align-items: center;
-  cursor: pointer;
-  flex-shrink: 0;
-}
-
-.toggle__input {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.toggle__track {
-  position: relative;
-  width: 44px;
-  height: 26px;
-  border-radius: 13px;
-  background: rgba(118, 118, 128, 0.32);
-  transition: background 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  flex-shrink: 0;
-}
-
-.toggle__thumb {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: #ffffff;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.22);
-  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.toggle__input:checked ~ .toggle__track {
-  background: $green;
-}
-
-// Основной тоггл Wi-Fi — синий
-.toggle__input:checked ~ .toggle__track--blue {
-  background: $accent-blue;
-}
-
-.toggle__input:checked ~ .toggle__track .toggle__thumb {
-  transform: translateX(18px);
-}
-
-// ── Secondary button ─────────────────────────────────────────────────
-.apple-btn-secondary {
-  background: rgba(255, 255, 255, 0.1);
-  border: 0.5px solid rgba(255, 255, 255, 0.15);
-  border-radius: $radius-sm;
-  color: $text-primary;
-  font-size: 12px;
-  font-family: inherit;
-  padding: 5px 10px;
-  cursor: pointer;
-  transition: background 0.12s;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.15);
+  .apple-section-header,
+  .searching-text,
+  .toggle-hint-desc {
+    color: rgba(0, 0, 0, 0.48);
   }
 
-  &:active {
-    background: rgba(255, 255, 255, 0.18);
-    transform: scale(0.97);
-  }
-}
-
-// ── Footer controls row ──────────────────────────────────────────────
-.apple-footer-controls {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 2px 0;
-}
-
-.apple-btn-action-panel {
-  background: rgba(255, 255, 255, 0.1);
-  border: 0.5px solid rgba(255, 255, 255, 0.15);
-  border-radius: $radius-sm;
-  color: $text-primary;
-  font-size: 13px;
-  font-family: inherit;
-  padding: 6px 14px;
-  cursor: pointer;
-  transition: background 0.12s;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.14);
+  .apple-list-row:not(:last-child),
+  .apple-system-toggle-row:not(:last-child) {
+    border-bottom-color: rgba(0, 0, 0, 0.06);
   }
 
-  &:active {
-    transform: scale(0.97);
+  .row-right-content svg,
+  .connected-card-right svg {
+    color: rgba(0, 0, 0, 0.4);
   }
-}
 
-.apple-btn-help-circle {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  border: 0.5px solid rgba(255, 255, 255, 0.15);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: $text-secondary;
-  transition: background 0.12s;
+  .apple-btn-secondary,
+  .apple-btn-action-panel,
+  .apple-btn-help-circle {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.02);
+    color: #1d1d1f;
 
-  &:hover {
-    background: rgba(255, 255, 255, 0.16);
+    &:hover {
+      background: rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .apple-icon-circle-btn:hover {
+    background: rgba(0, 0, 0, 0.06);
   }
 }
