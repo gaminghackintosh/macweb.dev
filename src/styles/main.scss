@@ -1,64 +1,79 @@
+// ═══════════════════════════════════════════════════════════════════
+//  hackintosh.web — Main Stylesheet
+// ═══════════════════════════════════════════════════════════════════
+
+// ─── 1. CORE ───────────────────────────────────────────────────────
 @use "variables" as *;
 @use "mixins" as *;
 @use "theme" as *;
 
-// Core (globals, icons)
+// ─── 2. GLOBAL ─────────────────────────────────────────────────────
 @use "globals";
 @use "icons";
 
-// Components
+// ─── 3. SYSTEM COMPONENTS ──────────────────────────────────────────
+@use "AppWindow";              // Windows, MenuBar, ContextMenu
 @use "Dock";
 @use "ControlCenter";
-
-// Windows / Layout
-@use "AppWindow/AppWindows";
-@use "AppWindow/MenuBar";
-@use "AppWindow/ContextMenu";
-
-
-// Boot & UI
-@use "BootScreen";
 @use "MobileNotSupported/main";
 
-// ===== Apps =====
+// ─── 4. SYSTEM APPS ────────────────────────────────────────────────
+@use "BootScreen";
 @use "Finder";
+@use "Settings";               // Core settings
+@use "Settings/WiFiSettings";
+@use "Settings/BluetoothSettings";
+@use "Settings/NetworkSettings";
+@use "Settings/GeneralSettings";
+@use "Settings/AppearanceSettings";
+@use "Settings/DesktopDockSettings";
+@use "Settings/LockScreenSettings";
+@use "Settings/LoginPasswordSettings";
+@use "Settings/UsersSettings";
+@use "Settings/PrivacySettings";
+@use "Settings/PasswordsSettings";
+@use "Settings/ICloudSettings";
+@use "Settings/FocusSettings";
+@use "Settings/NotificationsSettings";
+@use "Settings/SoundSettings";
+@use "Settings/DisplaysSettings";
+@use "Settings/BatterySettings";
+@use "Settings/TouchIDSettings";
+@use "Settings/AccessibilitySettings";
+@use "AboutThisMac/ATM";
+
+// ─── 5. APPLICATIONS ───────────────────────────────────────────────
 @use "NotesWindow/Notes";
 @use "Musics/Music";
 @use "Terminal/Terminal";
-// Safari
-@use "Safari/SafariBrowser";
-@use "Safari/SafariPages";
-@use "Safari/SurprisePages";
-// Calendar
-@use "Calendar/Calendar";
-@use "Calendar/calendar_dark";
+@use "Safari";                 // Safari browser
+@use "Calendar";               // Calendar app
 @use "CalendarWidget/calendar_widget";
-// Settings
-@use "Settings/Settings";
 
+// ═══════════════════════════════════════════════════════════════════
+//  BASE STYLES
+// ═══════════════════════════════════════════════════════════════════
 
-
-// About This Mac
-@use "AboutThisMac/ATM";
-
-// Apply default dark theme
 body {
   margin: 0;
   background: $color-bg-body;
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
   overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   
   @include dark-theme;
 }
 
-// Light theme override
 body.light-theme {
   background: $light-color-bg-body;
-  
   @include light-theme;
 }
 
-// Оптимизация Desktop
+// ═══════════════════════════════════════════════════════════════════
+//  OPTIMIZATION
+// ═══════════════════════════════════════════════════════════════════
+
 .desktop {
   width: 100vw;
   height: 100vh;
@@ -67,46 +82,30 @@ body.light-theme {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  will-change: auto;
-  transform: translateZ(0);
   contain: layout style paint;
-  content-visibility: auto;
 }
 
-// Оптимизация для окон
 .window {
   contain: layout style paint;
   content-visibility: auto;
 }
 
-// =========================================================
-// Скрытие скроллбаров во всех приложениях (macOS style)
-// Скролл работает, но полоса прокрутки не видна
-// =========================================================
+// ═══════════════════════════════════════════════════════════════════
+//  SCROLLBAR HIDING (except Settings)
+// ═══════════════════════════════════════════════════════════════════
 
-// Firefox
 *:not(.settings-content):not(.settings-sidebar):not(.tabs-list) {
   scrollbar-width: none;
 }
 
-// Chrome, Safari, Edge
 *:not(.settings-content):not(.settings-sidebar):not(.tabs-list)::-webkit-scrollbar {
   width: 0;
   height: 0;
   display: none;
 }
 
-// Разрешаем скролл, но скрываем полосу
 *:not(.settings-content):not(.settings-sidebar):not(.tabs-list) {
   -webkit-overflow-scrolling: touch;
-  overflow-scrolling: touch;
-}
-
-// Исключение: когда ховерим — показываем тонкую полосу (опционально)
-// Можно убрать если нужно полное скрытие
-.window:hover::-webkit-scrollbar {
-  width: 0;
-  height: 0;
 }
 
 .resize-handle {

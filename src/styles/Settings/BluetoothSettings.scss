@@ -1,0 +1,294 @@
+@use "../variables" as *;
+
+// ═══════════════════════════════════════════════════════════════════
+//  Bluetooth Settings — macOS System Settings Style
+// ═══════════════════════════════════════════════════════════════════
+
+.bluetooth-settings {
+  // ─── Header Row ──────────────────────────────────────────────────
+  .bt-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+  }
+
+  .bt-header-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .bt-icon-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    background: rgba(0, 122, 255, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    img, svg {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+    }
+  }
+
+  .bt-header-label {
+    font-size: 15px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  // ─── Devices Header ──────────────────────────────────────────────
+  .bt-devices-header {
+    padding: 12px 0 6px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.38);
+  }
+
+  // ─── Device Row ──────────────────────────────────────────────────
+  .bt-device-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+
+    &:not(:last-child) {
+      border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  .bt-device-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .bt-device-icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.5);
+    flex-shrink: 0;
+
+    img, svg {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+    }
+  }
+
+  .bt-device-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .bt-device-name {
+    font-size: 13.5px;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .bt-device-status {
+    font-size: 11.5px;
+    color: rgba(255, 255, 255, 0.45);
+
+    &.connected {
+      color: #34c759;
+      font-weight: 500;
+    }
+
+    &.disconnected {
+      color: rgba(255, 255, 255, 0.38);
+    }
+  }
+
+  .bt-device-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .bt-device-battery {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.45);
+    
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  .connect-btn {
+    background: rgba(0, 122, 255, 0.12);
+    border: none;
+    border-radius: 6px;
+    padding: 5px 12px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #007aff;
+    cursor: pointer;
+    transition: all 0.12s ease;
+
+    &:hover {
+      background: rgba(0, 122, 255, 0.2);
+    }
+
+    &.connected {
+      background: rgba(255, 59, 48, 0.12);
+      color: #ff3b30;
+
+      &:hover {
+        background: rgba(255, 59, 48, 0.2);
+      }
+    }
+  }
+
+  // ─── Scanning Row ────────────────────────────────────────────────
+  .bt-scanning-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 0;
+
+    .spinner-icon {
+      width: 16px;
+      height: 16px;
+      animation: spin 0.8s linear infinite;
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .bt-scanning-text {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  // ─── Footer Buttons ──────────────────────────────────────────────
+  .bt-footer-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 0 8px;
+    margin-top: 8px;
+    border-top: 0.5px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .footer-btn {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: all 0.12s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: rgba(255, 255, 255, 0.9);
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  LIGHT THEME
+// ═══════════════════════════════════════════════════════════════════
+
+.light-theme .bluetooth-settings {
+  .bt-header-label,
+  .bt-device-name {
+    color: #1d1d1f;
+  }
+
+  .bt-icon-circle {
+    background: rgba(0, 122, 255, 0.1);
+  }
+
+  .bt-devices-header {
+    color: rgba(29, 29, 31, 0.38);
+  }
+
+  .bt-device-icon {
+    color: rgba(29, 29, 31, 0.4);
+  }
+
+  .bt-device-status {
+    color: rgba(29, 29, 31, 0.45);
+
+    &.connected {
+      color: #34c759;
+    }
+  }
+
+  .bt-device-battery {
+    color: rgba(29, 29, 31, 0.45);
+  }
+
+  .bt-device-row:not(:last-child) {
+    border-bottom-color: rgba(0, 0, 0, 0.08);
+  }
+
+  .connect-btn {
+    background: rgba(0, 122, 255, 0.1);
+    color: #007aff;
+
+    &:hover {
+      background: rgba(0, 122, 255, 0.18);
+    }
+
+    &.connected {
+      background: rgba(255, 59, 48, 0.1);
+      color: #ff3b30;
+
+      &:hover {
+        background: rgba(255, 59, 48, 0.18);
+      }
+    }
+  }
+
+  .bt-scanning-text {
+    color: rgba(29, 29, 31, 0.5);
+  }
+
+  .bt-footer-row {
+    border-top-color: rgba(0, 0, 0, 0.08);
+  }
+
+  .footer-btn {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.08);
+    color: rgba(29, 29, 31, 0.6);
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.06);
+      color: #1d1d1f;
+    }
+  }
+}
