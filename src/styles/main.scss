@@ -43,6 +43,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   
+  // Firefox optimization
+  text-rendering: optimizeLegibility;
+  -webkit-tap-highlight-color: transparent;
+  
   @include dark-theme;
 }
 
@@ -64,11 +68,18 @@ body.light-theme {
   background-position: center;
   background-repeat: no-repeat;
   contain: layout style paint;
+  
+  // Firefox GPU acceleration
+  transform: translateZ(0);
+  will-change: auto;
 }
 
 .window {
   contain: layout style paint;
   content-visibility: auto;
+  
+  // Firefox optimization
+  transform: translateZ(0);
 }
 
 // ═══════════════════════════════════════════════════════════════════
