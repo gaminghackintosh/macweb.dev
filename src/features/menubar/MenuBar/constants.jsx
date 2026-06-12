@@ -7,21 +7,21 @@ import { memo } from "react";
 export const WIFI_NAME = "Kernel Panic Network";
 
 export const APPLE_MENU_OPTIONS = Object.freeze([
-  { id: "about", label: "About This Mac" },
+      { id: "about", label: "About This Mac" },
   { id: "div1", type: "divider" },
-  { id: "settings", label: "System Settings…" },
-  { id: "appstore", label: "App Store…" },
+      { id: "settings", label: "System Settings…" },
+      { id: "appstore", label: "App Store…" },
   { id: "div2", type: "divider" },
-  { id: "recent", label: "Recent Items", submenu: true },
+      { id: "recent", label: "Recent Items", submenu: true },
   { id: "div3", type: "divider" },
-  { id: "force", label: "Force Quit", dynamicApp: true, shortcut: "⌥⇧⌘Q" },
+      { id: "force", label: "Force Quit", dynamicApp: true, shortcut: "⌥⇧⌘Q" },
   { id: "div4", type: "divider" },
-  { id: "sleep", label: "Sleep" },
-  { id: "restart", label: "Restart…" },
-  { id: "shutdown", label: "Shut Down…" },
+      { id: "sleep", label: "Sleep" },
+      { id: "restart", label: "Restart…" },
+      { id: "shutdown", label: "Shut Down…" },
   { id: "div5", type: "divider" },
-  { id: "lock", label: "Lock Screen", shortcut: "⌃⌘Q" },
-  { id: "logout", label: "Log Out", dynamicUser: true, shortcut: "⇧⌘Q" },
+      { id: "lock", label: "Lock Screen", shortcut: "⌃⌘Q" },
+      { id: "logout", label: "Log Out", dynamicUser: true, shortcut: "⇧⌘Q" },
 ]);
 
 export const MENU_OPTIONS = Object.freeze({

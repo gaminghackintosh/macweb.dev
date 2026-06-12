@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./styles/features/main.scss";
 
-// ✅ Отключаем StrictMode в production для лучшей производительности
 const AppWrapper = process.env.NODE_ENV === 'production' ? App : React.StrictMode;
 
 document.addEventListener(

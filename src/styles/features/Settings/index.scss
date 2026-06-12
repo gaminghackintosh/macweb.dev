@@ -4,24 +4,28 @@
 
 // Core
 @use "Settings";
-
-// Active panels
-@use "WiFiSettings";
-@use "BluetoothSettings";
-@use "GeneralSettings";
-@use "AppearanceSettings";
-@use "DesktopDockSettings";
-@use "LockScreenSettings";
-@use "LoginPasswordSettings";
-@use "UsersSettings";
-@use "FocusSettings";
-@use "NotificationsSettings";
-@use "SoundSettings";
-@use "DisplaysSettings";
 @use "AboutPanel";
 
+// General Settings
+@use "General/GeneralSettings";
+@use "General/AppearanceSettings";
+@use "General/DesktopDockSettings";
+@use "General/LockScreenSettings";
+@use "General/LoginPasswordSettings";
+@use "General/NotificationsSettings";
+@use "General/SoundSettings";
+@use "General/DisplaysSettings";
+@use "General/FocusSettings";
+
+// Network Settings
+@use "Network/WiFiSettings";
+@use "Network/BluetoothSettings";
+
+// Users Settings
+@use "Users/UsersSettings";
+
 // Legacy (kept for compatibility)
-@use "AccessibilitySettings";
-@use "ICloudSettings";
-@use "PasswordsSettings";
-@use "PrivacySettings";
+@use "General/AccessibilitySettings";
+@use "General/ICloudSettings";
+@use "General/PasswordsSettings";
+@use "General/PrivacySettings";

@@ -1,0 +1,80 @@
+@use "../../../base/variables" as vars;
+
+// Design tokens (shared from main Settings.scss)
+$accent: #007aff;
+$text-primary: #f5f5f7;
+$text-secondary: rgba(255, 255, 255, 0.5);
+$text-tertiary: rgba(255, 255, 255, 0.3);
+$divider: rgba(255, 255, 255, 0.06);
+$card-bg: rgba(255, 255, 255, 0.055);
+$card-border: rgba(255, 255, 255, 0.07);
+$hover-bg: rgba(255, 255, 255, 0.06);
+
+// ═══════════════════════════════════════════════════════════════════
+//  GENERAL SETTINGS
+// ═══════════════════════════════════════════════════════════════════
+
+.general-settings {
+  // Software update badge
+  .update-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0;
+  }
+
+  .update-icon {
+    width: 20px;
+    height: 20px;
+    color: #34c759;
+  }
+
+  .update-text {
+    font-size: 13px;
+    color: #34c759;
+    font-weight: 500;
+  }
+
+  // Storage indicator
+  .storage-indicator {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+  }
+
+  .storage-bar-mini {
+    flex: 1;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+
+    .storage-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #007aff, #5856d6);
+      border-radius: 3px;
+      transition: width 0.3s ease;
+    }
+  }
+
+  .storage-label {
+    font-size: 12px;
+    color: $text-secondary;
+    white-space: nowrap;
+  }
+
+  // Language flag icon
+  .language-icon {
+    width: 24px;
+    height: 16px;
+    border-radius: 3px;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    margin-right: 8px;
+    background: rgba(255, 255, 255, 0.1);
+  }
+}

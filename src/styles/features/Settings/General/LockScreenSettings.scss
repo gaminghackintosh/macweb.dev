@@ -1,0 +1,169 @@
+@use "../../../base/variables" as vars;
+
+$accent: #007aff;
+$text-primary: #f5f5f7;
+$text-secondary: rgba(255, 255, 255, 0.5);
+$text-tertiary: rgba(255, 255, 255, 0.3);
+$divider: rgba(255, 255, 255, 0.06);
+
+.lockscreen-settings {
+  // Lock screen preview
+  .lockscreen-preview {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+  }
+
+  .lockscreen-preview-card {
+    width: 180px;
+    height: 280px;
+    background: linear-gradient(180deg, #1c1c22 0%, #2c2c36 100%);
+    border-radius: 20px;
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  }
+
+  .lockscreen-time {
+    font-size: 36px;
+    font-weight: 200;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 4px;
+  }
+
+  .lockscreen-date {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .lockscreen-notifications {
+    position: absolute;
+    bottom: 20px;
+    left: 16px;
+    right: 16px;
+  }
+
+  .lockscreen-notif-preview {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 10px;
+    margin-bottom: 6px;
+  }
+
+  // Require password
+  .require-password-section {
+    padding: 12px 0;
+  }
+
+  // Show when locked
+  .show-when-locked-section {
+    padding: 12px 0;
+  }
+
+  // Notification preview on lock screen
+  .lockscreen-preview-toggle {
+    padding: 12px 0;
+  }
+
+  // Widgets on lock screen
+  .widgets-section {
+    padding: 16px 0 0;
+    border-top: 1px solid $divider;
+    margin-top: 8px;
+  }
+
+  .widgets-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 8px 0;
+  }
+
+  .widget-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 14px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1.5px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover:not(.active) {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    &.active {
+      border-color: $accent;
+      background: rgba(0, 122, 255, 0.1);
+    }
+  }
+
+  .widget-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+
+  .widget-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: $text-primary;
+    text-align: center;
+  }
+
+  // Siri on lock screen
+  .siri-lockscreen-section {
+    padding: 12px 0;
+  }
+
+  // Find My on lock screen
+  .findmy-lockscreen-section {
+    padding: 12px 0;
+  }
+
+  // Sleep mode
+  .sleep-mode-section {
+    padding: 16px 0 0;
+    border-top: 1px solid $divider;
+    margin-top: 8px;
+  }
+
+  .sleep-schedule {
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 12px;
+    margin-top: 8px;
+  }
+
+  .sleep-time-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+  }
+
+  .sleep-time-label {
+    font-size: 13px;
+    color: $text-secondary;
+  }
+
+  .sleep-time-value {
+    font-size: 13px;
+    color: $text-primary;
+  }
+}

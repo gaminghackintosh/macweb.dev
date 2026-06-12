@@ -1,0 +1,397 @@
+@use "../../../base/variables" as vars;
+
+// Design tokens
+$accent: #007aff;
+$text-primary: #f5f5f7;
+$text-secondary: rgba(255, 255, 255, 0.5);
+$text-tertiary: rgba(255, 255, 255, 0.3);
+$divider: rgba(255, 255, 255, 0.06);
+
+// ═══════════════════════════════════════════════════════════════════
+//  ICLOUD SETTINGS
+// ═══════════════════════════════════════════════════════════════════
+
+.icloud-settings {
+  // Apple ID card
+  .apple-id-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    margin: 8px 0;
+    cursor: pointer;
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  .apple-id-avatar-large {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #007aff, #5856d6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 600;
+    color: #fff;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  .apple-id-info-card {
+    flex: 1;
+  }
+
+  .apple-id-name-large {
+    font-size: 17px;
+    font-weight: 600;
+    color: $text-primary;
+  }
+
+  .apple-id-email-large {
+    font-size: 13px;
+    color: $text-secondary;
+    margin-top: 2px;
+  }
+
+  .apple-id-chevron {
+    font-size: 18px;
+    color: $text-tertiary;
+  }
+
+  // Storage card
+  .storage-card {
+    padding: 16px 0;
+  }
+
+  .storage-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+
+  .storage-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: $text-primary;
+  }
+
+  .storage-manage-btn {
+    font-size: 13px;
+    color: $accent;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+  .storage-visual {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 12px;
+  }
+
+  .storage-donut {
+    width: 64px;
+    height: 64px;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .storage-donut svg {
+    transform: rotate(-90deg);
+  }
+
+  .storage-donut-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.1);
+    stroke-width: 8;
+  }
+
+  .storage-donut-fill {
+    fill: none;
+    stroke: $accent;
+    stroke-width: 8;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.5s ease;
+  }
+
+  .storage-donut-center {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: $text-primary;
+  }
+
+  .storage-details {
+    flex: 1;
+  }
+
+  .storage-used-text {
+    font-size: 20px;
+    font-weight: 600;
+    color: $text-primary;
+    line-height: 1.2;
+  }
+
+  .storage-total-text {
+    font-size: 13px;
+    color: $text-secondary;
+    margin-top: 4px;
+  }
+
+  .storage-breakdown {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+
+  .storage-category {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: $text-secondary;
+  }
+
+  .storage-category-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  // iCloud services
+  .icloud-services-section {
+    padding: 16px 0 0;
+    border-top: 1px solid $divider;
+    margin-top: 8px;
+  }
+
+  .services-list {
+    padding: 4px 0;
+  }
+
+  .service-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid $divider;
+    }
+  }
+
+  .service-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+
+    &.photos { background: linear-gradient(135deg, #ff6b6b, #ff3b30); }
+    &.drive { background: linear-gradient(135deg, #5ac8fa, #007aff); }
+    &.mail { background: linear-gradient(135deg, #5856d6, #007aff); }
+    &.notes { background: linear-gradient(135deg, #ffcc00, #ff9500); }
+    &.calendar { background: linear-gradient(135deg, #ff3b30, #ff6b6b); }
+    &.contacts { background: linear-gradient(135deg, #34c759, #30d158); }
+    &.reminders { background: linear-gradient(135deg, #ff9500, #ff6b00); }
+    &.keychain { background: linear-gradient(135deg, #8e8e93, #636366); }
+    &.find-my { background: linear-gradient(135deg, #34c759, #30d158); }
+    &.backup { background: linear-gradient(135deg, #5856d6, #af52de); }
+  }
+
+  .service-info {
+    flex: 1;
+  }
+
+  .service-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: $text-primary;
+  }
+
+  .service-status {
+    font-size: 12px;
+    color: $text-secondary;
+    margin-top: 2px;
+  }
+
+  // iCloud+ section
+  .icloud-plus-section {
+    padding: 16px 0 0;
+    border-top: 1px solid $divider;
+    margin-top: 8px;
+  }
+
+  .icloud-plus-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px;
+    background: linear-gradient(135deg, rgba(0, 122, 255, 0.1), rgba(88, 86, 214, 0.1));
+    border-radius: 14px;
+    border: 1px solid rgba(0, 122, 255, 0.2);
+    margin-top: 8px;
+  }
+
+  .icloud-plus-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(0, 122, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+
+  .icloud-plus-info {
+    flex: 1;
+  }
+
+  .icloud-plus-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: $text-primary;
+  }
+
+  .icloud-plus-desc {
+    font-size: 12px;
+    color: $text-secondary;
+    margin-top: 2px;
+    line-height: 1.4;
+  }
+
+  .icloud-plus-learn-more {
+    font-size: 13px;
+    color: $accent;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+  // Private Relay
+  .private-relay-section {
+    padding: 16px 0 0;
+    border-top: 1px solid $divider;
+    margin-top: 8px;
+  }
+
+  .private-relay-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 12px;
+    margin-top: 8px;
+  }
+
+  .private-relay-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: rgba(52, 199, 89, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #34c759;
+    flex-shrink: 0;
+  }
+
+  .private-relay-info {
+    flex: 1;
+  }
+
+  .private-relay-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: $text-primary;
+  }
+
+  .private-relay-status {
+    font-size: 12px;
+    color: #34c759;
+    margin-top: 2px;
+  }
+
+  // Hide My Email
+  .hide-my-email-section {
+    padding: 16px 0 0;
+    border-top: 1px solid $divider;
+    margin-top: 8px;
+  }
+
+  // Family sharing
+  .family-sharing-section {
+    padding: 16px 0 0;
+    border-top: 1px solid $divider;
+    margin-top: 8px;
+  }
+
+  .family-members-list {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 12px;
+  }
+
+  .family-member-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: $text-secondary;
+  }
+
+  .family-add-member {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px dashed rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: $text-tertiary;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      border-color: $accent;
+      color: $accent;
+    }
+  }
+}

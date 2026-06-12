@@ -1,0 +1,177 @@
+@use "../../../base/variables" as vars;
+
+// Design tokens
+$accent: #007aff;
+$text-primary: #f5f5f7;
+$text-secondary: rgba(255, 255, 255, 0.5);
+$text-tertiary: rgba(255, 255, 255, 0.3);
+$divider: rgba(255, 255, 255, 0.06);
+
+// ═══════════════════════════════════════════════════════════════════
+//  FOCUS SETTINGS
+// ═══════════════════════════════════════════════════════════════════
+
+.focus-settings {
+  // Focus mode selector
+  .focus-mode-selector {
+    display: flex;
+    gap: 10px;
+    padding: 8px 0;
+    flex-wrap: wrap;
+  }
+
+  .focus-mode-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 18px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1.5px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 90px;
+
+    &:hover:not(.active) {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    &.active {
+      border-color: $accent;
+      background: rgba(0, 122, 255, 0.1);
+    }
+  }
+
+  .focus-mode-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+
+    &.off { background: rgba(255, 255, 255, 0.1); }
+    &.work { background: rgba(0, 122, 255, 0.2); }
+    &.personal { background: rgba(175, 82, 222, 0.2); }
+    &.sleep { background: rgba(142, 142, 147, 0.2); }
+    &.driving { background: rgba(255, 149, 0, 0.2); }
+  }
+
+  .focus-mode-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: $text-primary;
+    text-align: center;
+  }
+
+  // Focus status indicator
+  .focus-status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: rgba(0, 122, 255, 0.08);
+    border-radius: 10px;
+    margin: 8px 0;
+  }
+
+  .focus-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #34c759;
+    flex-shrink: 0;
+  }
+
+  .focus-status-text {
+    font-size: 13px;
+    color: $text-primary;
+  }
+
+  // Allowed apps list
+  .allowed-apps-list {
+    padding: 4px 0;
+  }
+
+  .allowed-app-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid $divider;
+    }
+  }
+
+  .allowed-app-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .allowed-app-name {
+    flex: 1;
+    font-size: 13px;
+    color: $text-primary;
+  }
+
+  // Schedule section
+  .focus-schedule {
+    padding: 12px 0;
+  }
+
+  .schedule-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+  }
+
+  .schedule-label {
+    font-size: 13px;
+    color: $text-secondary;
+    min-width: 80px;
+  }
+
+  .schedule-time-picker {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .schedule-time-input {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    padding: 4px 8px;
+    color: $text-primary;
+    font-size: 13px;
+    width: 70px;
+    text-align: center;
+    outline: none;
+
+    &:focus {
+      border-color: rgba($accent, 0.5);
+    }
+  }
+
+  .schedule-separator {
+    color: $text-tertiary;
+    font-size: 13px;
+  }
+
+  // Focus options
+  .focus-options-section {
+    padding: 8px 0;
+  }
+}

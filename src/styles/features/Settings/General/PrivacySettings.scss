@@ -1,0 +1,353 @@
+@use "../../../base/variables" as vars;
+
+// Design tokens
+$accent: #007aff;
+$text-primary: #f5f5f7;
+$text-secondary: rgba(255, 255, 255, 0.5);
+$text-tertiary: rgba(255, 255, 255, 0.3);
+$divider: rgba(255, 255, 255, 0.06);
+
+// ═══════════════════════════════════════════════════════════════════
+//  PRIVACY & SECURITY SETTINGS
+// ═══════════════════════════════════════════════════════════════════
+
+.privacy-settings {
+  // Location Services
+  .location-services-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 0 12px;
+  }
+
+  .location-services-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #34c759;
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #34c759;
+    }
+  }
+
+  // Apps with location access
+  .location-apps-list {
+    padding: 4px 0;
+    margin-top: 8px;
+  }
+
+  .location-app-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid $divider;
+    }
+  }
+
+  .location-app-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .location-app-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .location-app-name {
+    font-size: 13px;
+    color: $text-primary;
+  }
+
+  .location-app-desc {
+    font-size: 11px;
+    color: $text-tertiary;
+    margin-top: 1px;
+  }
+
+  .location-app-access {
+    font-size: 12px;
+    color: $text-secondary;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    &.always { color: #ff9500; }
+    &.while-using { color: $accent; }
+    &.never { color: $text-tertiary; }
+    &.ask-next { color: #ff3b30; }
+  }
+
+  // System services
+  .system-services-toggle {
+    padding: 12px 0 8px;
+    border-top: 1px solid $divider;
+    margin-top: 8px;
+  }
+
+  .system-services-list {
+    padding: 8px 0 0 16px;
+  }
+
+  .system-service-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 0;
+  }
+
+  .system-service-name {
+    font-size: 12px;
+    color: $text-secondary;
+  }
+
+  // Analytics section
+  .analytics-section {
+    padding: 16px 0 0;
+    border-top: 1px solid $divider;
+    margin-top: 8px;
+  }
+
+  .analytics-preview-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+    padding: 6px 12px;
+    background: rgba(0, 122, 255, 0.12);
+    border-radius: 6px;
+    font-size: 12px;
+    color: $accent;
+    cursor: pointer;
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: rgba(0, 122, 255, 0.2);
+    }
+  }
+
+  // Advertising
+  .advertising-section {
+    padding: 12px 0;
+  }
+
+  .advertising-id-display {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    padding: 10px 12px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 8px;
+    font-family: monospace;
+    font-size: 11px;
+    color: $text-secondary;
+  }
+
+  .advertising-id-value {
+    flex: 1;
+    word-break: break-all;
+  }
+
+  .advertising-id-reset-btn {
+    padding: 4px 10px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+    font-size: 11px;
+    color: $text-primary;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    white-space: nowrap;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+  }
+
+  // Security section
+  .security-section {
+    padding: 16px 0 0;
+    border-top: 1px solid $divider;
+    margin-top: 8px;
+  }
+
+  // Firewall
+  .firewall-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 0;
+  }
+
+  .firewall-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #34c759;
+
+    &.off {
+      background: $text-tertiary;
+    }
+  }
+
+  .firewall-text {
+    font-size: 13px;
+    color: $text-primary;
+  }
+
+  .firewall-settings-btn {
+    margin-left: auto;
+    font-size: 12px;
+    color: $accent;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+  // FileVault
+  .filevault-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+  }
+
+  .filevault-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: rgba(52, 199, 89, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #34c759;
+    flex-shrink: 0;
+  }
+
+  .filevault-info {
+    flex: 1;
+  }
+
+  .filevault-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: $text-primary;
+  }
+
+  .filevault-desc {
+    font-size: 11px;
+    color: $text-secondary;
+    margin-top: 2px;
+  }
+
+  // Find My Mac
+  .find-my-mac-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+  }
+
+  .find-my-mac-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: rgba(0, 122, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $accent;
+    flex-shrink: 0;
+  }
+
+  .find-my-mac-info {
+    flex: 1;
+  }
+
+  .find-my-mac-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: $text-primary;
+  }
+
+  .find-my-mac-desc {
+    font-size: 11px;
+    color: $text-secondary;
+    margin-top: 2px;
+  }
+
+  // App permissions
+  .app-permissions-section {
+    padding: 16px 0 0;
+    border-top: 1px solid $divider;
+    margin-top: 8px;
+  }
+
+  .permissions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 4px 0;
+  }
+
+  .permission-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  .permission-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .permission-name {
+    flex: 1;
+    font-size: 13px;
+    color: $text-primary;
+  }
+
+  .permission-count {
+    font-size: 12px;
+    color: $text-tertiary;
+  }
+
+  .permission-chevron {
+    font-size: 14px;
+    color: $text-tertiary;
+  }
+}

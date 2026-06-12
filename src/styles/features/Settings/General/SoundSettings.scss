@@ -1,0 +1,249 @@
+@use "../../../base/variables" as vars;
+
+// Design tokens
+$accent: #007aff;
+$text-primary: #f5f5f7;
+$text-secondary: rgba(255, 255, 255, 0.5);
+$text-tertiary: rgba(255, 255, 255, 0.3);
+$divider: rgba(255, 255, 255, 0.06);
+
+// ═══════════════════════════════════════════════════════════════════
+//  SOUND SETTINGS
+// ═══════════════════════════════════════════════════════════════════
+
+.sound-settings {
+  // Output/Output level indicator
+  .output-level-indicator {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+  }
+
+  .output-level-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 24px;
+    flex: 1;
+  }
+
+  .output-level-bar {
+    width: 4px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 2px;
+    transition: height 0.2s ease, background 0.2s ease;
+
+    &:nth-child(-n+3) {
+      &.active {
+        background: #34c759;
+      }
+    }
+
+    &:nth-child(n+4):nth-child(-n+6) {
+      &.active {
+        background: #ffcc00;
+      }
+    }
+
+    &:nth-child(n+7) {
+      &.active {
+        background: #ff3b30;
+      }
+    }
+  }
+
+  // Volume slider with icon
+  .volume-slider-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+  }
+
+  .volume-icon {
+    width: 20px;
+    height: 20px;
+    color: $text-secondary;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.muted {
+      opacity: 0.5;
+    }
+  }
+
+  .volume-slider {
+    flex: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.15);
+    outline: none;
+    cursor: pointer;
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      transition: transform 0.15s ease;
+
+      &:hover {
+        transform: scale(1.15);
+      }
+
+      &:active {
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  .volume-value {
+    font-size: 12px;
+    color: $text-secondary;
+    min-width: 36px;
+    text-align: right;
+  }
+
+  // Output device selector
+  .output-device-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 10px;
+    margin: 8px 0;
+  }
+
+  .output-device-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $text-secondary;
+    flex-shrink: 0;
+  }
+
+  .output-device-info {
+    flex: 1;
+  }
+
+  .output-device-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: $text-primary;
+  }
+
+  .output-device-type {
+    font-size: 12px;
+    color: $text-secondary;
+    margin-top: 2px;
+  }
+
+  // Balance control
+  .balance-control {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+  }
+
+  .balance-label {
+    font-size: 12px;
+    color: $text-secondary;
+    min-width: 24px;
+    text-align: center;
+
+    &.left { text-align: left; }
+    &.right { text-align: right; }
+  }
+
+  .balance-slider {
+    flex: 1;
+  }
+
+  // Sound effects section
+  .sound-effects-list {
+    padding: 4px 0;
+  }
+
+  .sound-effect-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid $divider;
+    }
+  }
+
+  .sound-effect-preview {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(0, 122, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: rgba(0, 122, 255, 0.25);
+      transform: scale(1.1);
+    }
+
+    svg {
+      width: 14px;
+      height: 14px;
+      color: $accent;
+    }
+  }
+
+  .sound-effect-name {
+    flex: 1;
+    font-size: 13px;
+    color: $text-primary;
+  }
+
+  // Input level meter
+  .input-level-meter {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+  }
+
+  .input-level-bar-container {
+    flex: 1;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .input-level-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #34c759, #ffcc00);
+    border-radius: 2px;
+    transition: width 0.1s ease;
+  }
+
+  // Alert volume section
+  .alert-volume-section {
+    padding: 8px 0;
+  }
+}
