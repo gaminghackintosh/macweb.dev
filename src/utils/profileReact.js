@@ -1,10 +1,5 @@
 /**
  * Инструмент для профилирования производительности React приложения
- * 
- * Использование:
- * 1. Добавить в main.jsx: import { profileReact } from './utils/profileReact';
- * 2. Вызвать: profileReact();
- * 3. Открыть Chrome DevTools → Performance
  */
 
 export function profileReact() {

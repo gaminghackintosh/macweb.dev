@@ -33,6 +33,29 @@
   &--minimized {
     display: none;
   }
+  
+  // Приложения с фиксированным размером - размер определяется контентом
+  &--fixed-size {
+    width: fit-content !important;
+    height: fit-content !important;
+    min-width: 200px;
+    min-height: 150px;
+    
+    .app-window__content {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+.app-window__title-bar {
+  -webkit-app-region: drag;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.app-window__traffic-lights {
+  -webkit-app-region: no-drag;
 }
 
 .resize-handle {

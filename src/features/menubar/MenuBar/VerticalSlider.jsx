@@ -1,18 +1,5 @@
 import React, { useRef, useCallback, memo, useState, useEffect } from "react";
 
-// ═══════════════════════════════════════════════════════════════════
-//  VERTICAL / HORIZONTAL CAPSULE SLIDER — macOS Control Center style
-//
-//  Перфоманс:
-//  • Во время drag визуальное обновление (ширина fill) идёт напрямую
-//    через DOM (ref.style.width) — без перерисовки React на каждый
-//    пиксель.
-//  • onChange (обновление состояния родителя) троттлится через
-//    requestAnimationFrame — максимум 1 вызов на кадр (~60fps).
-//  • Поддержка мыши и touch через Pointer Events + setPointerCapture.
-//  • Доступность: role="slider", клавиатура (стрелки/Home/End).
-// ═══════════════════════════════════════════════════════════════════
-
 export const VerticalSlider = memo(function VerticalSlider({
   value,
   onChange,
@@ -144,12 +131,10 @@ export const VerticalSlider = memo(function VerticalSlider({
         aria-valuenow={value}
         tabIndex={0}
       >
-        {/* Иконка на пустом фоне трека */}
         <div className="cc-slider-track-bg">
           {Icon && <Icon size={14} />}
         </div>
 
-        {/* Заполняющаяся часть — обновляется напрямую через ref во время drag */}
         <div
           className="cc-slider-fill"
           ref={fillRef}

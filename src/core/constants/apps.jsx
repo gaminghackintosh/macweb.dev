@@ -12,6 +12,7 @@ export const INITIAL_POSITIONS = {
   music: { x: 160, y: 130, w: 1000, h: 500 },
   settings: { x: 180, y: 150, w: 700, h: 450 },
   calendar: { x: 200, y: 120, w: 900, h: 580 },
+  calculator: { x: 500, y: 150 },
 };
 
 export const APPS = [
@@ -69,5 +70,13 @@ export const APPS = [
     iconPathLight: APP_ICONS_LIGHT.calendar,
     icon: APP_ICON_FALLBACK.calendar,
     color: "#FF3B30",
+  },
+  {
+    id: "calculator",
+    name: "Calculator",
+    iconPath: APP_ICONS.calculator,
+    iconPathLight: APP_ICONS_LIGHT.calculator,
+    icon: APP_ICON_FALLBACK.calculator,
+    color: "#FF9500",
   },
 ];

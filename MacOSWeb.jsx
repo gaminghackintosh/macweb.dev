@@ -34,7 +34,7 @@ export default function MacOSWeb() {
   const openApp = useCallback((appId) => {
     setWindows(prev => {
       if (prev.find(w => w.id === appId)) return prev;
-      const p = INITIAL_POSITIONS[appId] || { x: 120, y: 80, w: 600, h: 420 };
+      const p = INITIAL_POSITIONS[appId] || { x: 120, y: 80 };
       const app = APPS.find(a => a.id === appId);
       return [...prev, { id: appId, title: app?.name || appId, x: p.x, y: p.y, width: p.w, height: p.h, zIndex: Date.now() }];
     });
@@ -94,7 +94,7 @@ export default function MacOSWeb() {
   const openApp = useCallback((appId) => {
     setWindows(prev => {
       if (prev.find((w) => w.id === appId)) return prev;
-      const p = INITIAL_POSITIONS[appId] || { x: 120, y: 80, w: 600, h: 420 };
+      const p = INITIAL_POSITIONS[appId] || { x: 120, y: 80 };
       const app = APPS.find((a) => a.id === appId);
       return [...prev, { id: appId, title: app?.name || appId, x: p.x, y: p.y, width: p.w, height: p.h, zIndex: ++zCounter }];
     });

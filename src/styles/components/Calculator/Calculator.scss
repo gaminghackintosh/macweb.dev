@@ -1,0 +1,171 @@
+.calculator {
+  width: 250px;
+  
+  background: #242424;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.calculator__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px 0;
+  cursor: default;
+  -webkit-app-region: drag;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* === СВЕТОФОРЫ === */
+.traffic-light {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.15);
+  outline: none;
+  -webkit-app-region: no-drag;
+}
+
+.traffic-light--close {
+  background-color: #ff5f56;
+}
+.traffic-light--close:active { background-color: #bf4942; }
+
+.traffic-light--minimize {
+  background-color: #ffbd2e;
+}
+.traffic-light--minimize:active { background-color: #bf8e22; }
+
+.traffic-light--disabled {
+  background-color: #4d4d4d;
+  cursor: default;
+  box-shadow: none;
+}
+
+/* === ЭКРАН И КНОПКИ === */
+.calculator__display {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 0 16px 8px;
+}
+
+.calculator__history {
+  font-size: 13px;
+  color: #8e8e93;
+  min-height: 16px;
+  margin-bottom: 2px;
+}
+
+.calculator__value {
+  font-size: 42px;
+  font-weight: 300;
+  color: #ffffff;
+  line-height: 1;
+  word-break: break-all;
+  text-align: right;
+  letter-spacing: -1px;
+}
+
+.calculator__buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 8px; /* Расстояние между кнопками */
+  padding: 0 12px 12px;
+}
+
+.calc__btn {
+  aspect-ratio: 1;
+  border: none;
+  border-radius: 50%;
+  font-size: 20px;
+  font-weight: 400;
+  cursor: default;
+  transition: filter 0.1s ease, background-color 0.1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.calc__btn:active {
+  filter: brightness(1.4);
+}
+
+/* Числовые кнопки */
+.calc__btn:not(.calc__btn--function):not(.calc__btn--operator) {
+  background: #333333;
+  color: #ffffff;
+}
+
+/* Функции (AC, +/-, %) */
+.calc__btn--function {
+  background: #a5a5a5;
+  color: #000000;
+  font-size: 18px;
+}
+.calc__btn--function:active {
+  filter: brightness(0.8);
+}
+
+/* Операторы (÷, ×, -, +, =) */
+.calc__btn--operator {
+  background: #ff9f0a;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 500;
+}
+.calc__btn--operator.calc__btn--active {
+  background: #ffffff;
+  color: #ff9f0a;
+}
+
+/* Большая кнопка 0 */
+.calc__btn--large {
+  grid-column: span 2;
+  aspect-ratio: auto;
+  border-radius: 40px;
+  justify-content: flex-start;
+  padding-left: 18px; /* Сдвиг нуля, чтобы он визуально был под кнопкой 1 */
+}
+
+/* Светлая тема */
+.light-theme .calculator {
+  background: #f3f3f3;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.light-theme .calculator__value {
+  color: #000000;
+}
+
+.light-theme .traffic-light--disabled {
+  background-color: #dcdcdc;
+}
+
+.light-theme .calc__btn:not(.calc__btn--function):not(.calc__btn--operator) {
+  background: #ffffff;
+  color: #000000;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.light-theme .calc__btn:not(.calc__btn--function):not(.calc__btn--operator):active {
+  background: #e6e6e6;
+  filter: none;
+}
+
+.light-theme .calc__btn--function {
+  background: #e0e0e0;
+}

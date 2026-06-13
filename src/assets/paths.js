@@ -7,6 +7,7 @@ export const APP_ICONS = {
   music: "icons/apps/Dark_Themes/Music_Dark.png",
   settings: "icons/apps/Dark_Themes/Settings_Dark.png",
   calendar: "icons/apps/Dark_Themes/Calendrier_Dark.png",
+  calculator: "icons/apps/Dark_Themes/Calculator_Dark.png"
 };
 
 /**===== Светлые иконки приложений для светлой темы =====**/
@@ -18,6 +19,7 @@ export const APP_ICONS_LIGHT = {
   music: "icons/apps/Light_Themes/apple_music.ico",
   settings: "icons/apps/Light_Themes/settings_1.png",
   calendar: "icons/apps/Light_Themes/Calendrier.png",
+  calculator: "icons/apps/Light_Themes/Calculator.png"
 };
 
 /**===== Emoji-fallback для иконок приложений =====**/
@@ -29,4 +31,5 @@ export const APP_ICON_FALLBACK = {
   music: "🎵",
   settings: "⚙️",
   calendar: "📅",
+  calculator: "🧮"
 };

@@ -16,7 +16,7 @@
 @use "./Dock";
 @use "./ControlCenter/ControlCenter";
 @use "./ControlCenter/Sliders";
-@use "../components/MobileNotSupported/main";
+@use "./MobileNotSupported/main";
 
 // ─── 4. SYSTEM APPS ────────────────────────────────────────────────
 @use "BootScreen";
@@ -31,6 +31,7 @@
 @use "../components/Safari/index" as safari-index;                 
 @use "../components/Calendar/index" as calendar-index;              
 @use "../components/CalendarWidget/calendar_widget";
+@use "../components/Calculator/Calculator";
 
 // ═══════════════════════════════════════════════════════════════════
 //  BASE STYLES

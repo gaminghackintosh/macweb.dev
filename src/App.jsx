@@ -1,14 +1,12 @@
 import React, { useState, useCallback, useEffect, memo } from "react";
-import { useMobileCheck } from "@/core/hooks";
-import { useContextMenu } from "@/core/hooks";
-import { WindowManagerProvider, useWindowManager } from "@/core/providers";
-import { ThemeProvider, useTheme } from "@/core/providers";
+import { useMobileCheck, useContextMenu } from "@/core/hooks";
+import { WindowManagerProvider, useWindowManager, ThemeProvider, useTheme  } from "@/core/providers";
 // UI компоненты
 import { BootScreen, MobileNotSupported, ContextMenu } from "@/ui";
 // Layout компоненты
 import { Desktop, Dock, WindowList } from "@/windows";
 import { MenuBar } from "@/features/menubar/MenuBar";
-// Оптимизация: ленивая загрузка обоев
+// Ленивая загрузка обоев
 import defaultWallpaperDark from "@/assets/images/wallpapers/Tahoe/Tahoe Dark.webp";
 import defaultWallpaperLight from "@/assets/images/wallpapers/Tahoe/Tahoe Light.webp";
 
@@ -65,7 +63,6 @@ function AppContent() {
         onZoom={() => windowManager.maximizeWindow(windowManager.activeWin)}
       />
 
-      {/* ✅ Окна рендерятся независимо через WindowList */}
       <WindowList setWallpaper={setWallpaper} />
 
       <Dock 
@@ -88,17 +85,15 @@ function AppContent() {
 }
 
 /**
- * AppInner — управляет boot screen и провайдерами
+ * AppInner — управление boot screen
  */
 function AppInner() {
   const isMobile = useMobileCheck();
   const [bootComplete, setBootComplete] = useState(false);
   
-  // Показываем boot screen сразу, не ждем инициализацию
   if (!bootComplete) return <BootScreen onComplete={() => setBootComplete(true)} />;
   if (isMobile) return <MobileNotSupported />;
 
-  // Рендерим провайдеры и контент
   return (
     <ThemeProvider>
       <WindowManagerProvider>

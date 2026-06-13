@@ -8,17 +8,9 @@ const SettingsContent = lazy(() => import("@/features/settings/SettingsContent")
 const MusicContent = lazy(() => import("@/features/music/MusicContent").then(m => ({ default: m.MusicContent })));
 const SafariContent = lazy(() => import("@/features/safari/SafariContent").then(m => ({ default: m.SafariContent })));
 const CalendarContent = lazy(() => import("@/features/calendar/CalendarContent").then(m => ({ default: m.CalendarContent })));
+const CalculatorContent = lazy(() => import("@/features/calculator/CalculatorContent").then(m => ({ default: m.CalculatorContent })));
 
-/**
- * Функция-фабрика для рендеринга контента приложения.
- * ✅ Оптимизирована для lazy loading + code-splitting.
- * @param {string} appId - ID приложения.
- * @param {object} props - Объект с функциями управления окном и состояниями.
- */
-export const renderAppContent = (appId, { 
-  closeWindow, minimizeWindow, maximizeWindow, setWallpaper 
-}) => {
-  // Общие пропсы для всех приложений
+export const renderAppContent = (appId, { closeWindow, minimizeWindow, maximizeWindow, setWallpaper }) => {
   const commonProps = {
     onClose: () => closeWindow(appId),
     onMinimize: () => minimizeWindow(appId),
@@ -26,58 +18,24 @@ export const renderAppContent = (appId, {
     onZoom: () => maximizeWindow(appId),
   };
 
-  // ✅ Оборачиваем каждое приложение в Suspense для lazy loading
   switch (appId) {
     case "finder":
-      return (
-        <Suspense fallback={<WindowLoading />}>
-          <FinderContent {...commonProps} />
-        </Suspense>
-      );
+      return <Suspense fallback={<WindowLoading />}><FinderContent {...commonProps} /></Suspense>;
     case "terminal":
-      return (
-        <Suspense fallback={<WindowLoading />}>
-          <TerminalContent {...commonProps} />
-        </Suspense>
-      );
+      return <Suspense fallback={<WindowLoading />}><TerminalContent {...commonProps} /></Suspense>;
     case "notes":
-      return (
-        <Suspense fallback={<WindowLoading />}>
-          <NotesContent {...commonProps} />
-        </Suspense>
-      );
+      return <Suspense fallback={<WindowLoading />}><NotesContent {...commonProps} /></Suspense>;
     case "settings":
-      return (
-        <Suspense fallback={<WindowLoading />}>
-          <SettingsContent
-            {...commonProps}
-            onWallpaperChange={setWallpaper}
-          />
-        </Suspense>
-      );
+      return <Suspense fallback={<WindowLoading />}><SettingsContent {...commonProps} onWallpaperChange={setWallpaper} /></Suspense>;
     case "safari":
-      return (
-        <Suspense fallback={<WindowLoading />}>
-          <SafariContent {...commonProps} />
-        </Suspense>
-      );
+      return <Suspense fallback={<WindowLoading />}><SafariContent {...commonProps} /></Suspense>;
     case "music":
-      return (
-        <Suspense fallback={<WindowLoading />}>
-          <MusicContent {...commonProps} />
-        </Suspense>
-      );
+      return <Suspense fallback={<WindowLoading />}><MusicContent {...commonProps} /></Suspense>;
     case "calendar":
-      return (
-        <Suspense fallback={<WindowLoading />}>
-          <CalendarContent {...commonProps} />
-        </Suspense>
-      );
+      return <Suspense fallback={<WindowLoading />}><CalendarContent {...commonProps} /></Suspense>;
+    case "calculator":
+      return <Suspense fallback={<WindowLoading />}><CalculatorContent {...commonProps} /></Suspense>;
     default:
-      return (
-        <div style={{ padding: 20, color: '#707070' }}>
-          App {appId} not found.
-        </div>
-      );
+      return <div style={{ padding: 20, color: '#707070' }}>App {appId} not found.</div>;
   }
 };
