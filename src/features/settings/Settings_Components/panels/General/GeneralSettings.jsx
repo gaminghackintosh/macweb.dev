@@ -10,7 +10,11 @@ export const GeneralSettings = () => {
   const [autoTZ, setAutoTZ] = useState(true);
 
   return (
-    <SettingsPanel title="General">
+    <SettingsPanel 
+      title="General"
+      description="Manage your overall setup and preferences for Mac, such as software updates, device language, AirDrop, and more."
+      icon="settings"
+    >
       <SettingsGroup label="Language & Region">
         <SettingsRow label="Language">
           <select className="ctrl-select" value={language} onChange={e => setLanguage(e.target.value)}>

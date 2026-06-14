@@ -54,7 +54,6 @@ $shadow-dark: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 0 0.5px rgba(255, 255, 255, 0.
   z-index: 10005;
   overflow: hidden;
 
-  // Liquid Glass — высокая прозрачность, видны обои сквозь панель
   background: $glass-bg;
   backdrop-filter: blur(60px) saturate(190%);
   -webkit-backdrop-filter: blur(60px) saturate(190%);
@@ -113,7 +112,7 @@ $shadow-dark: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 0 0.5px rgba(255, 255, 255, 0.
   align-items: stretch;
 }
 
-// ─── Right column — Focus row on top, two squares below ────────────
+// ─── Right column ────────────
 .cc-right-column {
   display: flex;
   flex-direction: column;

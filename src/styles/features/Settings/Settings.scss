@@ -386,7 +386,7 @@ $badge-red-l:       #ff3b30;
   // Ограничение ширины контента — не растягивается шире чем нужно
   max-width: 580px;
   margin: 0 auto;
-  padding: 20px 28px 40px;
+  padding: 28px 28px 40px;
   animation: panel-enter 0.15s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -396,22 +396,52 @@ $badge-red-l:       #ff3b30;
 }
 
 .panel-header {
-  margin-bottom: 16px;
+  margin-bottom: 24px;
+  text-align: center;
+  padding: 15px;
+}
+
+.panel-icon {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 14px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  border: 0.5px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  
+  svg {
+    width: 72px;
+    height: 72px;
+    color: $text-primary-d;
+  }
+  
+  img {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+  }
 }
 
 .panel-title {
-  font-size: 22px;
+  font-size: 28px;
   font-weight: 700;
-  letter-spacing: -0.018em;
-  margin: 0 0 2px;
+  letter-spacing: -0.02em;
+  margin: 0 0 8px;
   color: $text-primary-d;
+  text-align: center;
 }
 
 .panel-description {
-  font-size: 12.5px;
+  font-size: 13.5px;
   color: $text-secondary-d;
-  margin: 0;
-  line-height: 1.4;
+  margin: 0 auto;
+  line-height: 1.5;
+  max-width: 420px;
+  text-align: center;
 }
 
 .panel-body {
@@ -694,6 +724,16 @@ $badge-red-l:       #ff3b30;
 
   .panel-title       { color: $text-primary-l; }
   .panel-description { color: $text-secondary-l; }
+
+  .panel-icon {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.02));
+    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    
+    svg {
+      color: $text-primary-l;
+    }
+  }
 
   .sg-label          { color: $text-tertiary-l; }
   .sg-card           { background: $card-bg-l; border-color: $card-border-l; }

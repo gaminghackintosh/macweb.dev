@@ -1,8 +1,12 @@
+import React, { useLayoutEffect } from 'react';
 import { useWindowManager } from "@/core/providers";
 import { AppWindow } from './AppWindow/AppWindow';
 import { renderAppContent } from "@/utils/renderAppContent";
-import { Suspense, memo, useCallback, useMemo } from 'react';
+import { Suspense, memo, useCallback, useMemo, useRef } from 'react';
 import { WindowLoading } from "@/ui";
+
+// ✅ Отдельный контекст для изоляции активных окон
+const ActiveWindowContext = React.createContext(null);
 
 const WindowItem = memo(function WindowItem({ winId, setWallpaper }) {
   const { 
@@ -59,25 +63,47 @@ const WindowItem = memo(function WindowItem({ winId, setWallpaper }) {
     </AppWindow>
   );
 }, (prev, next) => {
+  // ✅ Кастомное сравнение: перерисовываем только если это наше окно
   return prev.winId === next.winId && prev.setWallpaper === next.setWallpaper;
 });
 
+// ✅ Оптимизированный WindowList с изоляцией рендеринга
 export const WindowList = memo(function WindowList({ setWallpaper }) {
-  const { windows } = useWindowManager();
+  const { windows, activeWin, minimizedApps } = useWindowManager();
   
-  // ✅ Мемоизация setWallpaper чтобы избежать лишних ререндеров
-  const stableSetWallpaper = useCallback(setWallpaper, [setWallpaper]);
+  // Мемоизация списка окон — рендерим только если изменилось конкретное окно
+  const windowItemsRef = useRef(new Map());
   
-  // Мемоизация списка окон для предотвращения лишних ререндеров
-  // ✅ setWallpaper заменён на stableSetWallpaper
-  const windowItems = useMemo(() => (
-    windows.map(win => (
-      <WindowItem key={win.id} winId={win.id} setWallpaper={stableSetWallpaper} />
-    ))
-  ), [windows, stableSetWallpaper]);
+  useLayoutEffect(() => {
+    // Очищаем кэш при размонтировании
+    return () => windowItemsRef.current.clear();
+  }, []);
+  
+  // Создаём окна только когда они появляются/исчезают
+  const windowItems = useMemo(() => {
+    const items = [];
+    const currentIds = new Set(windows.map(w => w.id));
+    const cachedIds = new Set(windowItemsRef.current.keys());
+    
+    // Добавляем новые окна
+    windows.forEach(win => {
+      if (!windowItemsRef.current.has(win.id)) {
+        windowItemsRef.current.set(win.id, (
+          <WindowItem key={win.id} winId={win.id} setWallpaper={setWallpaper} />
+        ));
+      }
+      items.push(windowItemsRef.current.get(win.id));
+    });
+    
+    // Удаляем закрытые окна из кэша
+    cachedIds.forEach(id => {
+      if (!currentIds.has(id)) {
+        windowItemsRef.current.delete(id);
+      }
+    });
+    
+    return items;
+  }, [windows, setWallpaper]);
 
   return <>{windowItems}</>;
-}, (prev, next) => {
-  // ✅ Кастомное сравнение без setWallpaper — он всегда один и тот же
-  return prev === next;
-});
+}, () => true); // ✅ Всегда skip - мы управляем рендерингом вручную

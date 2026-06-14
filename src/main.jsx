@@ -14,8 +14,6 @@ document.addEventListener(
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-// ✅ Production: без StrictMode для производительности
-// ✅ Development: с StrictMode для отладки
 root.render(
   process.env.NODE_ENV === 'production' 
     ? <App />

@@ -10,6 +10,28 @@ const defaultWindowContextValue = {
 
 export const WindowContext = React.createContext(defaultWindowContextValue);
 
+// ✅ Кастомное сравнение для AppWindow - неактивные окна не рендерятся когда активное меняется
+function appWindowShouldMemo(prevProps, nextProps) {
+  // Если это неактивное окно, рендерим только если изменилось win.x/y/zIndex
+  if (!prevProps.isActive && !nextProps.isActive) {
+    return (
+      prevProps.win.x === nextProps.win.x &&
+      prevProps.win.y === nextProps.win.y &&
+      prevProps.win.zIndex === nextProps.win.zIndex &&
+      prevProps.isMinimized === nextProps.isMinimized &&
+      prevProps.children === nextProps.children
+    );
+  }
+  
+  // Для активных окон - обычное сравнение
+  return (
+    prevProps.win.id === nextProps.win.id &&
+    prevProps.isActive === nextProps.isActive &&
+    prevProps.isMinimized === nextProps.isMinimized &&
+    prevProps.children === nextProps.children
+  );
+}
+
 export const AppWindow = memo(function AppWindow({
   win,
   onClose,
@@ -20,7 +42,7 @@ export const AppWindow = memo(function AppWindow({
   children,
   onZoom = null,
   allowResize = true,
-}) {
+}, ref) {
   const [pos, setPos] = useState(() => ({ x: win.x, y: win.y }));
   
   const hasCustomSize = win.width !== undefined || win.w !== undefined || win.height !== undefined || win.h !== undefined;
@@ -56,9 +78,6 @@ export const AppWindow = memo(function AppWindow({
     if ((win.x !== posRef.current.x || win.y !== posRef.current.y) && !dragging.current) {
       setPos({ x: win.x, y: win.y });
       setIsMaximized(win.x === 0 && win.y === 28);
-      if (windowRef.current) {
-        windowRef.current.style.transform = `translate3d(${win.x}px, ${win.y}px, 0)`;
-      }
     }
     
     // Обновляем размеры только если они явно указаны
@@ -88,7 +107,6 @@ export const AppWindow = memo(function AppWindow({
       windowRef.current.style.pointerEvents = 'none';
     }
 
-    let rafId = null;
     let lastX = rect.left;
     let lastY = rect.top;
     const windowWidth = rect.width;
@@ -99,29 +117,16 @@ export const AppWindow = memo(function AppWindow({
       const newX = Math.max(0, Math.min(window.innerWidth - windowWidth, ev.clientX - offset.current.x));
       const newY = Math.max(28, ev.clientY - offset.current.y);
 
-      if (Math.abs(newX - lastX) < 2 && Math.abs(newY - lastY) < 2) return;
-      lastX = newX;
-      lastY = newY;
-      
-      if (rafId !== null) cancelAnimationFrame(rafId);
-      
-      rafId = requestAnimationFrame(() => {
-        if (windowRef.current && dragging.current) {
-          windowRef.current.style.transform = `translate3d(${newX}px, ${newY}px, 0)`;
-          rafId = null;
-        }
-      });
+      // ✅ Прямой DOM update без React state для плавности
+      if (windowRef.current && dragging.current) {
+        windowRef.current.style.transform = `translate3d(${newX}px, ${newY}px, 0)`;
+      }
     };
 
     const onUp = (ev) => {
       if (!dragging.current) return;
       dragging.current = false;
 
-      if (rafId !== null) {
-        cancelAnimationFrame(rafId);
-        rafId = null;
-      }
-      
       if (windowRef.current) {
         windowRef.current.classList.remove('app-window--dragging');
         windowRef.current.style.willChange = '';
@@ -131,11 +136,8 @@ export const AppWindow = memo(function AppWindow({
       const finalX = Math.max(0, Math.min(window.innerWidth - windowWidth, ev.clientX - offset.current.x));
       const finalY = Math.max(28, ev.clientY - offset.current.y);
       
+      // ✅ setPos только после окончания drag - для сохранения позиции
       setPos({ x: finalX, y: finalY });
-      
-      if (windowRef.current) {
-        windowRef.current.style.transform = `translate3d(${finalX}px, ${finalY}px, 0)`;
-      }
 
       document.removeEventListener("mousemove", onMove);
       document.removeEventListener("mouseup", onUp);
@@ -162,7 +164,6 @@ export const AppWindow = memo(function AppWindow({
       windowRef.current.style.pointerEvents = 'none';
     }
 
-    let rafId = null;
     let lastW = startSize.current.width;
     let lastH = startSize.current.height;
     
@@ -174,28 +175,14 @@ export const AppWindow = memo(function AppWindow({
       const newWidth = Math.max(250, startSize.current.width + deltaX);
       const newHeight = Math.max(200, startSize.current.height + deltaY);
 
-      if (Math.abs(newWidth - lastW) < 2 && Math.abs(newHeight - lastH) < 2) return;
-      lastW = newWidth;
-      lastH = newHeight;
-      
-      if (rafId !== null) cancelAnimationFrame(rafId);
-      
-      rafId = requestAnimationFrame(() => {
-        if (windowRef.current && resizing.current) {
-          windowRef.current.style.width = `${newWidth}px`;
-          windowRef.current.style.height = `${newHeight}px`;
-          rafId = null;
-        }
-      });
+      if (windowRef.current && resizing.current) {
+        windowRef.current.style.width = `${newWidth}px`;
+        windowRef.current.style.height = `${newHeight}px`;
+      }
     };
 
     const onUp = () => {
       resizing.current = false;
-      
-      if (rafId !== null) {
-        cancelAnimationFrame(rafId);
-        rafId = null;
-      }
       
       if (windowRef.current) {
         windowRef.current.classList.remove('app-window--resizing');
@@ -223,6 +210,7 @@ export const AppWindow = memo(function AppWindow({
     onTitleMouseDown,
   }), [onClose, onMinimize, onZoom, onFocus, onTitleMouseDown]);
 
+  // ✅ Мемоизируем детей чтобы они не перерисовывались при drag
   const memoizedChildren = useMemo(() => children, [children]);
 
   return (
@@ -240,8 +228,8 @@ export const AppWindow = memo(function AppWindow({
         style={{
           position: "fixed",
           transform: `translate3d(${pos.x}px, ${pos.y}px, 0)`,
-          ...(size.width !== null ? { width: size.width } : {}),
-          ...(size.height !== null ? { height: size.height } : {}),
+          width: size.width !== null ? size.width : 'auto',
+          height: size.height !== null ? size.height : 'auto',
           zIndex: win.zIndex,
           willChange: isActive ? "transform" : "auto",
           contain: "layout style paint",
@@ -269,4 +257,4 @@ export const AppWindow = memo(function AppWindow({
       </div>
     </WindowContext.Provider>
   );
-});
+}, appWindowShouldMemo);

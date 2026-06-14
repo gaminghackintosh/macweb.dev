@@ -1,14 +1,30 @@
 import React from "react";
 
-export const SettingsPanel = ({ title, description, children }) => (
-  <div className="settings-panel">
-    <div className="panel-header">
-      <h2 className="panel-title">{title}</h2>
-      {description && <p className="panel-description">{description}</p>}
+// Импорты иконок
+import settingsIcon from "@/assets/icons/apps/Light_Themes/settings_1.png";
+
+
+export const SettingsPanel = ({ title, description, icon, children }) => {
+  // Путь к иконкам (импортированные)
+  const iconPaths = {
+    settings: settingsIcon,
+  };
+
+  return (
+    <div className="settings-panel">
+      <div className="panel-header">
+        {icon && (
+          <div className="panel-icon">
+            <img src={iconPaths[icon] || iconPaths.settings} alt={title} />
+          </div>
+        )}
+        <h2 className="panel-title">{title}</h2>
+        {description && <p className="panel-description">{description}</p>}
+      </div>
+      <div className="panel-body">{children}</div>
     </div>
-    <div className="panel-body">{children}</div>
-  </div>
-);
+  );
+};
 
 export const SettingsGroup = ({ label, footer, children }) => {
   const items = React.Children.toArray(children).filter(Boolean);

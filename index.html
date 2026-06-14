@@ -47,220 +47,144 @@
   <!-- Noscript fallback -->
   <noscript>
     <style>
-      #root {
-        display: none;
-      }
+      #root { display: none; }
 
-      .noscript-screen {
+      .mac-ns-screen {
         position: fixed;
         inset: 0;
-        overflow: hidden;
-
         display: flex;
         align-items: center;
         justify-content: center;
-
-        background:
-          radial-gradient(circle at top, rgba(88, 28, 135, 0.35), transparent 40%),
-          radial-gradient(circle at bottom, rgba(37, 99, 235, 0.25), transparent 45%),
-          linear-gradient(180deg, #0b0713 0%, #120d1f 100%);
-
-        font-family:
-          Inter,
-          -apple-system,
-          BlinkMacSystemFont,
-          "SF Pro Display",
-          sans-serif;
-
-        color: white;
+        background-color: #000;
+        background: radial-gradient(ellipse at 50% 0%, #2a4a7a 0%, #1a2a4a 40%, #0a0f1a 100%);
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+        color: #ffffff;
+        z-index: 9999;
       }
 
-      .noscript-blur {
-        position: absolute;
-        inset: 0;
-        backdrop-filter: blur(40px);
-        -webkit-backdrop-filter: blur(40px);
-      }
-
-      .noscript-window {
-        position: relative;
-        z-index: 2;
-
-        width: min(520px, calc(100% - 32px));
-
-        border-radius: 22px;
-
-        background: rgba(30, 30, 40, 0.55);
-
-        border: 1px solid rgba(255,255,255,0.08);
-
-        box-shadow:
-          0 30px 80px rgba(0,0,0,0.55),
-          inset 0 1px 0 rgba(255,255,255,0.05);
-
+      .mac-ns-window {
+        width: min(420px, calc(100% - 32px));
+        background: rgba(30, 30, 32, 0.75);
+        border-radius: 12px;
+        border: 0.5px solid rgba(255, 255, 255, 0.15);
+        box-shadow: 
+          0 25px 50px -12px rgba(0, 0, 0, 0.6),
+          0 0 0 1px rgba(0, 0, 0, 0.2) inset;
+        backdrop-filter: blur(50px) saturate(150%);
+        -webkit-backdrop-filter: blur(50px) saturate(150%);
         overflow: hidden;
-
-        backdrop-filter: blur(30px);
-        -webkit-backdrop-filter: blur(30px);
       }
 
-      .noscript-toolbar {
-        height: 42px;
-
+      .mac-ns-titlebar {
+        height: 38px;
         display: flex;
         align-items: center;
-
         padding: 0 16px;
-
-        background: rgba(255,255,255,0.03);
-
-        border-bottom: 1px solid rgba(255,255,255,0.06);
+        background: rgba(255, 255, 255, 0.02);
+        border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
       }
 
-      .traffic-lights {
+      .mac-ns-traffic {
         display: flex;
         gap: 8px;
       }
 
-      .traffic-lights span {
+      .mac-ns-traffic span {
         width: 12px;
         height: 12px;
         border-radius: 50%;
-        display: block;
+        box-shadow: inset 0 0 0 0.5px rgba(0,0,0,0.1);
       }
 
-      .traffic-lights span:nth-child(1) {
-        background: #ff5f57;
+      .mac-ns-traffic span:nth-child(1) { background: #ff5f57; }
+      .mac-ns-traffic span:nth-child(2) { background: #febc2e; }
+      .mac-ns-traffic span:nth-child(3) { background: #28c840; }
+
+      .mac-ns-body {
+        padding: 20px 24px 24px;
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
       }
 
-      .traffic-lights span:nth-child(2) {
-        background: #febc2e;
-      }
-
-      .traffic-lights span:nth-child(3) {
-        background: #28c840;
-      }
-
-      .noscript-content {
-        padding: 42px 34px 38px;
-        text-align: center;
-      }
-
-      .noscript-logo {
-        font-size: 64px;
-        line-height: 1;
-        margin-bottom: 18px;
-
-        filter: drop-shadow(0 0 18px rgba(255,255,255,0.08));
-      }
-
-      .noscript-title {
-        font-size: 32px;
-        font-weight: 700;
-        letter-spacing: -0.03em;
-
-        margin-bottom: 12px;
-      }
-
-      .noscript-subtitle {
-        font-size: 15px;
-        line-height: 1.7;
-
-        color: rgba(255,255,255,0.72);
-
-        margin-bottom: 28px;
-      }
-
-      .noscript-badge {
-        display: inline-flex;
+      .mac-ns-icon {
+        flex-shrink: 0;
+        width: 56px;
+        height: 56px;
+        background: linear-gradient(135deg, #F7DF1E 0%, #D4B800 100%);
+        border-radius: 12px;
+        display: flex;
         align-items: center;
-        gap: 10px;
-
-        padding: 12px 18px;
-
-        border-radius: 14px;
-
-        background: rgba(255,255,255,0.05);
-
-        border: 1px solid rgba(255,255,255,0.06);
-
-        font-size: 14px;
-        color: rgba(255,255,255,0.88);
+        justify-content: center;
+        font-size: 28px;
+        font-weight: 800;
+        color: #000;
+        box-shadow: 
+          inset 0 1px 0 rgba(255,255,255,0.4),
+          0 4px 12px rgba(0,0,0,0.2);
+        letter-spacing: -1px;
       }
 
-      .noscript-dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-
-        background: #ff453a;
-
-        box-shadow:
-          0 0 10px rgba(255,69,58,0.8),
-          0 0 24px rgba(255,69,58,0.45);
+      .mac-ns-content {
+        flex: 1;
+        padding-top: 4px;
       }
 
-      .noscript-footer {
-        margin-top: 30px;
-
-        font-size: 12px;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-
-        color: rgba(255,255,255,0.32);
+      .mac-ns-title {
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        margin-bottom: 6px;
       }
 
-      @media (max-width: 640px) {
-        .noscript-content {
-          padding: 34px 24px 30px;
-        }
+      .mac-ns-desc {
+        font-size: 13px;
+        line-height: 1.4;
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 20px;
+      }
 
-        .noscript-title {
-          font-size: 26px;
-        }
+      .mac-ns-actions {
+        display: flex;
+        justify-content: flex-end;
+      }
 
-        .noscript-subtitle {
-          font-size: 14px;
-        }
+      .mac-ns-button {
+        background: #007AFF;
+        color: white;
+        font-size: 13px;
+        font-weight: 500;
+        padding: 4px 16px;
+        border-radius: 6px;
+        border: 0.5px solid rgba(0, 0, 0, 0.2);
+        box-shadow: 
+          inset 0 1px 0 rgba(255,255,255,0.2),
+          0 1px 2px rgba(0,0,0,0.1);
+        opacity: 0.5;
+        cursor: not-allowed;
       }
     </style>
 
-    <div class="noscript-screen">
-      <div class="noscript-blur"></div>
-
-      <div class="noscript-window">
-        <div class="noscript-toolbar">
-          <div class="traffic-lights">
-            <span></span>
-            <span></span>
-            <span></span>
+    <div class="mac-ns-screen">
+      <div class="mac-ns-window">
+        <div class="mac-ns-titlebar">
+          <div class="mac-ns-traffic">
+            <span></span><span></span><span></span>
           </div>
         </div>
-
-        <div class="noscript-content">
-          <div class="noscript-logo">🍎</div>
-
-          <div class="noscript-title">
-            JavaScript Required
-          </div>
-
-          <div class="noscript-subtitle">
-            macweb.dev simulates an entire macOS-like desktop environment
-            directly inside your browser.<br /><br />
-
---
-
-          <div class="noscript-footer">
-            macweb.dev
-          </div>
-
-          <div class="noscript-badge">
-            <div class="noscript-dot"></div>
-            System halted — JavaScript unavailable
-          </div>
-
-          <div class="noscript-footer">
-            hackintosh.web
+        
+        <div class="mac-ns-body">
+          <div class="mac-ns-icon">JS</div>
+          
+          <div class="mac-ns-content">
+            <div class="mac-ns-title">JavaScript is required to boot macOS.web</div>
+            <div class="mac-ns-desc">
+              macweb.dev simulates an entire desktop environment in your browser. To initialize the system and load the UI, please enable JavaScript in your browser settings.
+            </div>
+            
+            <div class="mac-ns-actions">
+              <div class="mac-ns-button">System Halted</div>
+            </div>
           </div>
         </div>
       </div>
