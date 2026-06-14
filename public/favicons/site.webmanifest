@@ -1,6 +1,6 @@
 {
-  "name": "Hackintosh.Web",
-  "short_name": "Hackintosh",
+  "name": "macweb.dev",
+  "short_name": "macweb",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#000000"

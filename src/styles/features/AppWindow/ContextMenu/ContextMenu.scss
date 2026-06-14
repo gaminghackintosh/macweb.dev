@@ -1,0 +1,126 @@
+/* =========================================================
+   CONTEXT MENU — DARK THEME (DEFAULT) & BASE STYLES
+========================================================= */
+
+:root {
+  --context-bg: rgba(30, 30, 30, 0.65);
+  --context-border: rgba(255, 255, 255, 0.18);
+  --context-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 1px rgba(0, 0, 0, 0.6);
+  --context-text: #ffffff;
+  --context-hover-bg: #0060df; // Синий акцент macOS
+  --context-hover-text: #ffffff;
+  --context-shortcut: rgba(255, 255, 255, 0.5);
+  --context-divider: rgba(255, 255, 255, 0.12);
+  --context-arrow: rgba(255, 255, 255, 0.5);
+}
+
+.context-menu {
+  position: fixed;
+  z-index: 100000;
+  min-width: 240px; 
+  padding: 6px; 
+  background: var(--context-bg);
+  backdrop-filter: blur(50px) saturate(200%);
+  -webkit-backdrop-filter: blur(50px) saturate(200%);
+  border: 1px solid var(--context-border);
+  border-radius: 10px; 
+  box-shadow: var(--context-shadow);
+  animation: contextFade 0.15s cubic-bezier(0.2, 0.8, 0.2, 1);
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--context-text);
+  user-select: none;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 10px;
+    border-radius: 5px; 
+    cursor: default; 
+    transition: none; 
+    margin-bottom: 1px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &:not(.context-menu__item--disabled):hover {
+      background: var(--context-hover-bg);
+      color: var(--context-hover-text);
+
+      .context-menu__shortcut,
+      .context-menu__arrow {
+        color: var(--context-hover-text);
+        opacity: 1;
+      }
+    }
+  }
+
+  &__label {
+    flex: 1;
+    white-space: nowrap;
+    letter-spacing: -0.01em;
+  }
+
+  &__shortcut {
+    font-size: 13px;
+    color: var(--context-shortcut);
+    margin-left: 32px;
+    letter-spacing: 1.5px; 
+  }
+
+  &__arrow {
+    width: 12px;
+    height: 12px;
+    margin-left: 12px;
+    color: var(--context-arrow);
+  }
+
+  &__divider {
+    height: 1px;
+    background: var(--context-divider);
+    margin: 6px 4px; 
+  }
+
+  &__item--disabled {
+    opacity: 0.4;
+    
+    &:hover {
+      background: transparent;
+    }
+  }
+}
+
+@keyframes contextFade {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* =========================================================
+   CONTEXT MENU — LIGHT THEME
+========================================================= */
+
+.light-theme {
+  --context-bg: rgba(255, 255, 255, 0.85);
+  --context-border: rgba(0, 0, 0, 0.15);
+  --context-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 0 1px rgba(0, 0, 0, 0.15);
+  --context-text: rgba(0, 0, 0, 0.85);
+  
+  // При наведении в светлой теме macOS используется тот же синий цвет, 
+  // а текст становится белым
+  --context-hover-bg: #0060df; 
+  --context-hover-text: #ffffff; 
+  
+  --context-shortcut: rgba(0, 0, 0, 0.4);
+  --context-divider: rgba(0, 0, 0, 0.1);
+  --context-arrow: rgba(0, 0, 0, 0.4);
+}

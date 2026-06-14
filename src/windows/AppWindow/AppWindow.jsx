@@ -46,10 +46,11 @@ export const AppWindow = memo(function AppWindow({
   const posRef = useRef(pos);
   const sizeRef = useRef(size);
   
+  // ✅ onFocusRef для избежания лишних зависимостей в useCallback
+  const onFocusRef = useRef(onFocus);
   useLayoutEffect(() => {
-    posRef.current = pos;
-    sizeRef.current = size;
-  }, [pos, size]);
+    onFocusRef.current = onFocus;
+  }, [onFocus]);
 
   useLayoutEffect(() => {
     if ((win.x !== posRef.current.x || win.y !== posRef.current.y) && !dragging.current) {
@@ -75,7 +76,7 @@ export const AppWindow = memo(function AppWindow({
     if (e.button !== 0 || isMaximized) return;
     if (e.target.closest('button')) return;
     
-    onFocus();
+    onFocusRef.current();
     dragging.current = true;
 
     const rect = windowRef.current.getBoundingClientRect();
@@ -143,12 +144,12 @@ export const AppWindow = memo(function AppWindow({
     document.addEventListener("mousemove", onMove, { passive: true });
     document.addEventListener("mouseup", onUp, { passive: true });
     e.preventDefault();
-  }, [isMaximized, onFocus]);
-    
+  }, [isMaximized]);
+
   const onResizeMouseDown = useCallback((e) => {
     e.preventDefault();
     e.stopPropagation();
-    onFocus();
+    onFocusRef.current();
 
     resizing.current = true;
     startSize.current = { width: sizeRef.current.width, height: sizeRef.current.height };
@@ -212,7 +213,7 @@ export const AppWindow = memo(function AppWindow({
 
     document.addEventListener("mousemove", onMove, { passive: true });
     document.addEventListener("mouseup", onUp, { passive: true });
-  }, [onFocus]);
+  }, []);
 
   const contextValue = useMemo(() => ({
     onClose,

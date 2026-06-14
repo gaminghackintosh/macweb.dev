@@ -6,7 +6,7 @@ const GITHUB_APP = {
   id: "github",
   name: "View Source by GitHub",
   isLink: true,
-  url: "https://github.com/gaminghackintosh/hackintosh.web",
+  url: "https://github.com/gaminghackintosh/macweb.dev",
   icon: "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
 };
 
@@ -206,6 +206,7 @@ export default function Dock({ onOpen, openApps, minimizedApps = new Set(), isLi
   const githubMag = useDockMagnification(githubDockRef);
 
   // Мемоизация списка элементов (с привязкой к индексу для refs магнификации)
+  // ✅ Убрали mainMag из зависимостей — функции в mainMag стабильны
   const dockItems = useMemo(() => {
     let items = [];
     let itemIndex = 0;
@@ -235,7 +236,7 @@ export default function Dock({ onOpen, openApps, minimizedApps = new Set(), isLi
       );
     });
     return items;
-  }, [openApps, minimizedApps, onOpen, isLightTheme, mainMag]);
+  }, [openApps, minimizedApps, onOpen, isLightTheme, mainMag.registerItem]);
 
   return (
     <div className="dock-container">

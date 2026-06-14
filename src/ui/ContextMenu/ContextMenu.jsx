@@ -16,9 +16,7 @@ export const ContextMenu = memo(function ContextMenu({ x, y, items, onClose }) {
 
   useEffect(() => {
     const handleEscape = (e) => {
-      if (e.key === 'Escape') {
-        onClose();
-      }
+      if (e.key === 'Escape') onClose();
     };
     document.addEventListener('keydown', handleEscape);
     return () => document.removeEventListener('keydown', handleEscape);
@@ -29,17 +27,18 @@ export const ContextMenu = memo(function ContextMenu({ x, y, items, onClose }) {
       const rect = menuRef.current.getBoundingClientRect();
       const overflowsRight = x + rect.width > window.innerWidth;
       const overflowsBottom = y + rect.height > window.innerHeight;
+      
       if (overflowsRight) menuRef.current.style.left = `${x - rect.width}px`;
       if (overflowsBottom) menuRef.current.style.top = `${y - rect.height}px`;
     }
   }, [x, y]);
 
-  const handleItemClick = useCallback((item, onClose) => {
+  const handleItemClick = useCallback((item) => {
     if (!item.disabled) {
       item.action?.();
       onClose();
     }
-  }, []);
+  }, [onClose]);
 
   return (
     <div
@@ -55,7 +54,7 @@ export const ContextMenu = memo(function ContextMenu({ x, y, items, onClose }) {
           <div
             key={index}
             className={`context-menu__item ${item.disabled ? 'context-menu__item--disabled' : ''}`}
-            onClick={() => handleItemClick(item, onClose)}
+            onMouseUp={() => handleItemClick(item)} // В macOS триггер часто на mouseup
           >
             <span className="context-menu__label">{item.label}</span>
             {item.shortcut && <span className="context-menu__shortcut">{item.shortcut}</span>}
@@ -70,3 +69,5 @@ export const ContextMenu = memo(function ContextMenu({ x, y, items, onClose }) {
     </div>
   );
 });
+
+export default ContextMenu;

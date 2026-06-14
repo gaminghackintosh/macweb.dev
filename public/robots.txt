@@ -5,4 +5,4 @@ Allow: /
 # Disallow: /admin/
 # Disallow: /private/
 
-Sitemap: https://gaminghackintosh.github.io/hackintosh.web/sitemap.xml
+Sitemap: https://macweb.dev/sitemap.xml

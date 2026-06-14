@@ -40,7 +40,7 @@ export default function MobileNotSupported() {
             <div className="tl tl-min" />
             <div className="tl tl-max" />
           </div>
-          <span className="mns-titlebar-label">hackintosh.web</span>
+          <span className="mns-titlebar-label">macweb.dev</span>
           <div className="mns-titlebar-spacer" />
         </div>
 
@@ -54,7 +54,7 @@ export default function MobileNotSupported() {
               <h1 className="mns-title">Откройте на большом экране</h1>
               <p className="mns-subtitle">macOS Experience</p>
               <p className="mns-description">
-                hackintosh.web — это полноценная среда macOS прямо в браузере.
+                macweb.dev — это полноценная среда macOS прямо в браузере.
                 На телефоне ей тесно. Возьмите ноутбук или компьютер, чтобы
                 погрузиться в атмосферу настоящего Mac.
               </p>

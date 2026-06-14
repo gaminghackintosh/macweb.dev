@@ -3,6 +3,8 @@
 // ═══════════════════════════════════════════════════════════════════
 
 @use "AppWindows";
-@use "MenuBar";
-@use "ContextMenu";
+@use "MenuBars/MenuBar";
+
+@use "ContextMenu/ContextMenu";
+
 @use "AppWindow";

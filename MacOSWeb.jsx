@@ -90,7 +90,6 @@ export default function MacOSWeb() {
   const [openApps, setOpenApps] = useState([]);
   const [activeWin, setActiveWin] = useState(null);
 
-  // Используем useCallback, чтобы не пересоздавать функции при каждом рендере
   const openApp = useCallback((appId) => {
     setWindows(prev => {
       if (prev.find((w) => w.id === appId)) return prev;

@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, memo } from "react";
+import React, { useState, useCallback, useEffect, memo, useMemo } from "react";
 import { useMobileCheck, useContextMenu } from "@/core/hooks";
 import { WindowManagerProvider, useWindowManager, ThemeProvider, useTheme  } from "@/core/providers";
 // UI компоненты
@@ -15,19 +15,24 @@ function AppContent() {
   const { isLightTheme } = useTheme();
   const { contextMenu, openContextMenu, closeContextMenu } = useContextMenu();
 
-  // Состояние обоев с синхронизацией от темы
+  // Состояние обоев — используется Settings для смены обоев
   const [wallpaper, setWallpaper] = useState(() => ({
     id: "tahoe_default",
     type: "image",
     value: defaultWallpaperDark,
   }));
 
-  // Синхронизация обоев с темой
+  // ✅ Синхронизация обоев с темой только при первой загрузке
+  // (если пользователь не выбрал свои обои)
   useEffect(() => {
-    setWallpaper(prev => ({
-      ...prev,
+    // Проверяем если обои были изменены через Settings (id !== "tahoe_default")
+    if (wallpaper.id !== "tahoe_default") return;
+    
+    setWallpaper({
+      id: "tahoe_default",
+      type: "image",
       value: isLightTheme ? defaultWallpaperLight : defaultWallpaperDark,
-    }));
+    });
   }, [isLightTheme]);
 
   const handleDesktopContextMenu = useCallback((e) => {

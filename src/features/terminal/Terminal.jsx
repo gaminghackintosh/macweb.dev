@@ -29,7 +29,7 @@ export function TerminalContent({ openApp }) {
   const [history, setHistory] = useState([
     { type: "output", text: `\x1b[33mLast login:\x1b[0m ${new Date().toDateString()} on ttys001` },
     { type: "output", text: "" },
-    { type: "output", text: '\x1b[32mWelcome to hackintosh.web terminal!\x1b[0m' },
+    { type: "output", text: '\x1b[32mWelcome to macweb.dev terminal!\x1b[0m' },
     { type: "output", text: 'Type "help" for available commands.' },
     { type: "output", text: "" },
   ]);
@@ -57,7 +57,7 @@ export function TerminalContent({ openApp }) {
     async function fetchGitLog() {
       try {
         const response = await fetch(
-          "https://api.github.com/repos/gaminghackintosh/hackintosh.web/commits?sha=code-root&per_page=10",
+          "https://api.github.com/repos/gaminghackintosh/macweb.dev/commits?sha=code-root&per_page=10",
           { signal: controller.signal }
         );
         if (!response.ok) throw new Error(`GitHub API returned ${response.status}`);
@@ -172,7 +172,7 @@ export function TerminalContent({ openApp }) {
 
     if (cmd === "uname") {
       if (args[0] === "-a") {
-        return { clear: false, lines: ["Darwin hackintosh.web 24.0.0 Darwin Kernel Version 24.0.0; root:xnu/RELEASE_ARM64 hackintosh.web"] };
+        return { clear: false, lines: ["Darwin macweb.dev 24.0.0 Darwin Kernel Version 24.0.0; root:xnu/RELEASE_ARM64 macweb.dev"] };
       }
       return { clear: false, lines: ["Darwin"] };
     }
@@ -184,7 +184,7 @@ export function TerminalContent({ openApp }) {
       return {
         clear: false,
         lines: [
-          "# hackintosh.web",
+          "# macweb.dev",
           "",
           "A web-native macOS experience built with React.",
           "",
@@ -207,7 +207,7 @@ export function TerminalContent({ openApp }) {
           "  bare = false",
           "  logallrefupdates = true",
           "[remote \"origin\"]",
-          "  url = https://github.com/gaminghackintosh/hackintosh.web.git",
+          "  url = https://github.com/gaminghackintosh/macweb.dev.git",
           "  fetch = +refs/heads/*:refs/remotes/origin/*",
         ],
       };
@@ -236,10 +236,10 @@ export function TerminalContent({ openApp }) {
         clear: false,
         lines: [
           "",
-          " \x1b[38;5;39m                                     ,\x1b[0m                          \x1b[32mgaminghackintosh\x1b[0m@\x1b[36mhackintosh.web\x1b[0m",
+          " \x1b[38;5;39m                                     ,\x1b[0m                          \x1b[32mgaminghackintosh\x1b[0m@\x1b[36mmacweb.dev\x1b[0m",
           " \x1b[38;5;39m                                    ;o\\\\\x1b[0m                         ─────────────────────────────",
-          " \x1b[38;5;45m                                    ;Ob`.\x1b[0m                       OS:          \x1b[37mhackintosh.web 1.0.0\x1b[0m",
-          " \x1b[38;5;45m                                   ;OOOOb`.\x1b[0m                     Kernel:      \x1b[37mhackintosh-core\x1b[0m",
+          " \x1b[38;5;45m                                    ;Ob`.\x1b[0m                       OS:          \x1b[37mmacweb.dev 1.0.0\x1b[0m",
+          " \x1b[38;5;45m                                   ;OOOOb`.\x1b[0m                     Kernel:      \x1b[37mmacweb-core\x1b[0m",
           " \x1b[38;5;51m                                  ;OOOOOY\" )\x1b[0m                    Host:        \x1b[37mMacBook Pro (Simulated)\x1b[0m",
           " \x1b[38;5;51m                                 ;OOOO' ,%%)\x1b[0m                    Shell:       \x1b[37mhacksh 1.0.0\x1b[0m",
           " \x1b[38;5;87m                             \\\\  /OOO ,%%%%,%\\\\\x1b[0m                 Runtime:     \x1b[37mReact 19 / V8\x1b[0m",
@@ -319,7 +319,7 @@ export function TerminalContent({ openApp }) {
 
     if (cmd === "weather") {
       return { clear: false, lines: [
-        `\x1b[36mWeather for hackintosh.web:\x1b[0m`,
+        `\x1b[36mWeather for macweb.dev:\x1b[0m`,
         `  ☀️  Temperature: 24°C`,
         `  🌬️  Wind: 12 km/h`,
         `  💧  Humidity: 45%`,
@@ -327,7 +327,7 @@ export function TerminalContent({ openApp }) {
     }
 
     if (cmd === "hi") {
-      return { clear: false, lines: ["\x1b[33mHello! Welcome to the hackintosh.web terminal! 🍏\x1b[0m"] };
+      return { clear: false, lines: ["\x1b[33mHello! Welcome to the macweb.dev terminal! 🍏\x1b[0m"] };
     }
 
     // === FUN ASCII ART ===
@@ -375,7 +375,7 @@ export function TerminalContent({ openApp }) {
           "├── Music",
           "├── Pictures",
           "├── Projects",
-          "│   ├── hackintosh.web",
+          "│   ├── macweb.dev",
           "│   └── portfolio",
           "└── Public",
         ],
@@ -472,10 +472,10 @@ export function TerminalContent({ openApp }) {
       return {
         clear: false,
         lines: [
-          `12K    ./Projects/hackintosh.web/src`,
-          `8K     ./Projects/hackintosh.web/public`,
-          `4K     ./Projects/hackintosh.web/assets`,
-          `24K    ./Projects/hackintosh.web`,
+          `12K    ./Projects/macweb.dev/src`,
+          `8K     ./Projects/macweb.dev/public`,
+          `4K     ./Projects/macweb.dev/assets`,
+          `24K    ./Projects/macweb.dev`,
           `16K    ./Documents/Projects`,
           `8K     ./Downloads`,
           `4K     ./Music`,
@@ -610,7 +610,7 @@ export function TerminalContent({ openApp }) {
                 <span>
                   <span className="prompt-user">gaminghackintosh</span>
                   <span className="prompt-divider">@</span>
-                  <span className="prompt-host">hackintosh.web</span>
+                  <span className="prompt-host">macweb.dev</span>
                   <span className="prompt-sign">:~$ </span>
                   <span className="prompt-text">{entry.text}</span>
                 </span>
@@ -626,7 +626,7 @@ export function TerminalContent({ openApp }) {
         <div className="terminal-input-wrapper">
           <span className="prompt-user">gaminghackintosh</span>
           <span className="prompt-divider">@</span>
-          <span className="prompt-host">hackintosh.web</span>
+          <span className="prompt-host">macweb.dev</span>
           <span className="prompt-sign">:~$ </span>
           <input
             ref={inputRef}

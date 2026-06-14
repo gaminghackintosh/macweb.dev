@@ -65,14 +65,19 @@ const WindowItem = memo(function WindowItem({ winId, setWallpaper }) {
 export const WindowList = memo(function WindowList({ setWallpaper }) {
   const { windows } = useWindowManager();
   
-  // Мемоизация списка окон для предотвращения лишних рендеров
+  // ✅ Мемоизация setWallpaper чтобы избежать лишних ререндеров
+  const stableSetWallpaper = useCallback(setWallpaper, [setWallpaper]);
+  
+  // Мемоизация списка окон для предотвращения лишних ререндеров
+  // ✅ setWallpaper заменён на stableSetWallpaper
   const windowItems = useMemo(() => (
     windows.map(win => (
-      <WindowItem key={win.id} winId={win.id} setWallpaper={setWallpaper} />
+      <WindowItem key={win.id} winId={win.id} setWallpaper={stableSetWallpaper} />
     ))
-  ), [windows, setWallpaper]);
+  ), [windows, stableSetWallpaper]);
 
   return <>{windowItems}</>;
 }, (prev, next) => {
-  return prev.setWallpaper === next.setWallpaper;
+  // ✅ Кастомное сравнение без setWallpaper — он всегда один и тот же
+  return prev === next;
 });

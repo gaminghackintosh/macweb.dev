@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 
 export const useContextMenu = () => {
   const [contextMenu, setContextMenu] = useState(null);
@@ -16,9 +16,10 @@ export const useContextMenu = () => {
     setContextMenu(null);
   }, []);
 
-  return {
+  // ✅ Мемоизация объекта возвращаемого значения
+  return useMemo(() => ({
     contextMenu,
     openContextMenu,
     closeContextMenu,
-  };
+  }), [contextMenu, openContextMenu, closeContextMenu]);
 };

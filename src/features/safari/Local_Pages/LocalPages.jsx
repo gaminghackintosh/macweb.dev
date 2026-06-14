@@ -6,7 +6,7 @@ export const AboutPage = () => (
     <div className="sf-glass-card about-card">
       <div className="about-icon">🍎</div>
       <h1 className="sf-title">About This Mac</h1>
-      <p className="sf-subtitle"><strong>hackintosh.web</strong> – macOS Sonoma web simulation.</p>
+      <p className="sf-subtitle"><strong>macweb.dev</strong> – macOS Sonoma web simulation.</p>
       
       <div className="sf-specs-list">
         <div className="sf-spec-row">
@@ -35,12 +35,12 @@ export const HackintoshPage = () => (
   <div className="sf-local-page">
     <div className="sf-glass-card">
       <div className="hero-icon">🖥️</div>
-      <h1 className="sf-title">hackintosh.web</h1>
+      <h1 className="sf-title">macweb.dev</h1>
       <p className="sf-description">
         Welcome to the project! Experience a web-native macOS environment running directly in your browser. No hardware required.
       </p>
       <a 
-        href="https://github.com/gaminghackintosh/hackintosh.web" 
+        href="https://github.com/gaminghackintosh/macweb.dev" 
         target="_blank" 
         rel="noreferrer" 
         className="sf-btn sf-btn-primary"

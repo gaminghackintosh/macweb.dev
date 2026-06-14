@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useCallback, useState, useRef, useReducer } from "react";
+import { createContext, useContext, useMemo, useCallback, useState, useRef, useReducer, useLayoutEffect } from "react";
 import { APPS } from "@/core/constants/apps";
 import { INITIAL_POSITIONS } from "@/core/constants/positions";
 
@@ -175,22 +175,14 @@ function windowReducer(state, action) {
   }
 }
 
-const initialState = {
-  windows: [],
-  openApps: [],
-  activeWin: null,
-  minimizedApps: new Set(),
-  windowStates: {},
-  zCounter: 100,
-};
-
 // Ленивая инициализация initialState для производительности
+// ✅ Стабильный Set через функцию для избежания лишних ререндеров
 function getInitialState() {
   return {
     windows: [],
     openApps: [],
     activeWin: null,
-    minimizedApps: new Set(),
+    minimizedApps: Object.freeze(new Set()),
     windowStates: {},
     zCounter: 100,
   };
@@ -199,10 +191,15 @@ function getInitialState() {
 export function WindowManagerProvider({ children }) {
   const [state, dispatch] = useReducer(windowReducer, null, getInitialState);
   const focusTimeoutRef = useRef(null);
+  const activeWinRef = useRef(state.activeWin);
+
+  // ✅ Обновляем ref при каждом изменении state.activeWin
+  activeWinRef.current = state.activeWin;
 
   // Мемоизированный фокус без лишних обновлений
+  // ✅ Используем ref вместо зависимостей для избежания пересоздания функции
   const focusWindow = useCallback((appId) => {
-    if (state.activeWin === appId) return;
+    if (activeWinRef.current === appId) return;
     
     if (focusTimeoutRef.current) {
       cancelAnimationFrame(focusTimeoutRef.current);
@@ -211,7 +208,7 @@ export function WindowManagerProvider({ children }) {
     focusTimeoutRef.current = requestAnimationFrame(() => {
       dispatch({ type: WINDOW_ACTIONS.FOCUS, payload: { appId } });
     });
-  }, [state.activeWin]);
+  }, []);
 
   const openApp = useCallback((appId, appName) => {
     if (state.minimizedApps.has(appId)) {
@@ -246,12 +243,18 @@ export function WindowManagerProvider({ children }) {
     dispatch({ type: WINDOW_ACTIONS.MINIMIZE, payload: { appId } });
   }, []);
 
+  // ✅ Убрали state.windowStates из зависимостей — используем ref
+  const windowStatesRef = useRef(state.windowStates);
+  useLayoutEffect(() => {
+    windowStatesRef.current = state.windowStates;
+  }, [state.windowStates]);
+
   const maximizeWindow = useCallback((appId) => {
     dispatch({ 
       type: WINDOW_ACTIONS.MAXIMIZE, 
-      payload: { appId, windowStates: state.windowStates } 
+      payload: { appId, windowStates: windowStatesRef.current } 
     });
-  }, [state.windowStates]);
+  }, []);
 
   // Стабильный value объект для контекста
   const value = useMemo(() => ({
