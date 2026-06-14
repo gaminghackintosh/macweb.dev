@@ -40,7 +40,7 @@
 body {
   margin: 0;
   background: $color-bg-body;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  font-family: var(--system-font-family);
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

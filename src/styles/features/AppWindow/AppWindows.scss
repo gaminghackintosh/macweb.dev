@@ -60,15 +60,12 @@
 // Drag & Resize — оптимизация производительности
 // ═══════════════════════════════════════════════════════════════════
 .app-window--dragging {
-  // Убираем тени для производительности
   box-shadow: none !important;
   
   // GPU acceleration
   will-change: transform;
   
-  // Контент остаётся видимым, но упрощаем рендеринг
   .app-window__content {
-    // Лёгкое уменьшение непрозрачности для визуального эффекта drag
     opacity: 0.92;
   }
 }
@@ -77,12 +74,10 @@
   opacity: 0.85;
   pointer-events: none;
 
-  // Упрощаем рендеринг контента
   .app-window__content {
     filter: blur(0.5px);
   }
 
-  // Убираем тени для производительности
   box-shadow: none !important;
 }
 
@@ -221,7 +216,7 @@
   text-align: center;
   font-size: 13px;
   font-weight: 500;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  font-family: var(--system-font-family);
   letter-spacing: 0.15px;
   pointer-events: none;
 

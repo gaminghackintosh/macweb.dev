@@ -9,7 +9,6 @@ $dock-bg: rgba(255, 255, 255, 0.2);
 $dock-shadow: 0 15px 40px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.15) inset;
 $github-dock-gap: 16px;
 
-// Плавная кривая как в macOS - быстрая реакция с мягким завершением
 $magnification-timing: cubic-bezier(0.2, 0, 0, 1);
 
 .dock-container {
@@ -80,6 +79,24 @@ $magnification-timing: cubic-bezier(0.2, 0, 0, 1);
     }
   }
 
+  &__item-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  // Hover wrapper для эффекта поднятия без конфликта с magnification
+  &__item-wrapper:hover {
+    transform: translateY(-8px);
+  }
+
+  &__item-wrapper:hover &__icon-wrapper {
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  }
+
   &__item {
     display: flex;
     flex-direction: column;
@@ -87,57 +104,35 @@ $magnification-timing: cubic-bezier(0.2, 0, 0, 1);
     justify-content: center;
     position: relative;
     cursor: pointer;
-    transform: translateZ(0) scale(1) translateY(0);
     transform-origin: bottom center;
-    // Очень плавная анимация для магнификации - как в macOS
-    transition: transform 0.18s $magnification-timing;
     backface-visibility: hidden;
     contain: layout style paint;
   }
 
   &__tooltip {
     position: absolute;
-    bottom: calc(100% + 24px);
-    left: 50%;
+    top: -70%;
     white-space: nowrap;
     pointer-events: none;
-    z-index: 10000;
+    z-index: var(--system-z-index-dock-tooltip, 10000);
 
-    background: rgba(28, 28, 30, 0.92);
-    color: #f5f5f7;
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: -0.1px;
-    padding: 5px 11px;
-    border-radius: 7px;
-    border: 0.5px solid rgba(255, 255, 255, 0.14);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35), inset 0 0.5px 0 rgba(255, 255, 255, 0.2);
+    background-color: hsla(240, 24%, 100%, 0.5);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 5px 2px, inset 0 0 0 0.9px hsla(240, 3%, 11%, 0.3), 0 0 0 1.2px hsla(240, 24%, 100%, 0.3);
+    color: var(--system-color-light-contrast, #1d1d1f);
+    font-family: var(--system-font-family);
+    letter-spacing: 0.4px;
+    border-radius: 0.375rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+    font-weight: 400;
+    display: none;
+  }
 
-    opacity: 0;
-    visibility: hidden;
-    transform: translateX(-50%) translateY(8px) scale(0.95);
-    transform-origin: center bottom;
-    // Скрытие быстрое, появление плавное
-    transition: 
-      opacity 0.15s cubic-bezier(0.16, 1, 0.3, 1),
-      transform 0.15s cubic-bezier(0.16, 1, 0.3, 1),
-      visibility 0s linear 0.15s;
-
-    &::after {
-      content: "";
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      width: 7px;
-      height: 7px;
-      background: rgba(28, 28, 30, 0.92);
-      border: 0.5px solid rgba(255, 255, 255, 0.14);
-      border-top: none;
-      border-left: none;
-      transform: translateX(-50%) translateY(-4px) rotate(45deg);
-      border-radius: 0 0 2px 0;
-    }
+  // Show tooltip on hover
+  &__item-wrapper:hover &__tooltip {
+    display: block;
   }
 
   &__icon-wrapper {
@@ -272,15 +267,9 @@ $magnification-timing: cubic-bezier(0.2, 0, 0, 1);
     }
 
     &__tooltip {
-      background: rgba(250, 250, 252, 0.96);
-      color: #1d1d1f;
-      border-color: rgba(0, 0, 0, 0.08);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18), inset 0 0.5px 0 rgba(255, 255, 255, 0.6);
-
-      &::after {
-        background: rgba(250, 250, 252, 0.96);
-        border-color: rgba(0, 0, 0, 0.08);
-      }
+      background-color: hsla(240, 3%, 11%, 0.5);
+      color: #fff;
+      box-shadow: rgba(255, 255, 255, 0.3) 0px 1px 5px 2px, inset 0 0 0 0.9px hsla(240, 24%, 100%, 0.3), 0 0 0 1.2px hsla(240, 3%, 11%, 0.3);
     }
 
     &__indicator-dot {

@@ -26,7 +26,7 @@
   border-radius: 10px; 
   box-shadow: var(--context-shadow);
   animation: contextFade 0.15s cubic-bezier(0.2, 0.8, 0.2, 1);
-  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  font-family: var(--system-font-family);
   font-size: 13px;
   font-weight: 400;
   color: var(--context-text);

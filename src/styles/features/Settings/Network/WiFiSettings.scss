@@ -3,7 +3,7 @@
 // ═══════════════════════════════════════════════════════════════════
 
 .wifi-settings-wrapper {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: var(--system-font-family);
   -webkit-font-smoothing: antialiased;
   padding: 4px 0;
 

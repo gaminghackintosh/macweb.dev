@@ -19,7 +19,7 @@ $text-tertiary:   rgba(255, 255, 255, 0.25);
   height: 100%;
   background: $music-bg;
   color: $text-primary;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  font-family: var(--system-font-family);
   overflow: hidden;
 }
 

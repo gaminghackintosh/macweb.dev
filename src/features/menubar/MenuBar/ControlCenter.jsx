@@ -4,8 +4,6 @@ import { BiBluetooth } from "react-icons/bi";
 import { WIFI_NAME, AirDropIcon, StageManagerIcon, ScreenMirroringIcon, SoundIcon, FocusIcon } from "./constants";
 import { VerticalSlider } from "./VerticalSlider";
 
-import defaultAlbumArt from "@/assets/images/AlbumIMG.jpg";
-
 // ═══════════════════════════════════════════════════════════════════
 //  MUSIC / NOW PLAYING WIDGET
 // ═══════════════════════════════════════════════════════════════════
@@ -13,14 +11,6 @@ import defaultAlbumArt from "@/assets/images/AlbumIMG.jpg";
 const MusicWidget = memo(({ track, artist, isPlaying, onToggle, coverUrl }) => {
   const [imgSrc, setImgSrc] = useState(coverUrl || defaultAlbumArt);
   const [isError, setIsError] = useState(false);
-
-  const handleError = useCallback(() => {
-    if (imgSrc !== defaultAlbumArt) {
-      setImgSrc(defaultAlbumArt);
-    } else {
-      setIsError(true);
-    }
-  }, [imgSrc]);
 
   return (
     <div className="cc-music-widget">

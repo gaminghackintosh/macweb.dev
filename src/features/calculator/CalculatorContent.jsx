@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect, memo, useContext } from "react";
-import { WindowContext } from "@/windows"; // Убедись, что путь правильный
+import { WindowContext } from "@/windows";
 
 const CalculatorButton = memo(function CalculatorButton({ 
   label, 

@@ -14,7 +14,7 @@ $dropdown-shadow: rgba(0, 0, 0, 0.5);
 $dropdown-divider: rgba(255, 255, 255, 0.06);
 
 /* =========================================================
-   MENU BAR — macOS SEQUOIA STYLE
+   MENU BAR — macOS TAHOE STYLE
 ========================================================= */
 
 .menuBar {
@@ -27,7 +27,7 @@ $dropdown-divider: rgba(255, 255, 255, 0.06);
   z-index: 9999;
   user-select: none;
   color: $text-primary;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  font-family: var(--system-font-family);
   font-size: 13px;
   font-weight: 400;
   letter-spacing: -0.2px;
@@ -151,8 +151,7 @@ $dropdown-divider: rgba(255, 255, 255, 0.06);
   animation: menuFade 0.13s cubic-bezier(0.16, 1, 0.3, 1);
   transform-origin: top left;
   
-  // SF Pro шрифт как в macOS
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", sans-serif;
+  font-family: var(--system-font-family);
   font-size: 13px;
   font-weight: 400;
   letter-spacing: -0.01em;
@@ -367,16 +366,14 @@ $dropdown-divider: rgba(255, 255, 255, 0.06);
 
 .menuBar__date {
   color: $text-primary;
-  font-weight: 500;
-  font-size: 12.5px;
-  letter-spacing: -0.1px;
+  font-weight: 600;
+  font-size: 13px ;
 }
 
 .menuBar__time {
   color: $text-primary;
   font-weight: 600;
   font-size: 13px;
-  letter-spacing: -0.2px;
 }
 
 /* =========================================================

@@ -117,11 +117,7 @@ const DockItem = memo(forwardRef(function DockItem({
   isMinimized,
   isLightTheme
 }, ref) {
-  const [isHovered, setIsHovered] = useState(false);
   const isGitHub = app.id === "github";
-
-  const handleMouseEnter = useCallback(() => setIsHovered(true), []);
-  const handleMouseLeave = useCallback(() => setIsHovered(false), []);
 
   const handleClick = useCallback(() => {
     if (app.isLink) {
@@ -139,15 +135,7 @@ const DockItem = memo(forwardRef(function DockItem({
   }, [handleClick]);
 
   return (
-    <div
-      className={`dock__item-wrapper ${isHovered ? "dock__item-wrapper--hovered" : ""}`}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      <div className="dock__tooltip" role="tooltip">
-        {app.name}
-      </div>
-
+    <div className="dock__item-wrapper">
       {/* Иконка — transform во время магнификации пишется напрямую в DOM */}
       <div
         ref={ref}
@@ -159,6 +147,11 @@ const DockItem = memo(forwardRef(function DockItem({
         tabIndex={0}
         style={{ contain: "layout style" }}
       >
+        {/* Тултип внутри dock__item для hover эффекта */}
+        <div className="dock__tooltip" role="tooltip">
+          {app.name}
+        </div>
+
         {isGitHub ? (
           <div className="dock__icon-wrapper dock__icon-wrapper--white-bg">
             <img

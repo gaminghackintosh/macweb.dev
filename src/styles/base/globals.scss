@@ -1,18 +1,74 @@
 @use "./variables" as vars;
 
-
 :root {
-  --system-font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  /* 
+   * System Font Stack — Cross-Platform Support
+   * Inspired by: https://www.macos-web.app/
+   * 
+   * Order of priority:
+   * 1. -apple-system     — macOS/iOS (San Francisco)
+   * 2. BlinkMacSystemFont — macOS (system font)
+   * 3. Inter             — Modern fallback (Windows/Linux)
+   * 4. Helvetica Neue    — macOS fallback
+   * 5. Helvetica         — macOS fallback
+   * 6. Arial             — Windows/Linux fallback
+   * 7. sans-serif        — Ultimate fallback
+   */
+  --system-font-family: 
+    -apple-system, 
+    BlinkMacSystemFont,
+    "Inter", 
+    "Helvetica Neue",
+    "Helvetica",
+    "Arial",
+    sans-serif;
+
+  /* Monospace font stack for code/terminal */
+  --monospace-font-family:
+    "SF Mono",
+    "Menlo",
+    "Monaco",
+    "Consolas",
+    "Liberation Mono",
+    "Courier New",
+    monospace;
 }
+
 body {
   margin: 0;
   padding: 0;
-  font-family: var(--system-font);
+  font-family: var(--system-font-family);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   background: #0b0f1a;
   color: vars.$color-text-primary;
 
   -webkit-user-select: none;
   user-select: none;
+}
+
+/* Fix for Windows — enable text selection where needed */
+input, textarea, [contenteditable] {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* Ensure fonts render correctly on all platforms */
+* {
+  font-family: var(--system-font-family);
+}
+
+code, pre, [class*="terminal"], [class*="code"], [class*="Terminal"] {
+  font-family: var(--monospace-font-family);
+}
+
+/* Utility class for inline style override */
+.system-font {
+  font-family: var(--system-font-family) !important;
+}
+
+.monospace-font {
+  font-family: var(--monospace-font-family) !important;
 }
 

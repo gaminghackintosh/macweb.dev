@@ -9,9 +9,8 @@ export const WindowLoading = () => {
       justifyContent: "center",
       height: "100%",
       width: "100%",
-      // Цвет текста в стиле Apple (полупрозрачный белый)
       color: "rgba(255, 255, 255, 0.45)",
-      fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+      fontFamily: '-apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Arial, sans-serif',
       fontSize: "13px",
       gap: "12px",
       userSelect: "none"

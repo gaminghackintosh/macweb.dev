@@ -12,7 +12,7 @@ import Sequoia_9 from "@/assets/images/wallpapers/Sequoia/wallpaper_9.png";
 import Sequoia_10 from "@/assets/images/wallpapers/Sequoia/wallpaper_10.png";
 import Sequoia_11 from "@/assets/images/wallpapers/Sequoia/wallpaper_11.png";
 
-// Thumbnails for Settings (small, optimized ~20-50KB)
+// Thumbnails for Settings
 import Sequoia_1_thumb from "@/assets/images/wallpapers/Sequoia/thumbs/wallpaper_default_thumb.png";
 import Sequoia_2_thumb from "@/assets/images/wallpapers/Sequoia/thumbs/wallpaper_2_thumb.png";
 import Sequoia_3_thumb from "@/assets/images/wallpapers/Sequoia/thumbs/wallpaper_3_thumb.png";
@@ -30,9 +30,19 @@ import Sequoia_11_thumb from "@/assets/images/wallpapers/Sequoia/thumbs/wallpape
 import Tahoe_1 from "@/assets/images/wallpapers/Tahoe/Tahoe Light.webp";
 import Tahoe_2 from "@/assets/images/wallpapers/Tahoe/Tahoe Dark.webp";
 
-// Thumbnails for Settings (small, optimized ~20-50KB)
+import Tahoe_Beach_Dawn from "@/assets/images/wallpapers/Tahoe/26-Tahoe-Beach-Dawn.png";
+import Tahoe_Beach_Day from "@/assets/images/wallpapers/Tahoe/26-Tahoe-Beach-Day.png";
+import Tahoe_Beach_Dusk from "@/assets/images/wallpapers/Tahoe/26-Tahoe-Beach-Dusk.png";
+import Tahoe_Beach_Night from "@/assets/images/wallpapers/Tahoe/26-Tahoe-Beach-Night.png";
+
 import Tahoe_1_thumb from "@/assets/images/wallpapers/Tahoe/thumbs/Tahoe Light_thumb.webp";
 import Tahoe_2_thumb from "@/assets/images/wallpapers/Tahoe/thumbs/Tahoe Dark_thumb.webp";
+
+import Tahoe_Beach_Dawn_thumb from "@/assets/images/wallpapers/Tahoe/thumbs/26-Tahoe-Beach-Dawn_thumb.png";
+import Tahoe_Beach_Day_thumb from "@/assets/images/wallpapers/Tahoe/thumbs/26-Tahoe-Beach-Day_thumb.png";
+import Tahoe_Beach_Dusk_thumb from "@/assets/images/wallpapers/Tahoe/thumbs/26-Tahoe-Beach-Dusk_thumb.png";
+import Tahoe_Beach_Night_thumb from "@/assets/images/wallpapers/Tahoe/thumbs/26-Tahoe-Beach-Night_thumb.png";
+
 
 // ═══════════════════════════════════════════════════════════════════
 //  WALLPAPER GROUPS
@@ -61,20 +71,20 @@ export const WALLPAPER_GROUPS = [
     title: "macOS Tahoe",
     wallpapers: [
       { id: "Tahoe_1", name: "Tahoe Light", image: Tahoe_1, thumbnail: Tahoe_1_thumb },
-      { id: "Tahoe_2", name: "Tahoe Dark", image: Tahoe_2, thumbnail: Tahoe_2_thumb }
+      { id: "Tahoe_2", name: "Tahoe Dark", image: Tahoe_2, thumbnail: Tahoe_2_thumb },
+      { id: "Tahoe_3", name: "Tahoe Beach Dawn", image: Tahoe_Beach_Dawn, thumbnail: Tahoe_Beach_Dawn_thumb },
+      { id: "Tahoe_4", name: "Tahoe Beach Day", image: Tahoe_Beach_Day, thumbnail: Tahoe_Beach_Day_thumb },
+      { id: "Tahoe_5", name: "Tahoe Beach Dusk", image: Tahoe_Beach_Dusk, thumbnail: Tahoe_Beach_Dusk_thumb },
+      { id: "Tahoe_6", name: "Tahoe Beach Night", image: Tahoe_Beach_Night, thumbnail: Tahoe_Beach_Night_thumb }
     ]
   }
 ];
 
-// ═══════════════════════════════════════════════════════════════════
-//  EXPORTS
-// ═══════════════════════════════════════════════════════════════════
-
 const SEQUOIA_GROUP = 0;
 const TAHOE_GROUP = 1;
 
-// По умолчанию тёмная тема (Tahoe Dark)
-export const DEFAULT_WALLPAPER = WALLPAPER_GROUPS[TAHOE_GROUP].wallpapers[1];
+// Default Dark Themes (Tahoe Dark)
+export const DEFAULT_WALLPAPER = WALLPAPER_GROUPS[TAHOE_GROUP].wallpapers[3];
 export const WALLPAPERS = WALLPAPER_GROUPS.flatMap(g => g.wallpapers);
 
 export function getWallpaperById(id) {

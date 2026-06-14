@@ -6,7 +6,7 @@
   height: 100%;
   background: $color-finder-bg;
   backdrop-filter: blur(20px);
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  font-family: var(--system-font-family);
   color: $color-text-primary;
   user-select: none;
   overflow: hidden;
